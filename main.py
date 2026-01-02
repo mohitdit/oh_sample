@@ -9,6 +9,7 @@ from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 from utils.browser_manager import get_stealth_browser
 from utils.logger import log
 from utils.captcha_solver import CaptchaSolver
+import base64
 
 
 # MODE CONFIGURATION (ONLY CHANGE THESE)
@@ -291,12 +292,21 @@ async def main():
                             if captcha_src and "data:image" in captcha_src:
                                 # Use the base64 data directly from src
                                 log.info("📤 Using base64 from img src...")
-                                if await solver.solve_captcha(captcha_src):
-                                    captcha_text = solver.last_response_text.strip()
-                                    log.info(f"✅ CAPTCHA solved: {captcha_text}")
-                                    captcha_solved = True
-                                else:
-                                    log.error(f"❌ CAPTCHA solving failed: {solver.last_post_state.value}")
+                                
+                                # Extract base64 data from data:image URL
+                                # Format is: data:image/png;base64,iVBORw0KG...
+                                try:
+                                    base64_data = captcha_src.split(',')[1]
+                                    captcha_bytes = base64.b64decode(base64_data)
+                                    
+                                    if await solver.solve_captcha_from_bytes(captcha_bytes):
+                                        captcha_text = solver.last_response_text.strip()
+                                        log.info(f"✅ CAPTCHA solved: {captcha_text}")
+                                        captcha_solved = True
+                                    else:
+                                        log.error(f"❌ CAPTCHA solving failed")
+                                except Exception as e:
+                                    log.error(f"❌ Error decoding base64 image: {e}")
                             else:
                                 # It's a canvas, take screenshot
                                 log.info("📸 Taking CAPTCHA screenshot from canvas...")

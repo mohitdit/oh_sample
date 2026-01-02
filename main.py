@@ -8,6 +8,7 @@ from playwright.async_api import TimeoutError as PlaywrightTimeoutError
 
 from utils.browser_manager import get_stealth_browser
 from utils.logger import log
+from utils.captcha_solver import CaptchaSolver
 
 
 # MODE CONFIGURATION (ONLY CHANGE THESE)
@@ -38,6 +39,10 @@ END_DATE   = date(2025, 7, 20)
 
 TARGET_URL = "https://ohtrafficdata.dps.ohio.gov/CrashRetrieval"
 REPORT_POST_BASE = "https://ohtrafficdata.dps.ohio.gov/CrashRetrieval/OhioCrashReportRetrieval"
+
+# DeathByCaptcha credentials
+DBC_USERNAME = "hr@dharani.co.in"
+DBC_PASSWORD = "Dh@r@ni@gnt99!"
 
 DOWNLOAD_DIR = Path("downloads")
 DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
@@ -226,9 +231,118 @@ async def main():
                 await page.select_option("#ddlCounties", county_value)
                 await page.wait_for_timeout(1500)
 
-                log.info("🔍 Clicking Search — solve CAPTCHA manually")
+                log.info("🔍 Clicking Search — attempting to solve CAPTCHA automatically")
                 await page.click("#btnSearch")
-                input("⛔ Solve CAPTCHA in browser, then press ENTER here...")
+                
+                # Wait a moment for page to load
+                await page.wait_for_timeout(3000)
+                
+                # Try to solve captcha automatically
+                try:
+                    # Look for the captcha container/canvas element
+                    # The CAPTCHA appears next to "Enter the text from the image:"
+                    captcha_label = await page.wait_for_selector("text=Enter the text from the image:", timeout=10000)
+                    
+                    if captcha_label:
+                        log.info("🔍 CAPTCHA form detected, locating image...")
+                        
+                        # Wait a bit for canvas to render
+                        await page.wait_for_timeout(1000)
+                        
+                        # The captcha image is in a canvas or image next to the input
+                        # Try multiple selectors
+                        captcha_element = None
+                        
+                        # Try canvas first (most likely on this site)
+                        canvas_elements = await page.query_selector_all("canvas")
+                        if canvas_elements:
+                            log.info(f"Found {len(canvas_elements)} canvas elements")
+                            captcha_element = canvas_elements[0]  # Usually the first one
+                        
+                        # If not canvas, try finding image with data:image src
+                        if not captcha_element:
+                            images = await page.query_selector_all("img")
+                            for img in images:
+                                src = await img.get_attribute("src")
+                                if src and "data:image" in src:
+                                    captcha_element = img
+                                    log.info("Found data:image captcha")
+                                    break
+                        
+                        if captcha_element:
+                            log.info("🔍 Sending to solver...")
+                            solver = CaptchaSolver(DBC_USERNAME, DBC_PASSWORD)
+                            
+                            # Check balance
+                            balance = solver.get_balance()
+                            log.info(f"💰 DBC Balance: ${balance:.2f}")
+                            
+                            if balance <= 0:
+                                log.error("❌ Insufficient DBC balance")
+                                input("⛔ Add balance to DeathByCaptcha account, then press ENTER...")
+                                continue
+                            
+                            # Check if it's an img with src attribute (data:image)
+                            captcha_src = await captcha_element.get_attribute("src")
+                            
+                            captcha_solved = False
+                            captcha_text = ""
+                            
+                            if captcha_src and "data:image" in captcha_src:
+                                # Use the base64 data directly from src
+                                log.info("📤 Using base64 from img src...")
+                                if await solver.solve_captcha(captcha_src):
+                                    captcha_text = solver.last_response_text.strip()
+                                    log.info(f"✅ CAPTCHA solved: {captcha_text}")
+                                    captcha_solved = True
+                                else:
+                                    log.error(f"❌ CAPTCHA solving failed: {solver.last_post_state.value}")
+                            else:
+                                # It's a canvas, take screenshot
+                                log.info("📸 Taking CAPTCHA screenshot from canvas...")
+                                captcha_bytes = await captcha_element.screenshot()
+                                
+                                if await solver.solve_captcha_from_bytes(captcha_bytes):
+                                    captcha_text = solver.last_response_text.strip()
+                                    log.info(f"✅ CAPTCHA solved: {captcha_text}")
+                                    captcha_solved = True
+                                else:
+                                    log.error(f"❌ CAPTCHA solving failed: {solver.last_post_state.value}")
+                            
+                            # If captcha was solved, fill it in
+                            if captcha_solved:
+                                # Find the input field - it's right after "Enter the text from the image:"
+                                # Look for input in the same container
+                                captcha_input = await page.query_selector("input[type='text']")
+                                
+                                if captcha_input:
+                                    await captcha_input.fill(captcha_text)
+                                    log.info("✅ CAPTCHA text entered")
+                                    
+                                    # Click the Search button to submit
+                                    search_btn = await page.query_selector("button:has-text('Search')")
+                                    if search_btn:
+                                        await search_btn.click()
+                                        log.info("✅ Search submitted")
+                                    else:
+                                        await page.keyboard.press("Enter")
+                                else:
+                                    log.error("❌ Could not find captcha input field")
+                                    input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
+                            else:
+                                input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
+                        else:
+                            log.error("❌ Could not find CAPTCHA image element")
+                            input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
+                    else:
+                        # No captcha detected, might already be past it
+                        log.info("✅ No CAPTCHA detected, proceeding...")
+                        
+                except Exception as e:
+                    log.warning(f"⚠️ CAPTCHA auto-solve error: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
 
                 await page.wait_for_timeout(1500)
 

@@ -1,39 +1,197 @@
+import requests
+import base64
+from typing import Optional
 import asyncio
-from playwright.async_api import async_playwright
-from captcha_solver import CaptchaSolver
+import time
 
-CAPTCHA_POST_URL = "http://fasttypers.org/imagepost.ashx"
-CAPTCHA_KEY = "14AMYQ1DPJPOJ8YF1D7AJ82JIKVUEFMG9LFWIQ5P"
+class CaptchaSolver:
+    def __init__(self, username: str, password: str):
+        """
+        Initialize DeathByCaptcha solver using their HTTP API
+        Args:
+            username: DBC username
+            password: DBC password
+        """
+        self.username = username
+        self.password = password
+        # Correct DBC API endpoint
+        self.base_url = "http://deathbycaptcha.com/api"
+        self.last_response_text = ""
+        self.last_captcha_id = None
+        
+    def get_balance(self) -> float:
+        """Get account balance"""
+        try:
+            # Correct endpoint for balance check
+            response = requests.post(
+                f"{self.base_url}/user",
+                data={
+                    "username": self.username,
+                    "password": self.password
+                },
+                headers={
+                    "Accept": "application/json"
+                },
+                timeout=30
+            )
+            
+            print(f"Balance API Response Status: {response.status_code}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                print(f"Balance API Response: {data}")
+                # Balance is in US cents
+                balance = float(data.get('balance', 0)) / 100
+                return balance
+            else:
+                print(f"Balance check failed: {response.status_code} - {response.text[:200]}")
+                return 0.0
+        except Exception as e:
+            print(f"Error getting balance: {e}")
+            import traceback
+            traceback.print_exc()
+            return 0.0
+    
+    async def solve_captcha_from_bytes(self, image_bytes: bytes) -> bool:
+        """
+        Solve captcha from image bytes (async wrapper)
+        Args:
+            image_bytes: Raw image bytes
+        Returns:
+            True if successful, False otherwise
+        """
+        # Run in thread pool since requests is synchronous
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(None, self._solve_sync, image_bytes)
+    
+    def _solve_sync(self, image_bytes: bytes) -> bool:
+        """
+        Synchronous captcha solving using DBC HTTP API
+        """
+        try:
+            print(f"📤 Sending captcha to DeathByCaptcha (image size: {len(image_bytes)} bytes)...")
+            
+            # Encode image to base64
+            base64_image = base64.b64encode(image_bytes).decode('utf-8')
+            
+            # Step 1: Upload the captcha using correct endpoint
+            response = requests.post(
+                f"{self.base_url}/captcha",
+                data={
+                    "username": self.username,
+                    "password": self.password,
+                    "captchafile": f"base64:{base64_image}",
+                    "type": "0"  # 0 = normal captcha
+                },
+                headers={
+                    "Accept": "application/json"
+                },
+                timeout=60
+            )
+            
+            print(f"Upload Response Status: {response.status_code}")
+            
+            if response.status_code not in [200, 303]:
+                print(f"❌ Upload failed: {response.status_code} - {response.text[:200]}")
+                return False
+            
+            data = response.json()
+            print(f"Upload Response: {data}")
+            
+            captcha_id = data.get('captcha')
+            
+            if not captcha_id:
+                print("❌ No captcha ID returned")
+                return False
+            
+            self.last_captcha_id = captcha_id
+            print(f"⏳ Captcha uploaded. ID: {captcha_id}. Waiting for solution...")
+            
+            # Step 2: Poll for the solution
+            max_attempts = 60  # 60 attempts = 120 seconds max
+            for attempt in range(max_attempts):
+                time.sleep(2)  # Wait 2 seconds between polls
+                
+                response = requests.get(
+                    f"{self.base_url}/captcha/{captcha_id}",
+                    headers={
+                        "Accept": "application/json"
+                    },
+                    auth=(self.username, self.password),
+                    timeout=30
+                )
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    text = data.get('text')
+                    is_correct = data.get('is_correct')
+                    
+                    # Check if solved
+                    if text and (is_correct == True or is_correct == 1 or text != ""):
+                        self.last_response_text = str(text)
+                        print(f"✅ Captcha solved! Text: {self.last_response_text}")
+                        return True
+                
+                print(f"⏳ Attempt {attempt + 1}/{max_attempts}...")
+            
+            print("❌ Captcha solving timed out")
+            return False
+                
+        except Exception as e:
+            print(f"❌ Error solving captcha: {e}")
+            import traceback
+            traceback.print_exc()
+            return False
+    
+    def report_incorrect(self) -> bool:
+        """
+        Report the last captcha as incorrectly solved (gets refund)
+        """
+        if self.last_captcha_id:
+            try:
+                response = requests.post(
+                    f"{self.base_url}/captcha/{self.last_captcha_id}/report",
+                    data={
+                        "username": self.username,
+                        "password": self.password
+                    },
+                    timeout=30
+                )
+                if response.status_code == 200:
+                    print(f"✅ Reported captcha {self.last_captcha_id} as incorrect")
+                    return True
+                else:
+                    print(f"❌ Report failed: {response.status_code}")
+                    return False
+            except Exception as e:
+                print(f"❌ Error reporting captcha: {e}")
+                return False
+        return False
 
-async def run():
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
-        page = await browser.new_page()
 
-        await page.goto(
-            "https://ohtrafficdata.dps.ohio.gov/CrashRetrieval",
-            timeout=60000
-        )
-
-        # wait for captcha
-        captcha_img = await page.wait_for_selector("img.captchaImage", timeout=30000)
-        captcha_base64 = await captcha_img.get_attribute("src")
-
-        solver = CaptchaSolver(CAPTCHA_POST_URL, CAPTCHA_KEY)
-
-        if not solver.solve_captcha(captcha_base64):
-            raise Exception(f"Captcha failed: {solver.last_post_state}")
-
-        captcha_text = solver.last_response_text
-        print("✅ Captcha solved:", captcha_text)
-
-        # fill captcha
-        await page.fill('input[type="text"]', captcha_text)
-
-        # submit form
-        await page.click('button[type="submit"]')
-
-        await page.wait_for_load_state("networkidle")
-        await browser.close()
-
-asyncio.run(run())
+# Convenience function for backward compatibility
+async def solve_captcha(image_bytes: bytes) -> Optional[str]:
+    """
+    Solve captcha from image bytes using DeathByCaptcha
+    Returns the captcha text or None if failed
+    """
+    DBC_USERNAME = "hr@dharani.co.in"
+    DBC_PASSWORD = "Dh@r@ni@gnt99!"
+    
+    solver = CaptchaSolver(DBC_USERNAME, DBC_PASSWORD)
+    
+    # Check balance first
+    balance = solver.get_balance()
+    print(f"💰 DBC Account Balance: ${balance:.2f}")
+    
+    if balance <= 0:
+        print("❌ Insufficient balance in DeathByCaptcha account")
+        return None
+    
+    success = await solver.solve_captcha_from_bytes(image_bytes)
+    
+    if success:
+        return solver.last_response_text
+    else:
+        print("Captcha solving failed")
+        return None

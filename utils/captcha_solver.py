@@ -20,35 +20,51 @@ class CaptchaSolver:
         self.last_captcha_id = None
         
     def get_balance(self) -> float:
-        """Get account balance"""
+        """Get account balance using GET request to base API"""
         try:
+            # According to DBC docs: GET or POST to http://api.dbcapi.me/api
             response = requests.post(
-                f"{self.base_url}/user",
+                self.base_url,  # Changed from /api/user to /api
                 data={
                     "username": self.username,
                     "password": self.password
+                },
+                headers={
+                    "Accept": "application/json"  # Request JSON response
                 },
                 timeout=30
             )
             
             print(f"Balance check: Status {response.status_code}")
+            print(f"Balance response text: {response.text[:200]}")
             
             if response.status_code == 200:
-                data = response.json()
-                print(f"Balance response: {data}")
-                
-                if 'balance' in data:
-                    balance = float(data.get('balance', 0)) / 100
-                    return balance
-                else:
-                    print("✅ Account authenticated (no balance field returned)")
-                    return 999.99
-            
-            print(f"❌ Balance check failed with status {response.status_code}")
-            return 0.0
+                # Try to parse as JSON
+                try:
+                    data = response.json()
+                    print(f"Balance response JSON: {data}")
+                    
+                    if 'balance' in data:
+                        # Balance is in US cents, convert to dollars
+                        balance = float(data.get('balance', 0)) / 100
+                        print(f"✅ Account balance: ${balance:.2f}")
+                        return balance
+                    else:
+                        print("⚠️ No balance field in response, but authenticated successfully")
+                        return 999.99  # Assume sufficient balance if authenticated
+                except ValueError as e:
+                    print(f"❌ JSON parsing error: {e}")
+                    print(f"Response was: {response.text}")
+                    return 0.0
+            else:
+                print(f"❌ Balance check failed with status {response.status_code}")
+                print(f"Response: {response.text}")
+                return 0.0
             
         except Exception as e:
             print(f"❌ Error checking balance: {e}")
+            import traceback
+            traceback.print_exc()
             return 0.0
 
     async def solve_captcha_from_bytes(self, image_bytes: bytes) -> bool:
@@ -71,7 +87,6 @@ class CaptchaSolver:
             print(f"📤 Uploading captcha ({len(image_bytes)} bytes)...")
             
             # Step 1: Upload the captcha using multipart/form-data
-            # CORRECT: Send as actual file, not base64 in form data
             files = {
                 'captchafile': ('captcha.png', image_bytes, 'image/png')
             }
@@ -81,11 +96,17 @@ class CaptchaSolver:
                 'password': self.password
             }
             
+            headers = {
+                'Accept': 'application/json',
+                'Expect': ''  # Disable Expect: 100-continue
+            }
+            
             response = requests.post(
                 f"{self.base_url}/captcha",
                 data=data,
                 files=files,
-                timeout=60
+                headers=headers,
+                timeout=120
             )
             
             print(f"Upload status: {response.status_code}")
@@ -93,11 +114,21 @@ class CaptchaSolver:
             
             if response.status_code not in [200, 303]:
                 print(f"❌ Upload failed: {response.status_code}")
+                print(f"Response: {response.text}")
                 return False
             
-            data = response.json()
+            # Parse response
+            try:
+                data = response.json()
+            except ValueError:
+                print(f"❌ Could not parse JSON response: {response.text}")
+                return False
             
             # Check for errors in response
+            if data.get('status') == 255:
+                print(f"❌ API Error: {data.get('error', 'Unknown error')}")
+                return False
+            
             captcha_id = data.get('captcha')
             
             if not captcha_id:
@@ -123,19 +154,32 @@ class CaptchaSolver:
                 try:
                     response = requests.get(
                         f"{self.base_url}/captcha/{captcha_id}",
+                        headers={'Accept': 'application/json'},
                         timeout=30
                     )
                     
                     if response.status_code == 200:
-                        data = response.json()
+                        try:
+                            data = response.json()
+                        except ValueError:
+                            if attempt % 10 == 0:
+                                print(f"⚠️ Invalid JSON response on attempt {attempt}")
+                            continue
+                        
                         text = str(data.get('text', '')).strip()
                         is_correct = data.get('is_correct')
                         
                         # Check if solved (text exists and marked as correct)
+                        # In DBC API: is_correct=1 means solved or processing, is_correct=0 means failed
                         if text and is_correct:
                             self.last_response_text = text
                             print(f"✅ Captcha solved: '{self.last_response_text}'")
                             return True
+                        
+                        # Check if failed
+                        if is_correct == 0 or is_correct is False:
+                            print(f"❌ Captcha marked as incorrectly solved by DBC")
+                            return False
                     
                     if attempt % 10 == 0 and attempt > 0:
                         print(f"⏳ Still waiting... ({attempt}/{max_attempts})")
@@ -166,6 +210,7 @@ class CaptchaSolver:
                         "username": self.username,
                         "password": self.password
                     },
+                    headers={'Accept': 'application/json'},
                     timeout=30
                 )
                 if response.status_code == 200:
@@ -173,6 +218,7 @@ class CaptchaSolver:
                     return True
                 else:
                     print(f"❌ Report failed: {response.status_code}")
+                    print(f"Response: {response.text}")
                     return False
             except Exception as e:
                 print(f"❌ Error reporting captcha: {e}")

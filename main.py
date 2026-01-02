@@ -281,21 +281,16 @@ async def main():
                             input("⛔ Add balance to DeathByCaptcha account, then press ENTER...")
                             continue
                         
-                        # Extract base64 data (split by comma, take second part)
-                        # Format is: " data:image/png;base64,iVBORw0KG..." (note the leading space!)
+                        # Extract base64 data
                         try:
-                            # CRITICAL: Remove ALL whitespace (there's a space before "data:image")
                             captcha_src = captcha_src.strip()
                             
-                            # Validate format
                             if ',' not in captcha_src or 'data:image' not in captcha_src:
                                 log.error(f"❌ Invalid captcha src format")
-                                log.error(f"   Src: {captcha_src[:200]}")
                                 input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
                                 await page.wait_for_timeout(1500)
                                 continue
                             
-                            # Split by comma and get the base64 part (after the comma)
                             parts = captcha_src.split(',', 1)
                             if len(parts) != 2:
                                 log.error(f"❌ Could not split captcha src by comma")
@@ -304,71 +299,76 @@ async def main():
                                 continue
                             
                             base64_data = parts[1].strip()
-                            
                             log.info(f"🔍 Base64 data length: {len(base64_data)}")
                             
                             # Decode base64
                             captcha_bytes = base64.b64decode(base64_data)
-                            
                             log.info(f"📤 Captcha image size: {len(captcha_bytes)} bytes")
                             
-                            # Validate size (captchas are typically 1-10KB)
+                            # Validate size
                             if len(captcha_bytes) > 50000:
-                                log.error(f"❌ Image too large ({len(captcha_bytes)} bytes) - wrong image!")
+                                log.error(f"❌ Image too large ({len(captcha_bytes)} bytes)")
                                 input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
                                 await page.wait_for_timeout(1500)
                                 continue
                             
                             if len(captcha_bytes) < 500:
-                                log.error(f"❌ Image too small ({len(captcha_bytes)} bytes) - might be corrupt!")
+                                log.error(f"❌ Image too small ({len(captcha_bytes)} bytes)")
                                 input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
                                 await page.wait_for_timeout(1500)
                                 continue
                             
-                            # Solve the captcha
-                            captcha_solved = await solver.solve_captcha_from_bytes(captcha_bytes)
+                            # Solve with retry logic
+                            max_retries = 3
+                            captcha_solved = False
+                            
+                            for attempt in range(max_retries):
+                                try:
+                                    log.info(f"🔄 Attempt {attempt + 1}/{max_retries} to solve captcha...")
+                                    captcha_solved = await solver.solve_captcha_from_bytes(captcha_bytes)
+                                    
+                                    if captcha_solved:
+                                        break
+                                    else:
+                                        log.warning(f"⚠️ Attempt {attempt + 1} failed, retrying...")
+                                        await asyncio.sleep(2)
+                                        
+                                except Exception as e:
+                                    log.error(f"❌ Attempt {attempt + 1} error: {str(e)[:100]}")
+                                    if attempt < max_retries - 1:
+                                        await asyncio.sleep(3)
+                                    continue
                             
                             if captcha_solved:
                                 captcha_text = solver.last_response_text.strip()
                                 log.info(f"✅ CAPTCHA solved: '{captcha_text}' (length: {len(captcha_text)})")
                                 
-                                # Validate captcha text (should be 6 characters based on HTML maxlength="6")
+                                # Validate length (should be 6 based on HTML maxlength="6")
                                 if len(captcha_text) != 6:
-                                    log.warning(f"⚠️ CAPTCHA text length is {len(captcha_text)}, expected 6. Trying anyway...")
+                                    log.warning(f"⚠️ CAPTCHA text length is {len(captcha_text)}, expected 6")
                                 
-                                # Find the input field by ID (from the HTML: id="txtCaptcha")
+                                # Find the input field by ID (from HTML: id="txtCaptcha")
                                 captcha_input = await page.query_selector("#txtCaptcha")
                                 
                                 if captcha_input:
-                                    # Clear any existing text first
+                                    # Clear and fill
                                     await captcha_input.click()
                                     await page.keyboard.press("Control+A")
                                     await page.keyboard.press("Backspace")
-                                    await page.wait_for_timeout(500)
+                                    await page.wait_for_timeout(300)
                                     
-                                    # Fill in the solved captcha text
                                     await captcha_input.fill(captcha_text)
-                                    log.info(f"✅ CAPTCHA text '{captcha_text}' entered into input field")
+                                    log.info(f"✅ CAPTCHA text '{captcha_text}' entered")
                                     
-                                    # Wait for the form to register the input
-                                    await page.wait_for_timeout(1500)
-                                    
-                                    # NOW click the Search button to submit (ID from HTML: btnSearch)
-                                    search_btn = await page.query_selector("#btnSearch")
-                                    if search_btn:
-                                        log.info("🔍 Clicking Search button to submit CAPTCHA...")
-                                        await search_btn.click()
-                                        log.info("✅ Search button clicked - waiting for results...")
-                                    else:
-                                        # Fallback: press Enter if button not found
-                                        log.warning("⚠️ Search button not found, pressing Enter instead")
-                                        await captcha_input.press("Enter")
-                                        log.info("✅ Pressed Enter to submit CAPTCHA")
+                                    # Wait a moment then press Enter to submit the form
+                                    await page.wait_for_timeout(1000)
+                                    await captcha_input.press("Enter")
+                                    log.info("✅ Pressed Enter to submit captcha")
                                 else:
                                     log.error("❌ Could not find captcha input field #txtCaptcha")
                                     input("⛔ Fill in CAPTCHA manually in browser, then press ENTER here...")
                             else:
-                                log.error(f"❌ CAPTCHA solving failed - DBC returned no solution")
+                                log.error(f"❌ CAPTCHA solving failed after {max_retries} attempts")
                                 input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
                                 
                         except Exception as e:
@@ -377,16 +377,13 @@ async def main():
                             traceback.print_exc()
                             input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
                     else:
-                        # No captcha detected
                         log.info("✅ No CAPTCHA detected, proceeding...")
                         
                 except Exception as e:
                     log.warning(f"⚠️ CAPTCHA detection error: {e}")
-                    import traceback
-                    traceback.print_exc()
                     input("⛔ Solve CAPTCHA manually in browser, then press ENTER here...")
-
-                await page.wait_for_timeout(1500)
+                
+                await page.wait_for_timeout(3000)
 
                 no_results = page.locator("text=No results found matching your criteria")
                 if await no_results.is_visible():

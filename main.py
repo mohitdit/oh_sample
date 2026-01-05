@@ -159,45 +159,71 @@ async def download_all_reports(page):
 
         log.info(f"⬇️ Downloading PDF for crash {crash_number}")
 
-        form = row.locator("form")
+        # Retry logic
+        max_retries = 3
+        retry_delay = 5
+        
+        for attempt in range(max_retries):
+            try:
+                form = row.locator("form")
 
-        token = await form.locator("input[name='__RequestVerificationToken']").get_attribute("value")
-        report_id = await form.locator("input[name='id']").get_attribute("value")
+                token = await form.locator("input[name='__RequestVerificationToken']").get_attribute("value")
+                report_id = await form.locator("input[name='id']").get_attribute("value")
 
-        button = form.locator("button[type='submit']")
-        button_name = await button.get_attribute("name")
+                button = form.locator("button[type='submit']")
+                button_name = await button.get_attribute("name")
 
-        cookies = await page.context.cookies()
-        cookie_header = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
+                cookies = await page.context.cookies()
+                cookie_header = "; ".join(f"{c['name']}={c['value']}" for c in cookies)
 
-        async with aiohttp.ClientSession() as session:
-            async with session.post(
-                f"{REPORT_POST_BASE}/GetReport",
-                data={
-                    "__RequestVerificationToken": token,
-                    "id": report_id,
-                    button_name: ""
-                },
-                headers={
-                    "Cookie": cookie_header,
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "Referer": page.url,
-                    "Accept": "application/pdf",
-                },
-            ) as resp:
+                # Create session with timeout
+                timeout = aiohttp.ClientTimeout(total=60, connect=30, sock_read=30)
+                
+                async with aiohttp.ClientSession(timeout=timeout) as session:
+                    async with session.post(
+                        f"{REPORT_POST_BASE}/GetReport",
+                        data={
+                            "__RequestVerificationToken": token,
+                            "id": report_id,
+                            button_name: ""
+                        },
+                        headers={
+                            "Cookie": cookie_header,
+                            "Content-Type": "application/x-www-form-urlencoded",
+                            "Referer": page.url,
+                            "Accept": "application/pdf",
+                        },
+                    ) as resp:
 
-                content_type = resp.headers.get("Content-Type", "")
-                log.info(f"📦 Response Content-Type: {content_type}")
+                        content_type = resp.headers.get("Content-Type", "")
+                        log.info(f"📦 Response Content-Type: {content_type}")
 
-                if "pdf" not in content_type.lower():
-                    log.error("❌ Not a PDF — skipping")
+                        if "pdf" not in content_type.lower():
+                            log.error(f"❌ Not a PDF — skipping {crash_number}")
+                            break  # Don't retry if it's not a PDF
+
+                        pdf_bytes = await resp.read()
+
+                file_path.write_bytes(pdf_bytes)
+                log.info(f"✅ Saved: {file_path}")
+                break  # Success, exit retry loop
+                
+            except (aiohttp.ClientError, asyncio.TimeoutError) as e:
+                if attempt < max_retries - 1:
+                    log.warning(f"⚠️ Attempt {attempt + 1} failed for {crash_number}: {type(e).__name__}")
+                    log.info(f"🔄 Retrying in {retry_delay} seconds...")
+                    await asyncio.sleep(retry_delay)
+                else:
+                    log.error(f"❌ Failed to download {crash_number} after {max_retries} attempts")
+                    # Continue to next file instead of crashing
                     continue
+                    
+            except Exception as e:
+                log.error(f"❌ Unexpected error downloading {crash_number}: {e}")
+                break  # Don't retry unexpected errors
 
-                pdf_bytes = await resp.read()
-
-        file_path.write_bytes(pdf_bytes)
-        log.info(f"✅ Saved: {file_path}")
-
+        # Small delay between downloads to be polite to the server
+        await asyncio.sleep(0.5)
 
 # MAIN SCRAPER
 
@@ -375,7 +401,7 @@ async def main():
                                     
                                     # Wait a moment then press Enter to submit the form
                                     await page.wait_for_timeout(1000)
-                                    await captcha_input.press("Enter")
+                                    await captcha_input.press("Enter", no_wait_after=True)
                                     log.info("✅ Pressed Enter to submit captcha")
                                 else:
                                     log.error("❌ Could not find captcha input field #txtCaptcha")

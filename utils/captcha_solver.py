@@ -15,14 +15,14 @@ class CaptchaSolver:
         self.username = username
         self.password = password
         # CORRECT DBC API endpoint
-        self.base_url = "http://api.dbcapi.me/api"
+        self.base_url = "https://api.dbcapi.me/api"
         self.last_response_text = ""
         self.last_captcha_id = None
         
     def get_balance(self) -> float:
         """Get account balance using GET request to base API"""
         try:
-            # According to DBC docs: GET or POST to http://api.dbcapi.me/api
+            # According to DBC docs: GET or POST to https://api.dbcapi.me/api
             response = requests.post(
                 self.base_url,  # Changed from /api/user to /api
                 data={

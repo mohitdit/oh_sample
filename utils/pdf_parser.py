@@ -6,31 +6,81 @@ import pdfplumber
 from utils.logger import log
 
 
+def convert_pdf_to_json(pdf_path: Path, crash_number: str = "", document_number: str = ""):
+    """
+    Main entry point to convert PDF to JSON
+    Args:
+        pdf_path: Path to the PDF file
+        crash_number: Optional crash number
+        document_number: Optional document number
+    Returns:
+        Dictionary containing the parsed JSON data, or None if parsing failed
+    """
+    try:
+        parser = OhioPdfParser(pdf_path)
+        json_data = parser.parse()
+        
+        if json_data:
+            # Save JSON file
+            json_path = pdf_path.parent / f"{pdf_path.stem}.json"
+            with open(json_path, 'w', encoding='utf-8') as f:
+                json.dump(json_data, f, indent=2, ensure_ascii=False)
+            
+            log.info(f"✅ JSON saved: {json_path.name}")
+            return json_data
+        else:
+            log.error(f"❌ Failed to parse PDF: {pdf_path.name}")
+            return None
+            
+    except Exception as e:
+        log.error(f"❌ Error converting PDF to JSON: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+
 class OhioPdfParser:
-    """Parser for Ohio crash report PDFs with improved accuracy"""
+    """Parser for Ohio crash report PDFs matching C# legacy code logic"""
     
     def __init__(self, pdf_path: Path):
         self.pdf_path = pdf_path
-        self.raw_pages = []
-        self.pure_pages = []
+        self.raw_lines = []
+        self.pure_lines = []
         
     def parse(self):
         """Parse the PDF and return structured data"""
         try:
             with pdfplumber.open(self.pdf_path) as pdf:
-                # Extract text in both raw and pure formats for different parsing needs
+                # Extract text in both raw and pure formats
+                raw_text_pages = []
+                pure_text_pages = []
+                
                 for page in pdf.pages:
                     raw_text = page.extract_text() or ""
-                    self.raw_pages.append(raw_text)
-                    # Also store line-by-line for better parsing
-                    self.pure_pages.append(raw_text.split('\n'))
+                    raw_text_pages.append(raw_text)
+                    
+                # Combine all pages
+                full_raw_text = "\n".join(raw_text_pages)
+                self.raw_lines = [line for line in full_raw_text.split('\n') if line.strip()]
+                
+                # Pure text extraction (for vehicle details)
+                with pdfplumber.open(self.pdf_path) as pdf:
+                    pure_texts = []
+                    for page in pdf.pages:
+                        # Use layout mode for better parsing
+                        pure_text = page.extract_text(layout=True) or ""
+                        pure_texts.append(pure_text)
+                
+                full_pure_text = "\n".join(pure_texts)
+                self.pure_lines = [line for line in full_pure_text.split('\n') if line.strip()]
             
-            # Extract data
+            # Extract data following C# structure
             crash_info = self._extract_crash_info()
+            case_detail = self._extract_case_detail()
             vehicles = self._extract_all_vehicles()
             
             # Build the final JSON structure
-            return self._build_json_structure(crash_info, vehicles)
+            return self._build_json_structure(crash_info, case_detail, vehicles)
             
         except Exception as e:
             log.error(f"Error parsing PDF {self.pdf_path}: {e}")
@@ -38,607 +88,522 @@ class OhioPdfParser:
             traceback.print_exc()
             return None
     
-    def _find_in_lines(self, pattern, lines, start_index=0, flags=re.IGNORECASE):
-        """Find pattern in list of lines starting from start_index"""
-        for i in range(start_index, len(lines)):
-            m = re.search(pattern, lines[i], flags)
-            if m:
-                return m.group(1) if m.lastindex else m.group(0), i
-        return None, -1
-    
     def _extract_crash_info(self) -> dict:
-        """Extract crash information from page 1"""
-        if not self.raw_pages or not self.pure_pages:
-            return {}
+        """Extract basic crash information (matches ohioCaseBasicInfo)"""
+        info = {
+            "incident_number": "NA",
+            "report_number": "NA",
+            "department": "NA",
+            "state_code": "",
+            "state_abbreviation": "OH",
+            "state_name": "OHIO",
+            "county_code": "NA",
+            "county": "NA",
+            "municipality_code": "NA",
+            "municipality": "NA",
+            "crash_location": "NA",
+            "crash_type_l1": "",
+            "crash_type_l2": "",
+            "date_of_crash": "NA",
+            "total_killed": "",
+            "total_injured": "",
+            "total_vehicles": "0",
+            "case_file_s3_path": "",
+            "s3_bucket_name": "",
+            "s3_access_key": "",
+            "s3_secret_key": "",
+            "pdf_file_path": str(self.pdf_path),
+        }
         
-        page1_text = self.raw_pages[0]
-        page1_lines = self.pure_pages[0]
-        
-        # Extract report number (LOCAL INFORMATION at very top)
-        report_number = ""
-        for line in page1_lines[:5]:  # Check first 5 lines only
+        for i, line in enumerate(self.raw_lines):
+            # Report Number (LOCAL INFORMATION)
             if "LOCAL INFORMATION" in line:
-                # The number is on the same line or next line
-                m = re.search(r'P\d{14}', line)
-                if m:
-                    report_number = m.group(0)
-                break
-        
-        # Extract incident number (LOCAL REPORT NUMBER)
-        incident_number = ""
-        for i, line in enumerate(page1_lines):
-            if "LOCAL REPORT NUMBER" in line and "*" in line:
-                # Number is typically 2-3 lines below
-                for j in range(i+1, min(i+5, len(page1_lines))):
-                    m = re.match(r'^\d{2}-\d{4}-\d{2}$', page1_lines[j].strip())
-                    if m:
-                        incident_number = m.group(0)
-                        break
-                break
-        
-        # Extract department (REPORTING AGENCY NAME)
-        department = ""
-        for i, line in enumerate(page1_lines):
-            if "REPORTING AGENCY NAME" in line and "*" in line:
-                # Department is typically on next line
-                if i+1 < len(page1_lines):
-                    dept_line = page1_lines[i+1].strip()
-                    # Clean up - remove NCIC if it appears
-                    if "NCIC" not in dept_line and dept_line:
-                        department = dept_line
-                    else:
-                        # Try next line
-                        m = re.search(r'^([A-Za-z\s]+?)(?:\s+NCIC|$)', dept_line)
-                        if m:
-                            department = m.group(1).strip()
-                break
-        
-        # Extract NCIC (municipality code)
-        municipality_code = ""
-        for i, line in enumerate(page1_lines):
-            if line.strip() == "NCIC *":
-                # Code is on next line
-                if i+1 < len(page1_lines):
-                    ncic_line = page1_lines[i+1].strip()
-                    # Extract just the code (e.g., "OHP08")
-                    m = re.match(r'^([A-Z0-9]+)', ncic_line)
-                    if m:
-                        municipality_code = m.group(1)
-                break
-        
-        # Extract number of units
-        total_vehicles = ""
-        for i, line in enumerate(page1_lines):
-            if "NUMBER OF UNITS" in line:
-                if i+1 < len(page1_lines):
-                    m = re.match(r'^(\d+)', page1_lines[i+1].strip())
-                    if m:
-                        total_vehicles = m.group(1)
-                break
-        
-        # Extract county
-        county_code = ""
-        for i, line in enumerate(page1_lines):
-            if line.strip() == "COUNTY*":
-                # County code is on next line before "1 - CITY"
-                if i+1 < len(page1_lines):
-                    m = re.match(r'^(\d+)', page1_lines[i+1].strip())
-                    if m:
-                        county_code = m.group(1)
-                break
-        
-        # Extract locality
-        locality_code = ""
-        for i, line in enumerate(page1_lines):
-            if line.strip() == "LOCALITY*":
-                if i+1 < len(page1_lines):
-                    m = re.match(r'^(\d+)', page1_lines[i+1].strip())
-                    if m:
-                        locality_code = m.group(1)
-                break
-        
-        locality_map = {"1": "CITY", "2": "VILLAGE", "3": "TOWNSHIP"}
-        locality = locality_map.get(locality_code, "TOWNSHIP")
-        
-        # Extract crash location (city/village/township name)
-        crash_location = ""
-        for i, line in enumerate(page1_lines):
-            if "LOCATION: CITY, VILLAGE, TOWNSHIP*" in line:
-                if i+1 < len(page1_lines):
-                    loc_line = page1_lines[i+1].strip()
-                    # Remove "CRASH DATE" if it appears
+                report_match = re.search(r'P\d{14}', line)
+                if report_match:
+                    info["report_number"] = report_match.group(0)
+            
+            # Case Number (LOCAL REPORT NUMBER)
+            elif line.startswith("REPORT NUMBER *") or "LOCAL REPORT NUMBER" in line:
+                if i + 1 < len(self.raw_lines):
+                    case_match = re.match(r'([0-9A-Za-z-]+)', self.raw_lines[i + 1].strip())
+                    if case_match:
+                        case_num = case_match.group(1)
+                        # Remove trailing indicators
+                        case_num = re.sub(r'(X(\s|P)|PHOTOS).*$', '', case_num).strip()
+                        info["incident_number"] = case_num
+            
+            # Department (REPORTING AGENCY NAME)
+            elif line.startswith("REPORTING AGENCY NAME *"):
+                if i + 1 < len(self.raw_lines):
+                    dept_line = self.raw_lines[i + 1].strip()
+                    if "NCIC *" not in dept_line and dept_line:
+                        info["department"] = dept_line
+                        info["municipality"] = dept_line
+            
+            # Municipality Code (NCIC)
+            elif line.startswith("NCIC *"):
+                if i + 1 < len(self.raw_lines):
+                    ncic_parts = self.raw_lines[i + 1].strip().split()
+                    if ncic_parts and not ncic_parts[0].startswith("NUMBER"):
+                        info["municipality_code"] = ncic_parts[0]
+                        # Number of vehicles
+                        if len(ncic_parts) > 1 and ncic_parts[0] != "NUMBER":
+                            try:
+                                info["total_vehicles"] = ncic_parts[1]
+                            except:
+                                pass
+            
+            # County
+            elif line.startswith("COUNTY*") and i > 0 and "UNSOLVED" in self.raw_lines[i - 1]:
+                if i + 1 < len(self.raw_lines):
+                    county_line = self.raw_lines[i + 1].strip()
+                    if "CITY" not in county_line:
+                        info["county_code"] = county_line
+                        info["county"] = county_line
+            
+            # Crash Location
+            elif line.startswith("LOCATION: CITY, VILLAGE, TOWNSHIP*"):
+                if i + 1 < len(self.raw_lines):
+                    loc_line = self.raw_lines[i + 1].strip()
                     if "CRASH DATE" not in loc_line and loc_line:
-                        crash_location = loc_line
-                break
-        
-        # Extract crash date/time
-        date_of_crash = ""
-        for i, line in enumerate(page1_lines):
-            if "CRASH DATE / TIME*" in line:
-                if i+1 < len(page1_lines):
-                    datetime_match = re.search(r'(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2})', page1_lines[i+1])
+                        info["crash_location"] = loc_line
+            
+            # Crash Date
+            elif line.startswith("CRASH DATE / TIME*") or "CRASH DATE / TIME*" in line:
+                if i + 1 < len(self.raw_lines):
+                    datetime_match = re.search(r'(\d{2}/\d{2}/\d{4})', self.raw_lines[i + 1])
                     if datetime_match:
                         try:
                             dt = datetime.strptime(datetime_match.group(1), "%m/%d/%Y")
-                            date_of_crash = dt.strftime("%Y-%m-%d")
+                            info["date_of_crash"] = dt.strftime("%Y-%m-%d")
                         except:
-                            pass
-                break
+                            info["date_of_crash"] = datetime_match.group(1)
         
-        # Extract crash severity
-        crash_severity = ""
-        for i, line in enumerate(page1_lines):
-            if "CRASH SEVERITY" in line:
-                # Look backwards for the number
-                for j in range(i-1, max(0, i-5), -1):
-                    m = re.search(r'^(\d+)\s*$', page1_lines[j].strip())
-                    if m:
-                        crash_severity = m.group(1)
-                        break
-                break
-        
-        # Extract route information - look in LOCATION section
-        route_type = ""
-        route_number = ""
-        
-        # Find the route type and number in the bottom section
-        for i, line in enumerate(page1_lines):
-            if "ROUTE TYPE ROUTE NUMBER" in line:
-                # Route type is typically a few lines below
-                for j in range(i+1, min(i+10, len(page1_lines))):
-                    # Look for pattern like "SR" or "US" or "CR"
-                    m = re.match(r'^(SR|US|CR|IR|TR)$', page1_lines[j].strip())
-                    if m:
-                        route_type = m.group(1)
-                        # Route number is typically on next line
-                        if j+1 < len(page1_lines):
-                            n = re.match(r'^(\d+)', page1_lines[j+1].strip())
-                            if n:
-                                route_number = n.group(1)
-                        break
-                break
-        
-        return {
-            "incident_number": incident_number,
-            "report_number": report_number,
-            "department": department,
-            "county_code": county_code,
-            "municipality_code": municipality_code,
-            "crash_location": crash_location,
-            "date_of_crash": date_of_crash,
-            "total_vehicles": total_vehicles,
-            "crash_severity": crash_severity,
-            "locality": locality,
-            "route_type": route_type or "NA",
-            "route_number": route_number or "NA",
+        return info
+    
+    def _extract_case_detail(self) -> list:
+        """Extract case detail information (matches ohioCaseInfo)"""
+        detail = {
+            "local_information": "",
+            "locality": "TOWNSHIP",
+            "location": "NA",
+            "route_type": "NA",
+            "route_number": "NA",
+            "route_prefix": "NA",
+            "lane_speed_limit_1": "",
+            "lane_speed_limit_2": "",
+            "crash_severity": "5"
         }
+        
+        for i, line in enumerate(self.raw_lines):
+            # Locality
+            if line.startswith("LOCALITY*") and i > 0 and "TOWNSHIP" in self.raw_lines[i - 1]:
+                if i + 1 < len(self.raw_lines):
+                    locality_code = self.raw_lines[i + 1].strip()
+                    if locality_code == "1":
+                        detail["locality"] = "CITY"
+                    elif locality_code == "2":
+                        detail["locality"] = "VILLAGE"
+                    elif locality_code == "3":
+                        detail["locality"] = "TOWNSHIP"
+            
+            # Crash Severity
+            elif "FATAL" in line:
+                severity_match = re.match(r'^\s*(\d+)', line)
+                if severity_match:
+                    detail["crash_severity"] = severity_match.group(1)
+            
+            # Location Road Name
+            elif line.startswith("LOCATION ROAD NAME"):
+                if i + 1 < len(self.raw_lines):
+                    next_line = self.raw_lines[i + 1]
+                    # Check if it's not a distance value
+                    if not re.match(r'^\d+(\.\d+)?$', next_line.strip()):
+                        if i + 3 < len(self.raw_lines) and "DISTANCE" in self.raw_lines[i + 3]:
+                            detail["location"] = next_line.strip()
+                        elif i + 2 < len(self.raw_lines) and "DISTANCE" in self.raw_lines[i + 2]:
+                            detail["location"] = next_line.strip()
+            
+            # Route Type and Number
+            elif line == "LOCATION" and i + 1 < len(self.raw_lines) and self.raw_lines[i + 1] == "REFERENCE":
+                # Look ahead for route information
+                for j in range(i, min(i + 15, len(self.raw_lines))):
+                    if "ROUTE TYPE ROUTE NUMBER" in self.raw_lines[j]:
+                        # Check for PREFIX or route type/number
+                        for k in range(j + 1, min(j + 10, len(self.raw_lines))):
+                            route_type_match = re.match(r'^(SR|US|CR|IR|TR)$', self.raw_lines[k].strip())
+                            if route_type_match:
+                                detail["route_type"] = route_type_match.group(1)
+                                # Route number is typically next
+                                if k + 1 < len(self.raw_lines):
+                                    route_num_match = re.match(r'^(\d+)', self.raw_lines[k + 1].strip())
+                                    if route_num_match:
+                                        detail["route_number"] = route_num_match.group(1)
+                                break
+                        break
+        
+        return [detail]
     
     def _extract_all_vehicles(self) -> list:
-        """Extract all vehicles from the PDF"""
+        """Extract all vehicle information"""
         vehicles = []
+        person_index = 0
         
-        # Skip page 1 (crash info), process remaining pages
-        for page_num in range(1, len(self.pure_pages)):
-            page_lines = self.pure_pages[page_num]
-            
-            # Find all UNIT # occurrences on this page
-            for i, line in enumerate(page_lines):
-                if re.match(r'^UNIT\s*#$', line.strip()):
-                    # Unit number is on next line
-                    if i+1 < len(page_lines):
-                        m = re.match(r'^(\d+)$', page_lines[i+1].strip())
-                        if m:
-                            unit_num = m.group(1)
-                            vehicle = self._extract_vehicle_from_page(page_lines, unit_num, i)
-                            if vehicle:
-                                vehicles.append(vehicle)
+        # Find all UNIT # markers in raw_lines for person extraction
+        # Find vehicle data in pure_lines
+        
+        vehicle_units = []
+        for i, line in enumerate(self.pure_lines):
+            if "UNIT #" in line and "OWNER NAME" in line:
+                vehicle_units.append(i)
+        
+        for unit_idx, line_num in enumerate(vehicle_units):
+            vehicle_data = self._extract_vehicle_from_pure(line_num, unit_idx + 1)
+            if vehicle_data:
+                # Now extract person data from raw_lines for this unit
+                persons = self._extract_persons_for_unit(unit_idx + 1)
+                vehicle_data["persons"] = persons
+                vehicles.append(vehicle_data)
         
         return vehicles
     
-    def _extract_vehicle_from_page(self, page_lines: list, unit_num: str, start_idx: int) -> dict:
-        """Extract vehicle data starting from a specific index"""
-        
-        # Initialize vehicle data
-        vehicle_data = {
-            "owner_name": "",
-            "plate_state": "",
-            "plate_number": "",
-            "vin": "",
-            "occupants": "",
-            "make": "",
-            "color": "",
-            "model": "",
-            "year": "",
-            "insurance_company": "",
-            "insurance_policy": "",
-            "insurance_verified": "",
-            "towed_by": "",
-            "vehicle_type": "",
+    def _extract_vehicle_from_pure(self, start_idx: int, unit_num: int) -> dict:
+        """Extract vehicle data from pure_lines (matches ohioBasicVehicleInfo + ohioVehicleInfo)"""
+        vehicle = {
+            "vehicle_unit": str(unit_num),
             "is_commercial": "0",
-            "is_hit_and_run": "0",
-            "owner_address": "",
-            "owner_phone": "",
-        }
-        
-        # Person data
-        person_data = {
-            "name": "",
-            "dob": "",
-            "age": "",
-            "gender": "",
-            "address": "",
-            "phone": "",
-            "ol_state": "",
-            "ol_class": "",
-            "citation": "",
-            "offense_charged": "",
-            "offense_description": "",
-        }
-        
-        # Extract owner name - should be a few lines after UNIT #
-        for i in range(start_idx, min(start_idx + 10, len(page_lines))):
-            if "OWNER NAME: LAST, FIRST, MIDDLE" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    owner_line = page_lines[i+1].strip()
-                    # Remove "SAME AS DRIVER" if present
-                    owner_line = re.sub(r'\(\s*SAME AS DRIVER\s*\)', '', owner_line).strip()
-                    if owner_line and "UNIT #" not in owner_line:
-                        vehicle_data["owner_name"] = owner_line
-                break
-        
-        # Extract LP STATE and LICENSE PLATE #
-        for i in range(start_idx, len(page_lines)):
-            if "LP STATE" in page_lines[i] and "LICENSE PLATE" in page_lines[i]:
-                # Data is typically on next line
-                if i+1 < len(page_lines):
-                    lp_line = page_lines[i+1].strip()
-                    # Format: "KY 2802GB ..."
-                    parts = lp_line.split()
-                    if len(parts) >= 2:
-                        vehicle_data["plate_state"] = parts[0]
-                        vehicle_data["plate_number"] = parts[1]
-                break
-        
-        # Extract VIN
-        for i in range(start_idx, len(page_lines)):
-            if "VEHICLE IDENTIFICATION" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    vin_line = page_lines[i+1].strip()
-                    # VIN is 17 characters
-                    m = re.search(r'\b([A-HJ-NPR-Z0-9]{17})\b', vin_line)
-                    if m:
-                        vehicle_data["vin"] = m.group(1)
-                break
-        
-        # Extract occupants
-        for i in range(start_idx, len(page_lines)):
-            if "# OCCUPANTS" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    m = re.match(r'^(\d+)', page_lines[i+1].strip())
-                    if m:
-                        vehicle_data["occupants"] = m.group(1)
-                break
-        
-        # Extract make
-        for i in range(start_idx, len(page_lines)):
-            if "VEHICLE MAKE" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    make_line = page_lines[i+1].strip()
-                    # Make is typically one word
-                    m = re.match(r'^([A-Z]+)', make_line)
-                    if m:
-                        vehicle_data["make"] = m.group(1)
-                break
-        
-        # Extract color
-        for i in range(start_idx, len(page_lines)):
-            if "COLOR" in page_lines[i]:
-                # Color might be on same line or next
-                color_match = re.search(r'COLOR\s*([A-Z]{3})', page_lines[i])
-                if color_match:
-                    vehicle_data["color"] = color_match.group(1)
-                elif i+1 < len(page_lines):
-                    m = re.match(r'^([A-Z]{3})', page_lines[i+1].strip())
-                    if m:
-                        vehicle_data["color"] = m.group(1)
-                break
-        
-        # Extract model
-        for i in range(start_idx, len(page_lines)):
-            if "VEHICLE MODEL" in page_lines[i]:
-                model_match = re.search(r'VEHICLE\s+MODEL\s*([A-Z0-9\-]+)', page_lines[i])
-                if model_match:
-                    vehicle_data["model"] = model_match.group(1)
-                break
-        
-        # Extract year
-        for i in range(start_idx, len(page_lines)):
-            if "VEHICLE YEAR" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    year_line = page_lines[i+1].strip()
-                    m = re.match(r'^(19|20)\d{2}', year_line)
-                    if m:
-                        vehicle_data["year"] = m.group(0)
-                break
-        
-        # Extract insurance company and policy
-        for i in range(start_idx, len(page_lines)):
-            if "INSURANCE COMPANY" in page_lines[i] and "INSURANCE POLICY" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    ins_line = page_lines[i+1].strip()
-                    # Look for "INSURANCE VERIFIED" checkbox
-                    if i-1 >= 0 and "X" in page_lines[i-1]:
-                        vehicle_data["insurance_verified"] = "X"
-                break
-        
-        # Extract insurance company name - more lines down
-        for i in range(start_idx, len(page_lines)):
-            if "INSURANCE" in page_lines[i] and "VERIFIED" in page_lines[i]:
-                # Company name is typically a few lines after
-                for j in range(i+1, min(i+5, len(page_lines))):
-                    # Look for uppercase company names
-                    if re.match(r'^[A-Z\s&]+$', page_lines[j].strip()) and len(page_lines[j].strip()) > 3:
-                        vehicle_data["insurance_company"] = page_lines[j].strip()
-                        # Policy might be on next line
-                        if j+1 < len(page_lines):
-                            policy_match = re.search(r'\b(\d{10,})\b', page_lines[j+1])
-                            if policy_match:
-                                vehicle_data["insurance_policy"] = policy_match.group(1)
-                        break
-                break
-        
-        # Extract towed by
-        for i in range(start_idx, len(page_lines)):
-            if "TOWED BY: COMPANY NAME" in page_lines[i]:
-                # Company might be a few lines down
-                for j in range(i+1, min(i+5, len(page_lines))):
-                    line = page_lines[j].strip()
-                    if line and not re.match(r'^\d{4}$', line):  # Skip year line
-                        # Check if it's a company name (mixed case or all caps, not a year)
-                        if re.match(r'^[A-Z]', line) and len(line) > 2:
-                            vehicle_data["towed_by"] = line
-                            break
-                break
-        
-        # Extract owner address
-        for i in range(start_idx, len(page_lines)):
-            if "OWNER ADDRESS: STREET, CITY, STATE, ZIP" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    addr_line = page_lines[i+1].strip()
-                    if addr_line and "SAME AS DRIVER" not in addr_line:
-                        vehicle_data["owner_address"] = addr_line
-                break
-        
-        # Extract owner phone
-        for i in range(start_idx, len(page_lines)):
-            if "OWNER PHONE:INCLUDE AREA CODE" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    phone_line = page_lines[i+1].strip()
-                    m = re.search(r'\d{3}[-.]?\d{3}[-.]?\d{4}', phone_line)
-                    if m:
-                        vehicle_data["owner_phone"] = m.group(0)
-                break
-        
-        # Extract vehicle type
-        for i in range(start_idx, len(page_lines)):
-            if "UNIT TYPE" in page_lines[i]:
-                # Type is typically a few lines before or after
-                for j in range(max(0, i-5), min(i+5, len(page_lines))):
-                    m = re.match(r'^(\d+)$', page_lines[j].strip())
-                    if m and int(m.group(1)) < 30:  # Vehicle types are 1-27
-                        vehicle_data["vehicle_type"] = m.group(1)
-                        break
-                break
-        
-        # Check for commercial
-        for i in range(start_idx, len(page_lines)):
-            if "COMMERCIAL" in page_lines[i] and "GOVERNMENT" in page_lines[i]:
-                # Look for X mark nearby
-                if i-1 >= 0 and "X" in page_lines[i-1]:
-                    vehicle_data["is_commercial"] = "1"
-                elif i+1 < len(page_lines) and "X" in page_lines[i+1]:
-                    vehicle_data["is_commercial"] = "1"
-                break
-        
-        # Check for hit and run
-        for i in range(start_idx, len(page_lines)):
-            if "HIT/SKIP UNIT" in page_lines[i]:
-                if i-1 >= 0 and "X" in page_lines[i-1]:
-                    vehicle_data["is_hit_and_run"] = "1"
-                elif i+1 < len(page_lines) and "X" in page_lines[i+1]:
-                    vehicle_data["is_hit_and_run"] = "1"
-                break
-        
-        # Now extract person data - look for person section
-        person_data = self._extract_person_from_page(page_lines, unit_num)
-        
-        # Build vehicle object
-        return self._build_vehicle_object(vehicle_data, person_data, unit_num)
-    
-    def _extract_person_from_page(self, page_lines: list, unit_num: str) -> dict:
-        """Extract person/driver data from page"""
-        person = {
-            "name": "",
-            "dob": "",
-            "age": "",
-            "gender": "",
-            "address": "",
-            "phone": "",
-            "ol_state": "",
-            "ol_class": "",
-            "citation": "",
-            "offense_charged": "",
-            "offense_description": "",
-        }
-        
-        # Find person section - look for "UNIT #" followed by unit number, then "NAME:"
-        unit_section_start = -1
-        for i, line in enumerate(page_lines):
-            if f"UNIT #" in line:
-                # Check if next line has our unit number
-                if i+1 < len(page_lines) and page_lines[i+1].strip() == unit_num:
-                    unit_section_start = i
-                    break
-        
-        if unit_section_start == -1:
-            return person
-        
-        # Extract name
-        for i in range(unit_section_start, min(unit_section_start + 30, len(page_lines))):
-            if "NAME: LAST, FIRST, MIDDLE" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    name_line = page_lines[i+1].strip()
-                    if name_line and "DATE OF BIRTH" not in name_line:
-                        person["name"] = name_line
-                break
-        
-        # Extract DOB
-        for i in range(unit_section_start, min(unit_section_start + 30, len(page_lines))):
-            if "DATE OF BIRTH" in page_lines[i]:
-                dob_match = re.search(r'\b(\d{2}/\d{2}/\d{4})\b', page_lines[i])
-                if dob_match:
-                    person["dob"] = dob_match.group(1)
-                elif i+1 < len(page_lines):
-                    dob_match = re.search(r'\b(\d{2}/\d{2}/\d{4})\b', page_lines[i+1])
-                    if dob_match:
-                        person["dob"] = dob_match.group(1)
-                break
-        
-        # Extract age
-        for i in range(unit_section_start, min(unit_section_start + 30, len(page_lines))):
-            if "AGE" in page_lines[i] and "GENDER" in page_lines[i]:
-                # Age and gender are typically on same line
-                age_match = re.search(r'\b(\d{1,3})\b', page_lines[i])
-                if age_match:
-                    person["age"] = age_match.group(1)
-                # Try next line too
-                elif i+1 < len(page_lines):
-                    age_match = re.search(r'^(\d{1,3})', page_lines[i+1].strip())
-                    if age_match:
-                        person["age"] = age_match.group(1)
-                break
-        
-        # Extract gender
-        for i in range(unit_section_start, min(unit_section_start + 30, len(page_lines))):
-            if "GENDER" in page_lines[i]:
-                gender_match = re.search(r'\b([MFU])\b', page_lines[i])
-                if gender_match:
-                    person["gender"] = gender_match.group(1)
-                elif i+1 < len(page_lines):
-                    gender_match = re.search(r'^([MFU])$', page_lines[i+1].strip())
-                    if gender_match:
-                        person["gender"] = gender_match.group(1)
-                break
-        
-        # Extract address
-        for i in range(unit_section_start, min(unit_section_start + 30, len(page_lines))):
-            if "ADDRESS: STREET, CITY, STATE, ZIP" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    addr_line = page_lines[i+1].strip()
-                    if addr_line and "UNIT #" not in addr_line:
-                        person["address"] = addr_line
-                break
-        
-        # Extract phone
-        for i in range(unit_section_start, min(unit_section_start + 30, len(page_lines))):
-            if "CONTACT PHONE" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    phone_match = re.search(r'\d{3}[-.]?\d{3}[-.]?\d{4}', page_lines[i+1])
-                    if phone_match:
-                        person["phone"] = phone_match.group(0)
-                break
-        
-        # Extract OL STATE
-        for i in range(unit_section_start, min(unit_section_start + 50, len(page_lines))):
-            if page_lines[i].strip() == "OL STATE":
-                if i+1 < len(page_lines):
-                    state_match = re.match(r'^([A-Z]{2})$', page_lines[i+1].strip())
-                    if state_match:
-                        person["ol_state"] = state_match.group(1)
-                break
-        
-        # Extract OL CLASS
-        for i in range(unit_section_start, min(unit_section_start + 50, len(page_lines))):
-            if page_lines[i].strip() == "OL CLASS":
-                if i+1 < len(page_lines):
-                    class_match = re.match(r'^(\d+)$', page_lines[i+1].strip())
-                    if class_match:
-                        person["ol_class"] = class_match.group(1)
-                break
-        
-        # Extract citation number
-        for i in range(unit_section_start, min(unit_section_start + 50, len(page_lines))):
-            if "CITATION NUMBER" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    citation_line = page_lines[i+1].strip()
-                    if citation_line and len(citation_line) > 5:
-                        person["citation"] = citation_line
-                break
-        
-        # Extract offense charged
-        for i in range(unit_section_start, min(unit_section_start + 50, len(page_lines))):
-            if "OFFENSE CHARGED" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    offense_line = page_lines[i+1].strip()
-                    # Look for code like "4511.44"
-                    if re.match(r'^\d{4}', offense_line):
-                        person["offense_charged"] = offense_line
-                break
-        
-        # Extract offense description
-        for i in range(unit_section_start, min(unit_section_start + 50, len(page_lines))):
-            if "OFFENSE DESCRIPTION" in page_lines[i]:
-                if i+1 < len(page_lines):
-                    desc_line = page_lines[i+1].strip()
-                    if desc_line and len(desc_line) > 3:
-                        person["offense_description"] = desc_line
-                break
-        
-        return person
-    
-    def _build_vehicle_object(self, vehicle_data: dict, person_data: dict, unit_num: str) -> dict:
-        """Build the final vehicle object"""
-        
-        # Parse address into components
-        address_parts = {"line1": "", "city": "", "state": "", "zip": ""}
-        if person_data["address"]:
-            addr = person_data["address"]
-            # Format: "814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056"
-            parts = [p.strip() for p in addr.split(',')]
-            if len(parts) >= 4:
-                address_parts["line1"] = parts[0]
-                address_parts["city"] = parts[1]
-                address_parts["state"] = parts[2]
-                address_parts["zip"] = parts[3]
-            elif len(parts) == 3:
-                address_parts["line1"] = parts[0]
-                address_parts["city"] = parts[1]
-                # Try to split state and zip
-                m = re.match(r'([A-Z]{2})\s+(\d{5})', parts[2])
-                if m:
-                    address_parts["state"] = m.group(1)
-                    address_parts["zip"] = m.group(2)
-        
-        return {
-            "vehicle_unit": unit_num,
-            "is_commercial": vehicle_data["is_commercial"],
-            "make": f" {vehicle_data['make']}" if vehicle_data['make'] else "",
-            "model": vehicle_data["model"],
-            "vehicle_year": vehicle_data["year"],
-            "plate_number": f" {vehicle_data['plate_number']}" if vehicle_data['plate_number'] else "",
-            "plate_state": f" {vehicle_data['plate_state']}" if vehicle_data['plate_state'] else "",
+            "make": "",
+            "model": "",
+            "vehicle_year": "",
+            "plate_number": "",
+            "plate_state": "",
             "plate_year": "",
-            "vin": vehicle_data["vin"],
-            "policy": vehicle_data["insurance_policy"],
+            "vin": "",
+            "policy": "",
             "is_driven": "",
             "is_left_at_scene": "",
-            "is_towed": "1" if vehicle_data["towed_by"] else "0",
+            "is_towed": "0",
             "is_impounded": "",
             "is_disabled": "",
             "is_parked": "0",
             "is_pedestrian": "",
             "is_pedal_cyclist": "",
-            "is_hit_and_run": vehicle_data["is_hit_and_run"],
+            "is_hit_and_run": "0",
             "vehicle_used": "",
-            "vehicle_type": vehicle_data["vehicle_type"] or "1",
-            "trailer
+            "vehicle_type": "1",
+            "trailer_or_carrier_count": "0",
+            "color": "",
+            "vehicle_body_type": "",
+            "vehicle_travel_direction": "",
+            "vehicle_details": {
+                "crash_seq_1st_event": "",
+                "crash_seq_2nd_event": "",
+                "crash_seq_3rd_event": "",
+                "crash_seq_4th_event": "",
+                "harmful_event": "",
+                "authorized_speed": "",
+                "estimated_original_speed": "",
+                "estimated_impact_speed": "",
+                "tad": "",
+                "estimated_damage": "",
+                "most_harmful_event": "",
+                "insurance_company": "",
+                "insurance_verified": "",
+                "us_dot": "",
+                "towed_by": "",
+                "occupant_count": "",
+                "initial_impact": "",
+                "contributing_circumstance": "",
+                "damage_severity": "",
+                "damaged_area": "",
+                "vehicle_defects": "",
+                "overweight_permit": ""
+            }
+        }
+        
+        # Parse from pure_lines starting at start_idx
+        search_range = self.pure_lines[start_idx:min(start_idx + 80, len(self.pure_lines))]
+        
+        for i, line in enumerate(search_range):
+            abs_i = start_idx + i
+            
+            # Owner name, phone, etc. from first line
+            if "OWNER NAME" in line and "OWNER PHONE" in line:
+                if i + 1 < len(search_range):
+                    parts = search_range[i + 1].split('  ')
+                    parts = [p.strip() for p in parts if p.strip()]
+                    # Parts typically: [unit#, owner_name, phone, ...]
+            
+            # LP STATE, LICENSE PLATE, VIN
+            elif "LP STATE" in line and "LICENSE PLATE" in line and "VEHICLE IDENTIFICATION" in line:
+                if i + 1 < len(search_range):
+                    data_line = search_range[i + 1]
+                    parts = [p.strip() for p in data_line.split('  ') if p.strip()]
+                    
+                    if len(parts) >= 2:
+                        vehicle["plate_state"] = f" {parts[0]}"
+                        vehicle["plate_number"] = f" {parts[1]}"
+                    
+                    vin_match = re.search(r'\b([A-HJ-NPR-Z0-9]{17})\b', data_line)
+                    if vin_match:
+                        vehicle["vin"] = vin_match.group(1)
+                    
+                    if len(parts) >= 4:
+                        try:
+                            vehicle["vehicle_year"] = parts[3]
+                        except:
+                            pass
+                    if len(parts) >= 5:
+                        vehicle["make"] = f" {parts[4]}"
+            
+            # Insurance company, policy, color, model
+            elif "INSURANCE" in line and "INSURANCE COMPANY" in line and "INSURANCE POLICY" in line:
+                if i + 1 < len(search_range):
+                    data_line = search_range[i + 1]
+                    parts = [p.strip() for p in data_line.split('   ') if p.strip()]
+                    
+                    if len(parts) >= 1 and parts[0] == "X":
+                        vehicle["vehicle_details"]["insurance_verified"] = "X"
+                    if len(parts) >= 3:
+                        vehicle["vehicle_details"]["insurance_company"] = parts[2]
+                    if len(parts) >= 4:
+                        vehicle["policy"] = parts[3]
+                    if len(parts) >= 5:
+                        vehicle["color"] = parts[4]
+                    if len(parts) >= 6:
+                        vehicle["model"] = parts[5]
+            
+            # Towed by
+            elif "TOWED BY: COMPANY" in line and "US DOT" in line:
+                if i + 2 < len(search_range):
+                    tow_line = search_range[i + 2]
+                    parts = [p.strip() for p in tow_line.split('  ') if p.strip()]
+                    
+                    for part in parts:
+                        if not part.isdigit() and len(part) > 2:
+                            vehicle["vehicle_details"]["towed_by"] = part
+                            vehicle["is_towed"] = "1"
+                            break
+                    
+                    # US DOT
+                    for part in parts:
+                        if part.isdigit():
+                            vehicle["vehicle_details"]["us_dot"] = part
+                            break
+                
+                # Check for commercial (X mark)
+                if i + 3 < len(search_range):
+                    if search_range[i + 3].strip().startswith("X"):
+                        vehicle["is_commercial"] = "1"
+            
+            # Hit and Run
+            elif "HIT/SKIP UNIT" in line:
+                if i + 1 < len(search_range):
+                    if re.search(r'\sX\s', search_range[i + 1]):
+                        vehicle["is_hit_and_run"] = "1"
+            
+            # Vehicle Type
+            elif "UNIT TYPE" in line:
+                if i - 3 >= 0 and "MINIVAN" in search_range[i - 3]:
+                    type_match = re.match(r'^\s*(\d+)', search_range[i - 3])
+                    if type_match:
+                        vehicle["vehicle_type"] = type_match.group(1)
+            
+            # Contributing Circumstance
+            elif "CONTRIBUTING" in line and i + 1 < len(search_range) and "CIRCUMSTANCES" in search_range[i + 1]:
+                if i - 2 >= 0:
+                    parts = [p.strip() for p in search_range[i - 2].split('  ') if p.strip()]
+                    if parts and parts[0].isdigit():
+                        vehicle["vehicle_details"]["contributing_circumstance"] = parts[0]
+            
+            # Harmful Events
+            elif "FIRST HARMFUL EVENT" in line and "MOST HARMFUL EVENT" in line:
+                first_match = re.search(r'\s*(\d{1,2})\s*(?=FIRST HARMFUL EVENT)', line)
+                if first_match:
+                    vehicle["vehicle_details"]["harmful_event"] = first_match.group(1)
+                
+                most_match = re.search(r'(?<=FIRST HARMFUL EVENT)\s*(\d{1,2})\s*(?=MOST HARMFUL EVENT)', line)
+                if most_match:
+                    vehicle["vehicle_details"]["most_harmful_event"] = most_match.group(1)
+        
+        return vehicle
+    
+    def _extract_persons_for_unit(self, unit_num: int) -> list:
+        """Extract person data for a specific unit from raw_lines"""
+        persons = []
+        
+        # Find all person entries for this unit
+        for i, line in enumerate(self.raw_lines):
+            if line.startswith("UNIT  #") or "UNIT #" in line:
+                # Check if next line has our unit number
+                if i + 1 < len(self.raw_lines):
+                    unit_match = re.match(r'^\s*(\d+)\s*$', self.raw_lines[i + 1].strip())
+                    if unit_match and int(unit_match.group(1)) == unit_num:
+                        person = self._extract_person_data(i)
+                        if person:
+                            persons.append(person)
+        
+        return persons
+    
+    def _extract_person_data(self, unit_line_idx: int) -> dict:
+        """Extract person data starting from UNIT # line"""
+        person = {
+            "person_type": "",
+            "first_name": "",
+            "middle_name": "",
+            "last_name": "",
+            "same_as_driver": "",
+            "address_block": {
+                "address_line1": "",
+                "address_city": "",
+                "address_state": "",
+                "address_zip": ""
+            },
+            "seating_position": "",
+            "date_of_birth": "",
+            "gender": "",
+            "alcohol_or_drug_involved": "",
+            "ethnicity": "",
+            "occupant": "",
+            "airbag_deployed": "",
+            "airbag_status": "",
+            "trapped": "",
+            "ejection": "",
+            "injury": "",
+            "ems_name": "",
+            "injured_taken_by_ems": "",
+            "age": "",
+            "injured_taken_to": "",
+            "driver_info_id": "",
+            "alcohol_test_status": "",
+            "alcohol_test_type": "",
+            "alcohol_test_value": "",
+            "drug_test_status": "",
+            "drug_test_type": "",
+            "drug_test_value": "",
+            "offense_charged": "",
+            "local_code": "",
+            "offense_description": "",
+            "citation_number": "",
+            "contact_number": "",
+            "ol_class": "",
+            "endorsement": "",
+            "restriction": "",
+            "driver_distracted_by": "",
+            "driving_license": "",
+            "dl_state": "",
+            "alcohol_or_drug_suspected": ""
+        }
+        
+        search_end = min(unit_line_idx + 60, len(self.raw_lines))
+        
+        for i in range(unit_line_idx, search_end):
+            line = self.raw_lines[i]
+            
+            # Name
+            if "NAME: LAST, FIRST, MIDDLE" in line:
+                if i + 1 < len(self.raw_lines):
+                    name_line = self.raw_lines[i + 1].strip()
+                    if name_line and "CONTACT PHONE" not in name_line:
+                        name_parts = name_line.split(',')
+                        if len(name_parts) >= 1:
+                            person["last_name"] = name_parts[0].strip()
+                        if len(name_parts) >= 2:
+                            person["first_name"] = name_parts[1].strip()
+                        if len(name_parts) >= 3:
+                            person["middle_name"] = name_parts[2].strip()
+            
+            # Address
+            elif "ADDRESS: STREET, CITY, STATE, ZIP" in line:
+                if i + 1 < len(self.raw_lines):
+                    addr_line = self.raw_lines[i + 1].strip()
+                    if addr_line and "SAME AS DRIVER" not in addr_line:
+                        addr_parts = [p.strip() for p in addr_line.split(',')]
+                        if len(addr_parts) >= 1:
+                            person["address_block"]["address_line1"] = addr_parts[0]
+                        if len(addr_parts) >= 2:
+                            person["address_block"]["address_city"] = addr_parts[1]
+                        if len(addr_parts) >= 3:
+                            person["address_block"]["address_state"] = addr_parts[2]
+                        if len(addr_parts) >= 4:
+                            person["address_block"]["address_zip"] = addr_parts[3]
+            
+            # DOB
+            elif "DATE OF BIRTH" in line:
+                dob_match = re.search(r'(\d{2}/\d{2}/\d{4})', line)
+                if not dob_match and i + 1 < len(self.raw_lines):
+                    dob_match = re.search(r'(\d{2}/\d{2}/\d{4})', self.raw_lines[i + 1])
+                if dob_match:
+                    person["date_of_birth"] = dob_match.group(1)
+            
+            # Age
+            elif "AGE" in line and "GENDER" in line:
+                age_match = re.search(r'\b(\d{1,3})\b', line)
+                if age_match:
+                    person["age"] = age_match.group(1)
+                elif i + 1 < len(self.raw_lines):
+                    age_match = re.search(r'^(\d{1,3})', self.raw_lines[i + 1].strip())
+                    if age_match:
+                        person["age"] = age_match.group(1)
+            
+            # Gender
+            elif "GENDER" in line:
+                gender_match = re.search(r'\b([MFU])\b', line)
+                if gender_match:
+                    person["gender"] = gender_match.group(1)
+                elif i + 1 < len(self.raw_lines):
+                    gender_match = re.search(r'^([MFU])$', self.raw_lines[i + 1].strip())
+                    if gender_match:
+                        person["gender"] = gender_match.group(1)
+            
+            # Contact Phone
+            elif "CONTACT PHONE" in line:
+                if i + 1 < len(self.raw_lines):
+                    phone_match = re.search(r'(\d{3}[-.]?\d{3}[-.]?\d{4})', self.raw_lines[i + 1])
+                    if phone_match:
+                        person["contact_number"] = phone_match.group(1)
+            
+            # OL STATE
+            elif line.strip() == "OL STATE":
+                if i + 1 < len(self.raw_lines):
+                    state_match = re.match(r'^([A-Z]{2})$', self.raw_lines[i + 1].strip())
+                    if state_match:
+                        person["dl_state"] = state_match.group(1)
+            
+            # OL CLASS
+            elif line.strip() == "OL CLASS":
+                if i + 1 < len(self.raw_lines):
+                    class_match = re.match(r'^(\d+)$', self.raw_lines[i + 1].strip())
+                    if class_match:
+                        person["ol_class"] = class_match.group(1)
+            
+            # Offense Charged
+            elif "OFFENSE CHARGED" in line:
+                if i + 1 < len(self.raw_lines):
+                    offense_line = self.raw_lines[i + 1].strip()
+                    if re.match(r'^\d{4}', offense_line):
+                        person["offense_charged"] = offense_line
+            
+            # Offense Description
+            elif "OFFENSE DESCRIPTION" in line:
+                if i + 1 < len(self.raw_lines):
+                    desc_line = self.raw_lines[i + 1].strip()
+                    if desc_line and len(desc_line) > 3:
+                        person["offense_description"] = desc_line
+            
+            # Citation Number
+            elif "CITATION NUMBER" in line:
+                if i + 1 < len(self.raw_lines):
+                    citation_line = self.raw_lines[i + 1].strip()
+                    if citation_line and len(citation_line) > 5:
+                        person["citation_number"] = citation_line
+        
+        return person
+    
+    def _build_json_structure(self, crash_info: dict, case_detail: list, vehicles: list) -> dict:
+        """Build final JSON matching the target format"""
+        return {
+            **crash_info,
+            "case_detail": case_detail,
+            "vehicles": vehicles
+        }

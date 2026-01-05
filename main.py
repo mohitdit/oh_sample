@@ -209,8 +209,15 @@ async def download_all_reports(page):
                 log.info(f"✅ Saved: {file_path}")
                 
                 # Convert PDF to JSON immediately after download
-                convert_pdf_to_json(file_path)
-                
+                try:
+                    json_result = convert_pdf_to_json(file_path, crash_number, document_number)
+                    if json_result:
+                        log.info(f"✅ Converted to JSON: {file_path.stem}.json")
+                    else:
+                        log.warning(f"⚠️ JSON conversion returned None for {file_path.name}")
+                except Exception as e:
+                    log.error(f"❌ Failed to convert {file_path.name} to JSON: {e}")
+
                 break  # Success, exit retry loop
                 
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:

@@ -4,7 +4,7 @@ from utils.browser_manager import get_stealth_browser
 from utils.logger import log
 import asyncio
 
-class WisconsinScraper(BaseScraper):
+class OhioScraper(BaseScraper):
     """
     Scraper specific to the Wisconsin Circuit Court Access (WCCA) site.
     Handles the two-step process: consent click and then detail page navigation.

@@ -14,7 +14,7 @@ import base64
 
 # MODE CONFIGURATION (ONLY CHANGE THESE)
 
-MODE = "PRESENT"          # "PAST" or "PRESENT"
+MODE = "PAST"          # "PAST" or "PRESENT"
 
 # Past year (FULL YEAR)
 
@@ -31,8 +31,18 @@ MODE = "PRESENT"          # "PAST" or "PRESENT"
 PAST_YEAR = 2023       # Used only when MODE = "PAST"
 
 # ---- PRESENT MODE ----
-START_DATE = date(2025, 1, 10)
-END_DATE   = date(2025, 7, 20)
+START_DATE = date(2025, 12, 18)
+END_DATE   = date(2025, 12, 20)
+
+
+# =====================================================
+# COUNTY CONTROL
+# =====================================================
+# None            -> ALL counties
+# [1, 88]         -> First & last
+# [1, 12, 45]     -> Custom counties
+
+COUNTY_TEST_IDS = None   #  Change this when testing
 
 
 
@@ -226,6 +236,9 @@ async def main():
                 county_text = (await county.text_content()).strip()
 
                 if not county_value:
+                    continue
+
+                if COUNTY_TEST_IDS is not None and int(county_value) not in COUNTY_TEST_IDS:
                     continue
 
                 log.info(f"🏛️ County: {county_text}")

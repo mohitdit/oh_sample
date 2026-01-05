@@ -10,7 +10,7 @@ from scrapers.base_scraper import BaseScraper
 # Define the cookie file path
 COOKIE_FILE = "wcca_cookies.json"
 
-class WisconsinScraper(BaseScraper):
+class OhioScraper(BaseScraper):
 
     async def detect_and_solve_captcha(self, page):
         log.info("🔍 Checking for CAPTCHA...")

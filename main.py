@@ -10,6 +10,7 @@ from utils.browser_manager import get_stealth_browser
 from utils.logger import log
 from utils.captcha_solver import CaptchaSolver
 import base64
+from utils.pdf_parser import convert_pdf_to_json
 
 
 # MODE CONFIGURATION (ONLY CHANGE THESE)
@@ -206,6 +207,10 @@ async def download_all_reports(page):
 
                 file_path.write_bytes(pdf_bytes)
                 log.info(f"✅ Saved: {file_path}")
+                
+                # Convert PDF to JSON immediately after download
+                convert_pdf_to_json(file_path)
+                
                 break  # Success, exit retry loop
                 
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:

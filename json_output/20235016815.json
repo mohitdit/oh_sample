@@ -1,0 +1,38 @@
+{
+  "incident_number": "08-0079-01",
+  "report_number": "P23013000000287",
+  "department": "Ohio State Highway Patrol",
+  "state_code": "",
+  "state_abbreviation": "OH",
+  "state_name": "OHIO",
+  "county_code": "1",
+  "county": "1",
+  "municipality_code": "OHP08",
+  "municipality": "OHP08",
+  "crash_location": "Liberty",
+  "crash_type_l1": "",
+  "crash_type_l2": "",
+  "date_of_crash": "2023-01-30",
+  "total_killed": "",
+  "total_injured": "",
+  "total_vehicles": "0",
+  "case_file_s3_path": "",
+  "s3_bucket_name": "",
+  "s3_access_key": "",
+  "s3_secret_key": "",
+  "pdf_file_path": "D:\\Git Projects\\Data parser\\oh_sample\\downloads\\20235016815.pdf",
+  "case_detail": [
+    {
+      "local_information": "",
+      "locality": "TOWNSHIP",
+      "location": "NA",
+      "route_type": "SR",
+      "route_number": "136",
+      "route_prefix": "NA",
+      "lane_speed_limit_1": "",
+      "lane_speed_limit_2": "",
+      "crash_severity": ""
+    }
+  ],
+  "vehicles": []
+}

@@ -1,9 +1,9 @@
 from pathlib import Path
-from utils.pdf_parser import convert_pdf_to_json
+from utils.pdf_parser import OhioPdfParser
 
 # Test with the problematic PDF
 pdf_path = Path("downloads/20235016815.pdf")
-success = convert_pdf_to_json(pdf_path)
+success = OhioPdfParser(pdf_path)
 
 if success:
     # Check the output

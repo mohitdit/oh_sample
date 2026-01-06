@@ -15,7 +15,7 @@ class CaptchaSolver:
         self.username = username
         self.password = password
         # CORRECT DBC API endpoint
-        self.base_url = "https://api.dbcapi.me/api"
+        self.base_url = "http://api.dbcapi.me/api"
         self.last_response_text = ""
         self.last_captcha_id = None
         

@@ -574,447 +574,446 @@ class OhioPdfParser:
                 # Save previous person if exists
                 if current_person is not None:
                     person_index += 1
-
                     current_person["person_index"] = person_index
-                current_person_info["person_index"] = person_index
-                current_driver_info["person_index"] = person_index
-                persons.append({
-                    "basic": current_person,
-                    "info": current_person_info,
-                    "driver": current_driver_info
-                })
-            
-            # Start new person
-            current_person = {}
-            current_person_info = {}
-            current_driver_info = {}
-            
-            # Injuries
-            if i + 2 < len(self.raw_lines) and "INJURED" in self.raw_lines[i + 2]:
-                current_person_info["injuries"] = self.raw_lines[i + 1]
-            else:
-                current_person_info["injuries"] = "0"
-            
-            # Injured Taken By EMS
-            if i + 2 < len(self.raw_lines) and "BY" in self.raw_lines[i + 2]:
-                match = re.search(r'\d{1,2}', self.raw_lines[i + 2])
-                if match:
-                    current_person_info["injured_taken_by_ems"] = match.group(0).strip()
-            elif i + 4 < len(self.raw_lines) and "BY" in self.raw_lines[i + 4]:
-                match = re.search(r'\d{1,2}', self.raw_lines[i + 4])
-                if match:
-                    current_person_info["injured_taken_by_ems"] = match.group(0).strip()
-            
-            # EMS Agency Name
-            if i + 5 < len(self.raw_lines) and "EMS AGENCY (NAME)" in self.raw_lines[i + 5] and i + 7 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 7]:
-                current_person_info["name_of_ems"] = self.raw_lines[i + 6].strip()
-            elif i + 3 < len(self.raw_lines) and "EMS AGENCY (NAME)" in self.raw_lines[i + 3] and i + 5 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 5]:
-                current_person_info["name_of_ems"] = self.raw_lines[i + 4].strip()
-            elif i + 5 < len(self.raw_lines) and "EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 5]:
-                current_person_info["name_of_ems"] = "NA"
-            else:
-                current_person_info["name_of_ems"] = "NA"
-            
-            # Injured Taken To
-            if i + 7 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 7] and i + 9 < len(self.raw_lines) and "SAFETY EQUIPMENT" in self.raw_lines[i + 9]:
-                current_person_info["injured_taken_to"] = self.raw_lines[i + 8].strip()
-            elif i + 5 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 5] and i + 7 < len(self.raw_lines) and "SAFETY EQUIPMENT" in self.raw_lines[i + 7]:
-                current_person_info["injured_taken_to"] = self.raw_lines[i + 6].strip()
-            elif i + 3 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 3] and i + 5 < len(self.raw_lines) and "SAFETY EQUIPMENT" in self.raw_lines[i + 5]:
-                current_person_info["injured_taken_to"] = self.raw_lines[i + 4].strip()
-            else:
-                current_person_info["injured_taken_to"] = "NA"
-        
-        # Seating Position
-        elif current_person and "SEATING" in line and i + 1 < len(self.raw_lines) and "POSITION" in self.raw_lines[i + 1]:
-            if i + 3 < len(self.raw_lines) and "AIR BAG USAGE" in self.raw_lines[i + 3]:
-                match = re.search(r'^\d{1,2}', self.raw_lines[i + 2])
-                if match:
-                    seating_pos = int(match.group(0).strip())
-                    current_person_info["seating_position"] = seating_pos
-                    current_person["is_same_as_driver"] = (seating_pos == 1)
-        
-        # Air Bag Usage
-        elif current_person and "AIR BAG USAGE" in line:
-            if "EJECTION" in line or (i + 1 < len(self.raw_lines) and "EJECTION" in self.raw_lines[i + 1]):
-                pass  # Use stored value
-            elif i + 1 < len(self.raw_lines):
-                try:
-                    current_person_info["air_bag_status"] = int(self.raw_lines[i + 1].strip())
-                    current_person_info["air_bag_deployed"] = current_person_info["air_bag_status"]
-                except:
-                    pass
-        
-        # Ejection
-        elif current_person and "EJECTION" in line:
-            if "TRAPPED" in line or (i + 1 < len(self.raw_lines) and "TRAPPED" in self.raw_lines[i + 1]):
-                pass
-            elif i + 1 < len(self.raw_lines):
-                match = re.search(r'^\d{1,2}', self.raw_lines[i + 1])
-                if match:
-                    current_person_info["ejection"] = int(match.group(0).strip())
-        
-        # Trapped
-        elif current_person and "TRAPPED" in line and (i + 1 < len(self.raw_lines) and "ADDRESS: STREET, CITY, STATE, ZIP" in self.raw_lines[i + 1] or i + 2 < len(self.raw_lines) and "ADDRESS: STREET, CITY, STATE, ZIP" in self.raw_lines[i + 2]):
-            if i + 2 < len(self.raw_lines) and "ADDRESS" in self.raw_lines[i + 2]:
-                try:
-                    current_person_info["trapped"] = int(self.raw_lines[i + 1].strip())
-                except:
-                    pass
-        
-        # Unit Number and Name
-        elif current_person and "UNIT  #" in line and i + 2 < len(self.raw_lines) and "NAME: LAST, FIRST, MIDDLE" in self.raw_lines[i + 2]:
-            if i + 1 < len(self.raw_lines):
-                try:
-                    vehicle_num = int(self.raw_lines[i + 1].strip())
-                    current_person["vehicle_number"] = vehicle_num
-                    current_person_info["vehicle_unit"] = vehicle_num
-                    current_driver_info["vehicle_unit"] = vehicle_num
-                except:
-                    pass
-            
-            # Person Name
-            if i + 3 < len(self.raw_lines):
-                person_name_line = self.raw_lines[i + 3]
-                if "CONTACT PHONE" not in person_name_line and not re.search(r'\d{2}/\d{2}/\d{4}', person_name_line):
-                    if "UNKNOWN" not in person_name_line:
-                        names = person_name_line.split(',')
-                        current_person["first_name"] = names[0].strip() if len(names) >= 1 else "NA"
-                        current_person["last_name"] = names[1].strip() if len(names) >= 2 else "NA"
-                        current_person["middle_name"] = names[2].strip() if len(names) == 3 else "NA"
-                    else:
-                        current_person["first_name"] = current_person["last_name"] = current_person["middle_name"] = "UNKNOWN"
-                else:
-                    current_person["first_name"] = current_person["last_name"] = current_person["middle_name"] = "NA"
-            
-            # Person Address
-            if i - 2 >= 0 and "ADDRESS: STREET, CITY, STATE, ZIP" in self.raw_lines[i - 2]:
-                person_address = self.raw_lines[i - 1]
-                if person_address != "NA" and "UNKNOWN" not in person_address:
-                    address_parts = person_address.split(',')
-                    current_person["address"] = address_parts[0].strip() if len(address_parts) >= 3 else "NA"
-                    current_person["city"] = address_parts[1].strip() if len(address_parts) >= 3 else (address_parts[0].strip() if len(address_parts) == 2 else "NA")
-                    current_person["state"] = address_parts[2].strip() if len(address_parts) >= 3 else (address_parts[1].strip() if len(address_parts) == 2 and len(address_parts[1].strip()) == 2 else "NA")
-                    current_person["zip"] = address_parts[3].strip() if len(address_parts) == 4 else "NA"
-                else:
-                    current_person["address"] = current_person["city"] = current_person["state"] = current_person["zip"] = "NA"
-            
-            # Date of Birth
-            if i + 3 < len(self.raw_lines):
-                dob_match = re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', self.raw_lines[i + 3])
-                if not dob_match and i + 4 < len(self.raw_lines):
-                    dob_match = re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', self.raw_lines[i + 4])
-                if not dob_match and i + 5 < len(self.raw_lines):
-                    dob_match = re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', self.raw_lines[i + 5])
+                    current_person_info["person_index"] = person_index
+                    current_driver_info["person_index"] = person_index
+                    persons.append({
+                        "basic": current_person,
+                        "info": current_person_info,
+                        "driver": current_driver_info
+                    })
                 
-                current_person_info["date_of_birth"] = dob_match.group(0) if dob_match else "NA"
-            
-            # Age
-            if i + 4 < len(self.raw_lines):
-                if "AGE GENDER" in self.raw_lines[i + 4]:
-                    current_person_info["age"] = 0
-                elif "AGE" in self.raw_lines[i + 4] and "GENDER" not in self.raw_lines[i + 5] if i + 5 < len(self.raw_lines) else False:
-                    try:
-                        current_person_info["age"] = int(self.raw_lines[i + 5].strip())
-                    except:
-                        pass
-                elif i + 6 < len(self.raw_lines) and "AGE" in self.raw_lines[i + 6] and "GENDER" not in self.raw_lines[i + 7] if i + 7 < len(self.raw_lines) else False:
-                    try:
-                        current_person_info["age"] = int(self.raw_lines[i + 7].strip())
-                    except:
-                        pass
-            
-            # Gender
-            if i + 6 < len(self.raw_lines) and "GENDER" in self.raw_lines[i + 6] and "CONTACT PHONE" not in self.raw_lines[i + 7] if i + 7 < len(self.raw_lines) else False:
-                current_person_info["gender"] = self.raw_lines[i + 7].strip() if i + 7 < len(self.raw_lines) else ""
-            elif i + 8 < len(self.raw_lines) and "GENDER" in self.raw_lines[i + 8] and "CONTACT PHONE" not in self.raw_lines[i + 9] if i + 9 < len(self.raw_lines) else False:
-                current_person_info["gender"] = self.raw_lines[i + 9].strip() if i + 9 < len(self.raw_lines) else ""
-            
-            # Phone Number
-            if i + 10 < len(self.raw_lines) and "CONTACT PHONE" in self.raw_lines[i + 10]:
-                if i + 11 < len(self.raw_lines) and "MOTORIST" not in self.raw_lines[i + 11] and "OCCUPANT" not in self.raw_lines[i + 11]:
-                    current_person["phone_number"] = self.raw_lines[i + 11]
-                    current_driver_info["contact_number"] = self.raw_lines[i + 11]
+                # Start new person
+                current_person = {}
+                current_person_info = {}
+                current_driver_info = {}
+                
+                # Injuries
+                if i + 2 < len(self.raw_lines) and "INJURED" in self.raw_lines[i + 2]:
+                    current_person_info["injuries"] = self.raw_lines[i + 1]
                 else:
-                    current_person["phone_number"] = "NA"
-                    current_driver_info["contact_number"] = "NA"
-        
-        # OL State
-        elif current_person and "OL STATE" in line and (i + 4 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 4] or i + 3 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 3]):
-            if i + 1 < len(self.raw_lines) and "OL CLASS" not in self.raw_lines[i + 1]:
-                current_driver_info["dl_state"] = self.raw_lines[i + 1].strip()
-            else:
-                current_driver_info["dl_state"] = "NA"
+                    current_person_info["injuries"] = "0"
+                
+                # Injured Taken By EMS
+                if i + 2 < len(self.raw_lines) and "BY" in self.raw_lines[i + 2]:
+                    match = re.search(r'\d{1,2}', self.raw_lines[i + 2])
+                    if match:
+                        current_person_info["injured_taken_by_ems"] = match.group(0).strip()
+                elif i + 4 < len(self.raw_lines) and "BY" in self.raw_lines[i + 4]:
+                    match = re.search(r'\d{1,2}', self.raw_lines[i + 4])
+                    if match:
+                        current_person_info["injured_taken_by_ems"] = match.group(0).strip()
+                
+                # EMS Agency Name
+                if i + 5 < len(self.raw_lines) and "EMS AGENCY (NAME)" in self.raw_lines[i + 5] and i + 7 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 7]:
+                    current_person_info["name_of_ems"] = self.raw_lines[i + 6].strip()
+                elif i + 3 < len(self.raw_lines) and "EMS AGENCY (NAME)" in self.raw_lines[i + 3] and i + 5 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 5]:
+                    current_person_info["name_of_ems"] = self.raw_lines[i + 4].strip()
+                elif i + 5 < len(self.raw_lines) and "EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 5]:
+                    current_person_info["name_of_ems"] = "NA"
+                else:
+                    current_person_info["name_of_ems"] = "NA"
+                
+                # Injured Taken To
+                if i + 7 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 7] and i + 9 < len(self.raw_lines) and "SAFETY EQUIPMENT" in self.raw_lines[i + 9]:
+                    current_person_info["injured_taken_to"] = self.raw_lines[i + 8].strip()
+                elif i + 5 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 5] and i + 7 < len(self.raw_lines) and "SAFETY EQUIPMENT" in self.raw_lines[i + 7]:
+                    current_person_info["injured_taken_to"] = self.raw_lines[i + 6].strip()
+                elif i + 3 < len(self.raw_lines) and "INJURED TAKEN TO: MEDICAL FACILITY" in self.raw_lines[i + 3] and i + 5 < len(self.raw_lines) and "SAFETY EQUIPMENT" in self.raw_lines[i + 5]:
+                    current_person_info["injured_taken_to"] = self.raw_lines[i + 4].strip()
+                else:
+                    current_person_info["injured_taken_to"] = "NA"
             
-            # OL Class
-            if i + 2 < len(self.raw_lines) and "OL CLASS" in self.raw_lines[i + 2] and i + 4 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 4]:
-                current_driver_info["ol_class"] = self.raw_lines[i + 3].strip()
-            elif i + 1 < len(self.raw_lines) and "OL CLASS" in self.raw_lines[i + 1] and i + 3 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 3]:
-                current_driver_info["ol_class"] = self.raw_lines[i + 2].strip()
-            else:
-                current_driver_info["ol_class"] = "NA"
-        
-        # Restriction
-        elif current_person and "RESTRICTION SELECT UP TO 3" in line:
-            # Endorsement
-            if i - 2 >= 0 and "ENDORSEMENT" in self.raw_lines[i - 2]:
-                current_driver_info["endorsement"] = self.raw_lines[i - 1]
-            else:
-                current_driver_info["endorsement"] = "NA"
+            # Seating Position
+            elif current_person is not None and "SEATING" in line and i + 1 < len(self.raw_lines) and "POSITION" in self.raw_lines[i + 1]:
+                if i + 3 < len(self.raw_lines) and "AIR BAG USAGE" in self.raw_lines[i + 3]:
+                    match = re.search(r'^\d{1,2}', self.raw_lines[i + 2])
+                    if match:
+                        seating_pos = int(match.group(0).strip())
+                        current_person_info["seating_position"] = seating_pos
+                        current_person["is_same_as_driver"] = (seating_pos == 1)
+            
+            # Air Bag Usage
+            elif current_person is not None and "AIR BAG USAGE" in line:
+                if "EJECTION" in line or (i + 1 < len(self.raw_lines) and "EJECTION" in self.raw_lines[i + 1]):
+                    pass
+                elif i + 1 < len(self.raw_lines):
+                    try:
+                        current_person_info["air_bag_status"] = int(self.raw_lines[i + 1].strip())
+                        current_person_info["air_bag_deployed"] = current_person_info["air_bag_status"]
+                    except:
+                        pass
+            
+            # Ejection
+            elif current_person is not None and "EJECTION" in line:
+                if "TRAPPED" in line or (i + 1 < len(self.raw_lines) and "TRAPPED" in self.raw_lines[i + 1]):
+                    pass
+                elif i + 1 < len(self.raw_lines):
+                    match = re.search(r'^\d{1,2}', self.raw_lines[i + 1])
+                    if match:
+                        current_person_info["ejection"] = int(match.group(0).strip())
+            
+            # Trapped
+            elif current_person is not None and "TRAPPED" in line and (i + 1 < len(self.raw_lines) and "ADDRESS: STREET, CITY, STATE, ZIP" in self.raw_lines[i + 1] or i + 2 < len(self.raw_lines) and "ADDRESS: STREET, CITY, STATE, ZIP" in self.raw_lines[i + 2]):
+                if i + 2 < len(self.raw_lines) and "ADDRESS" in self.raw_lines[i + 2]:
+                    try:
+                        current_person_info["trapped"] = int(self.raw_lines[i + 1].strip())
+                    except:
+                        pass
+            
+            # Unit Number and Name
+            elif current_person is not None and "UNIT  #" in line and i + 2 < len(self.raw_lines) and "NAME: LAST, FIRST, MIDDLE" in self.raw_lines[i + 2]:
+                if i + 1 < len(self.raw_lines):
+                    try:
+                        vehicle_num = int(self.raw_lines[i + 1].strip())
+                        current_person["vehicle_number"] = vehicle_num
+                        current_person_info["vehicle_unit"] = vehicle_num
+                        current_driver_info["vehicle_unit"] = vehicle_num
+                    except:
+                        pass
+                
+                # Person Name
+                if i + 3 < len(self.raw_lines):
+                    person_name_line = self.raw_lines[i + 3]
+                    if "CONTACT PHONE" not in person_name_line and not re.search(r'\d{2}/\d{2}/\d{4}', person_name_line):
+                        if "UNKNOWN" not in person_name_line:
+                            names = person_name_line.split(',')
+                            current_person["first_name"] = names[0].strip() if len(names) >= 1 else "NA"
+                            current_person["last_name"] = names[1].strip() if len(names) >= 2 else "NA"
+                            current_person["middle_name"] = names[2].strip() if len(names) == 3 else "NA"
+                        else:
+                            current_person["first_name"] = current_person["last_name"] = current_person["middle_name"] = "UNKNOWN"
+                    else:
+                        current_person["first_name"] = current_person["last_name"] = current_person["middle_name"] = "NA"
+                
+                # Person Address
+                if i - 2 >= 0 and "ADDRESS: STREET, CITY, STATE, ZIP" in self.raw_lines[i - 2]:
+                    person_address = self.raw_lines[i - 1]
+                    if person_address != "NA" and "UNKNOWN" not in person_address:
+                        address_parts = person_address.split(',')
+                        current_person["address"] = address_parts[0].strip() if len(address_parts) >= 3 else "NA"
+                        current_person["city"] = address_parts[1].strip() if len(address_parts) >= 3 else (address_parts[0].strip() if len(address_parts) == 2 else "NA")
+                        current_person["state"] = address_parts[2].strip() if len(address_parts) >= 3 else (address_parts[1].strip() if len(address_parts) == 2 and len(address_parts[1].strip()) == 2 else "NA")
+                        current_person["zip"] = address_parts[3].strip() if len(address_parts) == 4 else "NA"
+                    else:
+                        current_person["address"] = current_person["city"] = current_person["state"] = current_person["zip"] = "NA"
+                
+                # Date of Birth
+                if i + 3 < len(self.raw_lines):
+                    dob_match = re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', self.raw_lines[i + 3])
+                    if not dob_match and i + 4 < len(self.raw_lines):
+                        dob_match = re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', self.raw_lines[i + 4])
+                    if not dob_match and i + 5 < len(self.raw_lines):
+                        dob_match = re.search(r'\d{1,2}\/\d{1,2}\/\d{4}', self.raw_lines[i + 5])
+                    
+                    current_person_info["date_of_birth"] = dob_match.group(0) if dob_match else "NA"
+                
+                # Age
+                if i + 4 < len(self.raw_lines):
+                    if "AGE GENDER" in self.raw_lines[i + 4]:
+                        current_person_info["age"] = 0
+                    elif "AGE" in self.raw_lines[i + 4] and (i + 5 >= len(self.raw_lines) or "GENDER" not in self.raw_lines[i + 5]):
+                        try:
+                            current_person_info["age"] = int(self.raw_lines[i + 5].strip())
+                        except:
+                            pass
+                    elif i + 6 < len(self.raw_lines) and "AGE" in self.raw_lines[i + 6] and (i + 7 >= len(self.raw_lines) or "GENDER" not in self.raw_lines[i + 7]):
+                        try:
+                            current_person_info["age"] = int(self.raw_lines[i + 7].strip())
+                        except:
+                            pass
+                
+                # Gender
+                if i + 6 < len(self.raw_lines) and "GENDER" in self.raw_lines[i + 6] and (i + 7 >= len(self.raw_lines) or "CONTACT PHONE" not in self.raw_lines[i + 7]):
+                    current_person_info["gender"] = self.raw_lines[i + 7].strip() if i + 7 < len(self.raw_lines) else ""
+                elif i + 8 < len(self.raw_lines) and "GENDER" in self.raw_lines[i + 8] and (i + 9 >= len(self.raw_lines) or "CONTACT PHONE" not in self.raw_lines[i + 9]):
+                    current_person_info["gender"] = self.raw_lines[i + 9].strip() if i + 9 < len(self.raw_lines) else ""
+                
+                # Phone Number
+                if i + 10 < len(self.raw_lines) and "CONTACT PHONE" in self.raw_lines[i + 10]:
+                    if i + 11 < len(self.raw_lines) and "MOTORIST" not in self.raw_lines[i + 11] and "OCCUPANT" not in self.raw_lines[i + 11]:
+                        current_person["phone_number"] = self.raw_lines[i + 11]
+                        current_driver_info["contact_number"] = self.raw_lines[i + 11]
+                    else:
+                        current_person["phone_number"] = "NA"
+                        current_driver_info["contact_number"] = "NA"
+            
+            # OL State
+            elif current_person is not None and "OL STATE" in line and (i + 4 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 4] or i + 3 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 3]):
+                if i + 1 < len(self.raw_lines) and "OL CLASS" not in self.raw_lines[i + 1]:
+                    current_driver_info["dl_state"] = self.raw_lines[i + 1].strip()
+                else:
+                    current_driver_info["dl_state"] = "NA"
+                
+                # OL Class
+                if i + 2 < len(self.raw_lines) and "OL CLASS" in self.raw_lines[i + 2] and i + 4 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 4]:
+                    current_driver_info["ol_class"] = self.raw_lines[i + 3].strip()
+                elif i + 1 < len(self.raw_lines) and "OL CLASS" in self.raw_lines[i + 1] and i + 3 < len(self.raw_lines) and "OPERATOR LICENSE NUMBER" in self.raw_lines[i + 3]:
+                    current_driver_info["ol_class"] = self.raw_lines[i + 2].strip()
+                else:
+                    current_driver_info["ol_class"] = "NA"
             
             # Restriction
-            if i + 2 < len(self.raw_lines) and "DRIVER" in self.raw_lines[i + 2]:
-                current_driver_info["restriction"] = self.raw_lines[i + 1]
-            else:
-                current_driver_info["restriction"] = "NA"
+            elif current_person is not None and "RESTRICTION SELECT UP TO 3" in line:
+                # Endorsement
+                if i - 2 >= 0 and "ENDORSEMENT" in self.raw_lines[i - 2]:
+                    current_driver_info["endorsement"] = self.raw_lines[i - 1]
+                else:
+                    current_driver_info["endorsement"] = "NA"
+                
+                # Restriction
+                if i + 2 < len(self.raw_lines) and "DRIVER" in self.raw_lines[i + 2]:
+                    current_driver_info["restriction"] = self.raw_lines[i + 1]
+                else:
+                    current_driver_info["restriction"] = "NA"
+                
+                # Driver Distracted By
+                if i + 2 < len(self.raw_lines) and "BY" in self.raw_lines[i + 2]:
+                    parts = self.raw_lines[i + 2].strip().split(' ')
+                    current_driver_info["driver_distracted_by"] = parts[1] if len(parts) == 2 else "NA"
+                elif i + 3 < len(self.raw_lines) and "BY" in self.raw_lines[i + 3]:
+                    parts = self.raw_lines[i + 3].strip().split(' ')
+                    current_driver_info["driver_distracted_by"] = parts[1] if len(parts) == 2 else "NA"
+                elif i + 4 < len(self.raw_lines) and "BY" in self.raw_lines[i + 4]:
+                    parts = self.raw_lines[i + 4].strip().split(' ')
+                    current_driver_info["driver_distracted_by"] = parts[1] if len(parts) == 2 else "NA"
+                else:
+                    current_driver_info["driver_distracted_by"] = "NA"
             
-            # Driver Distracted By
-            if i + 2 < len(self.raw_lines) and "BY" in self.raw_lines[i + 2]:
-                parts = self.raw_lines[i + 2].strip().split(' ')
-                current_driver_info["driver_distracted_by"] = parts[1] if len(parts) == 2 else "NA"
-            elif i + 3 < len(self.raw_lines) and "BY" in self.raw_lines[i + 3]:
-                parts = self.raw_lines[i + 3].strip().split(' ')
-                current_driver_info["driver_distracted_by"] = parts[1] if len(parts) == 2 else "NA"
-            elif i + 4 < len(self.raw_lines) and "BY" in self.raw_lines[i + 4]:
-                parts = self.raw_lines[i + 4].strip().split(' ')
-                current_driver_info["driver_distracted_by"] = parts[1] if len(parts) == 2 else "NA"
-            else:
-                current_driver_info["driver_distracted_by"] = "NA"
-        
-        # Operator License Number
-        elif current_person and "OPERATOR LICENSE NUMBER" in line:
-            if "OFFENSE CHARGED" in line:
-                current_driver_info["driving_licence"] = "NA"
-            elif i + 1 < len(self.raw_lines):
-                current_driver_info["driving_licence"] = self.raw_lines[i + 1].strip()
+            # Operator License Number
+            elif current_person is not None and "OPERATOR LICENSE NUMBER" in line:
+                if "OFFENSE CHARGED" in line:
+                    current_driver_info["driving_licence"] = "NA"
+                elif i + 1 < len(self.raw_lines):
+                    current_driver_info["driving_licence"] = self.raw_lines[i + 1].strip()
+                
+                # Offense Charged
+                if "OFFENSE CHARGED" in line and "LOCAL" not in line:
+                    if i + 1 < len(self.raw_lines):
+                        current_driver_info["offense_charged"] = self.raw_lines[i + 1]
+                elif i + 2 < len(self.raw_lines) and "OFFENSE CHARGED" in self.raw_lines[i + 2] and i + 4 < len(self.raw_lines) and "LOCAL" in self.raw_lines[i + 4]:
+                    current_driver_info["offense_charged"] = self.raw_lines[i + 3]
+                else:
+                    current_driver_info["offense_charged"] = "NA"
             
-            # Offense Charged
-            if "OFFENSE CHARGED" in line and "LOCAL" not in line:
+            # Offense Description
+            elif current_person is not None and "OFFENSE DESCRIPTION" in line:
+                if "CITATION NUMBER" in line:
+                    current_driver_info["offense_description"] = "NA"
+                elif i + 1 < len(self.raw_lines):
+                    current_driver_info["offense_description"] = self.raw_lines[i + 1]
+                
+                # Citation Number
+                if "CITATION NUMBER" in line and i + 1 < len(self.raw_lines) and "ENDORSEMENT" not in self.raw_lines[i + 1]:
+                    current_driver_info["citation_number"] = self.raw_lines[i + 1]
+                elif i + 2 < len(self.raw_lines) and "CITATION NUMBER" in self.raw_lines[i + 2] and i + 3 < len(self.raw_lines) and "ENDORSEMENT" not in self.raw_lines[i + 3]:
+                    current_driver_info["citation_number"] = self.raw_lines[i + 3]
+                else:
+                    current_driver_info["citation_number"] = "NA"
+            
+            # Alcohol/Drug Suspected
+            elif current_person is not None and "ALCOHOL / DRUG SUSPECTED" in line:
                 if i + 1 < len(self.raw_lines):
-                    current_driver_info["offense_charged"] = self.raw_lines[i + 1]
-            elif i + 2 < len(self.raw_lines) and "OFFENSE CHARGED" in self.raw_lines[i + 2] and i + 4 < len(self.raw_lines) and "LOCAL" in self.raw_lines[i + 4]:
-                current_driver_info["offense_charged"] = self.raw_lines[i + 3]
-            else:
-                current_driver_info["offense_charged"] = "NA"
-        
-        # Offense Description
-        elif current_person and "OFFENSE DESCRIPTION" in line:
-            if "CITATION NUMBER" in line:
-                current_driver_info["offense_description"] = "NA"
-            elif i + 1 < len(self.raw_lines):
-                current_driver_info["offense_description"] = self.raw_lines[i + 1]
-            
-            # Citation Number
-            if "CITATION NUMBER" in line and i + 1 < len(self.raw_lines) and "ENDORSEMENT" not in self.raw_lines[i + 1]:
-                current_driver_info["citation_number"] = self.raw_lines[i + 1]
-            elif i + 2 < len(self.raw_lines) and "CITATION NUMBER" in self.raw_lines[i + 2] and i + 3 < len(self.raw_lines) and "ENDORSEMENT" not in self.raw_lines[i + 3]:
-                current_driver_info["citation_number"] = self.raw_lines[i + 3]
-            else:
-                current_driver_info["citation_number"] = "NA"
-        
-        # Alcohol/Drug Suspected
-        elif current_person and "ALCOHOL / DRUG SUSPECTED" in line:
-            if i + 1 < len(self.raw_lines):
-                if "X" in self.raw_lines[i + 1] and "ALCOHOL" not in self.raw_lines[i + 1]:
-                    current_driver_info["alcohol_drug_suspected"] = "Other Drug"
-                elif "X ALCOHOL" in self.raw_lines[i + 1]:
-                    current_driver_info["alcohol_drug_suspected"] = "Alcohol"
-                elif i + 3 < len(self.raw_lines) and "X MARIJUANA" in self.raw_lines[i + 3]:
-                    current_driver_info["alcohol_drug_suspected"] = "Marijuana"
-                else:
-                    current_driver_info["alcohol_drug_suspected"] = "NA"
-        
-        # Alcohol/Drug Tests
-        elif current_person and "ALCOHOL TEST DRUG TEST(S)" in line:
-            # Person Condition
-            if i - 2 >= 0 and "CONDITION" in self.raw_lines[i - 2]:
-                current_person["person_condition"] = self.raw_lines[i - 1]
-            else:
-                current_person["person_condition"] = "NA"
-            
-            # Alcohol Test
-            if i + 1 < len(self.raw_lines) and "STATUS TYPE VALUE" in self.raw_lines[i + 1]:
-                current_driver_info["alcohol_test_status"] = "NA"
-                current_driver_info["alcohol_test_type"] = "NA"
-                current_driver_info["alcohol_test_value"] = "NA"
-            else:
-                if i + 1 < len(self.raw_lines) and "STATUS" in self.raw_lines[i + 1] and i + 3 < len(self.raw_lines) and "TYPE" in self.raw_lines[i + 3]:
-                    current_driver_info["alcohol_test_status"] = self.raw_lines[i + 2].strip()
-                else:
-                    current_driver_info["alcohol_test_status"] = "NA"
-                
-                if i + 3 < len(self.raw_lines) and "TYPE" in self.raw_lines[i + 3] and i + 5 < len(self.raw_lines) and "VALUE" in self.raw_lines[i + 5]:
-                    current_driver_info["alcohol_test_type"] = self.raw_lines[i + 4]
-                else:
-                    current_driver_info["alcohol_test_type"] = "NA"
-                
-                if i + 5 < len(self.raw_lines) and "VALUE" in self.raw_lines[i + 5] and i + 7 < len(self.raw_lines) and "STATUS" in self.raw_lines[i + 7]:
-                    value = self.raw_lines[i + 6].strip()
-                    current_driver_info["alcohol_test_value"] = value if value != "." else "NA"
-                else:
-                    current_driver_info["alcohol_test_value"] = "NA"
-        
-        # Drug Test
-        elif current_person and "TYPE RESULTS SELECT UP TO 4" in line:
-            if "STATUS TYPE RESULTS SELECT UP TO 4" in line:
-                current_driver_info["drug_test_status"] = "NA"
-                current_driver_info["drug_test_type"] = "NA"
-                current_driver_info["drug_test_value"] = "NA"
-            else:
-                if i - 1 >= 0:
-                    arr = self.raw_lines[i - 1].strip().split()
-                    arr = [s for s in arr if s.strip()]
-                    
-                    if len(arr) == 2:
-                        current_driver_info["drug_test_status"] = arr[0].strip()
-                        current_driver_info["drug_test_type"] = arr[1].strip()
-                        current_driver_info["drug_test_value"] = "NA"
-                    elif len(arr) == 1:
-                        current_driver_info["drug_test_status"] = arr[0].strip()
-                        current_driver_info["drug_test_type"] = "NA"
-                        current_driver_info["drug_test_value"] = "NA"
+                    if "X" in self.raw_lines[i + 1] and "ALCOHOL" not in self.raw_lines[i + 1]:
+                        current_driver_info["alcohol_drug_suspected"] = "Other Drug"
+                    elif "X ALCOHOL" in self.raw_lines[i + 1]:
+                        current_driver_info["alcohol_drug_suspected"] = "Alcohol"
+                    elif i + 3 < len(self.raw_lines) and "X MARIJUANA" in self.raw_lines[i + 3]:
+                        current_driver_info["alcohol_drug_suspected"] = "Marijuana"
                     else:
-                        current_driver_info["drug_test_status"] = "NA"
-                        current_driver_info["drug_test_type"] = "NA"
-                        current_driver_info["drug_test_value"] = "NA"
-    
-    # Add last person
-    if current_person is not None:
-        person_index += 1
-        current_person["person_index"] = person_index
-        current_person_info["person_index"] = person_index
-        current_driver_info["person_index"] = person_index
-        persons.append({
-            "basic": current_person,
-            "info": current_person_info,
-            "driver": current_driver_info
-        })
-    
-    return persons
-
-def _map_persons_to_vehicles(self, vehicles: list, persons: list) -> list:
-    """Map persons to their respective vehicles"""
-    for person_data in persons:
-        person_basic = person_data["basic"]
-        person_info = person_data["info"]
-        driver_info = person_data["driver"]
-        
-        vehicle_unit = person_basic.get("vehicle_number", 1)
-        
-        # Find matching vehicle
-        for vehicle in vehicles:
-            if vehicle["vehicle_unit"] == vehicle_unit:
-                # Build person JSON for this vehicle
-                person_json = {
-                    "person_type": "",
-                    "first_name": person_basic.get("first_name", ""),
-                    "middle_name": person_basic.get("middle_name", ""),
-                    "last_name": person_basic.get("last_name", ""),
-                    "same_as_driver": "1" if person_basic.get("is_same_as_driver", False) else "0",
-                    "address_block": {
-                        "address_line1": person_basic.get("address", ""),
-                        "address_city": person_basic.get("city", ""),
-                        "address_state": person_basic.get("state", ""),
-                        "address_zip": person_basic.get("zip", "")
-                    },
-                    "seating_position": str(person_info.get("seating_position", "")),
-                    "date_of_birth": person_info.get("date_of_birth", ""),
-                    "gender": person_info.get("gender", ""),
-                    "alcohol_or_drug_involved": "",
-                    "ethnicity": "",
-                    "occupant": "",
-                    "airbag_deployed": str(person_info.get("air_bag_deployed", "")),
-                    "airbag_status": str(person_info.get("air_bag_status", "")),
-                    "trapped": str(person_info.get("trapped", "")),
-                    "ejection": str(person_info.get("ejection", "")),
-                    "injury": str(person_info.get("injuries", "")),
-                    "ems_name": person_info.get("name_of_ems", ""),
-                    "injured_taken_by_ems": str(person_info.get("injured_taken_by_ems", "")),
-                    "age": str(person_info.get("age", "")),
-                    "injured_taken_to": person_info.get("injured_taken_to", ""),
-                    "driver_info_id": "",
-                    "alcohol_test_status": driver_info.get("alcohol_test_status", ""),
-                    "alcohol_test_type": driver_info.get("alcohol_test_type", ""),
-                    "alcohol_test_value": driver_info.get("alcohol_test_value", ""),
-                    "drug_test_status": driver_info.get("drug_test_status", ""),
-                    "drug_test_type": driver_info.get("drug_test_type", ""),
-                    "drug_test_value": driver_info.get("drug_test_value", ""),
-                    "offense_charged": driver_info.get("offense_charged", ""),
-                    "local_code": "",
-                    "offense_description": driver_info.get("offense_description", ""),
-                    "citation_number": driver_info.get("citation_number", ""),
-                    "contact_number": driver_info.get("contact_number", ""),
-                    "ol_class": driver_info.get("ol_class", ""),
-                    "endorsement": driver_info.get("endorsement", ""),
-                    "restriction": driver_info.get("restriction", ""),
-                    "driver_distracted_by": driver_info.get("driver_distracted_by", ""),
-                    "driving_license": driver_info.get("driving_licence", ""),
-                    "dl_state": driver_info.get("dl_state", ""),
-                    "alcohol_or_drug_suspected": driver_info.get("alcohol_drug_suspected", "")
-                }
+                        current_driver_info["alcohol_drug_suspected"] = "NA"
+            
+            # Alcohol/Drug Tests
+            elif current_person is not None and "ALCOHOL TEST DRUG TEST(S)" in line:
+                # Person Condition
+                if i - 2 >= 0 and "CONDITION" in self.raw_lines[i - 2]:
+                    current_person["person_condition"] = self.raw_lines[i - 1]
+                else:
+                    current_person["person_condition"] = "NA"
                 
-                vehicle["persons"].append(person_json)
-                break
-    
-    return vehicles
-
-def _build_final_json(self, crash_info: dict, case_info: dict, vehicles: list) -> dict:
-    """Build final JSON structure matching expected output"""
-    # Parse date
-    date_of_crash = ""
-    if crash_info.get("date_of_crash"):
-        try:
-            dt = datetime.strptime(crash_info["date_of_crash"].split()[0], "%m/%d/%Y")
-            date_of_crash = dt.strftime("%Y-%m-%d")
-        except:
-            pass
-    
-    # Build vehicle JSON array
-    vehicles_json = []
-    for veh in vehicles:
-        veh_info = veh.get("vehicle_info", {})
+                # Alcohol Test
+                if i + 1 < len(self.raw_lines) and "STATUS TYPE VALUE" in self.raw_lines[i + 1]:
+                    current_driver_info["alcohol_test_status"] = "NA"
+                    current_driver_info["alcohol_test_type"] = "NA"
+                    current_driver_info["alcohol_test_value"] = "NA"
+                else:
+                    if i + 1 < len(self.raw_lines) and "STATUS" in self.raw_lines[i + 1] and i + 3 < len(self.raw_lines) and "TYPE" in self.raw_lines[i + 3]:
+                        current_driver_info["alcohol_test_status"] = self.raw_lines[i + 2].strip()
+                    else:
+                        current_driver_info["alcohol_test_status"] = "NA"
+                    
+                    if i + 3 < len(self.raw_lines) and "TYPE" in self.raw_lines[i + 3] and i + 5 < len(self.raw_lines) and "VALUE" in self.raw_lines[i + 5]:
+                        current_driver_info["alcohol_test_type"] = self.raw_lines[i + 4]
+                    else:
+                        current_driver_info["alcohol_test_type"] = "NA"
+                    
+                    if i + 5 < len(self.raw_lines) and "VALUE" in self.raw_lines[i + 5] and i + 7 < len(self.raw_lines) and "STATUS" in self.raw_lines[i + 7]:
+                        value = self.raw_lines[i + 6].strip()
+                        current_driver_info["alcohol_test_value"] = value if value != "." else "NA"
+                    else:
+                        current_driver_info["alcohol_test_value"] = "NA"
+            
+            # Drug Test
+            elif current_person is not None and "TYPE RESULTS SELECT UP TO 4" in line:
+                if "STATUS TYPE RESULTS SELECT UP TO 4" in line:
+                    current_driver_info["drug_test_status"] = "NA"
+                    current_driver_info["drug_test_type"] = "NA"
+                    current_driver_info["drug_test_value"] = "NA"
+                else:
+                    if i - 1 >= 0:
+                        arr = self.raw_lines[i - 1].strip().split()
+                        arr = [s for s in arr if s.strip()]
+                        
+                        if len(arr) == 2:
+                            current_driver_info["drug_test_status"] = arr[0].strip()
+                            current_driver_info["drug_test_type"] = arr[1].strip()
+                            current_driver_info["drug_test_value"] = "NA"
+                        elif len(arr) == 1:
+                            current_driver_info["drug_test_status"] = arr[0].strip()
+                            current_driver_info["drug_test_type"] = "NA"
+                            current_driver_info["drug_test_value"] = "NA"
+                        else:
+                            current_driver_info["drug_test_status"] = "NA"
+                            current_driver_info["drug_test_type"] = "NA"
+                            current_driver_info["drug_test_value"] = "NA"
         
-        vehicle_json = {
-            "vehicle_unit": str(veh.get("vehicle_unit", "1")),
-            "is_commercial": "1" if veh.get("is_commercial", False) else "0",
-            "make": f" {veh.get('make', '')}",
-            "model": veh.get("model", ""),
-            "vehicle_year": str(veh.get("year", "")),
-            "plate_number": f" {veh.get('plate_no', '')}",
-            "plate_state": f" {veh.get('plate_state', '')}",
-            "plate_year": "",
-            "vin": veh.get("vin", ""),
-            "policy": veh.get("policy_no", ""),
-            "is_driven": "",
-            "is_left_at_scene": "",
-            "is_towed": "1" if veh.get("is_towed", False) else "0",
-            "is_impounded": "",
-            "is_disabled": "",
-            "is_parked": "1" if veh.get("is_parked", False) else "0",
-            "is_pedestrian": "",
-            "is_pedal_cyclist": "",
-            "is_hit_and_run": "1" if veh.get("is_hit_and_run", False) else "0",
-            "vehicle_used": "",
-            "vehicle_type": str(veh.get("vehicle_type", "1")),
-            "trailer_or_carrier_count": str(veh.get("no_of_trailer", "0")),
-            "color": veh.get("color", ""),
-            "vehicle_body_type": str(veh.get("veh_body_type", "")),
-            "vehicle_travel_direction": "",
-            "vehicle_details": {
-                "crash_seq_1st_event": str(veh_info.get("crash_seq_1st_event", "")),
-                "crash_seq_2nd_event": str(veh_info.get("crash_seq_2nd_event", "")),
-                "crash_seq_3rd_event": str(veh_info.get("crash_seq_3rd_event", "")),
-                "crash_seq_4th_event": str(veh_info.get("crash_seq_4th_event", "")),
-                "harmful_event": str(veh_info.get("harmful_event", "")),
-                "authorized_speed": "",
-                "estimated_original_speed": "",
-                "estimated_impact_speed": "",
-                "tad": "",
-                "estimated_damage": "",
-                "most_harmful_event": str(veh_info.get("most_harmful_event", "")),
-                "insurance_company": veh_info.get("insurance_company", ""),
-                "insurance_verified": veh_info.get("insurance_verified", ""),
-                "us_dot": veh_info.get("us_dot", ""),
+        # Add last person
+        if current_person is not None:
+            person_index += 1
+            current_person["person_index"] = person_index
+            current_person_info["person_index"] = person_index
+            current_driver_info["person_index"] = person_index
+            persons.append({
+                "basic": current_person,
+                "info": current_person_info,
+                "driver": current_driver_info
+            })
+        
+        return persons
+    
+    def _map_persons_to_vehicles(self, vehicles: list, persons: list) -> list:
+        """Map persons to their respective vehicles"""
+        for person_data in persons:
+            person_basic = person_data["basic"]
+            person_info = person_data["info"]
+            driver_info = person_data["driver"]
+            
+            vehicle_unit = person_basic.get("vehicle_number", 1)
+            
+            # Find matching vehicle
+            for vehicle in vehicles:
+                if vehicle["vehicle_unit"] == vehicle_unit:
+                    # Build person JSON for this vehicle
+                    person_json = {
+                        "person_type": "",
+                        "first_name": person_basic.get("first_name", ""),
+                        "middle_name": person_basic.get("middle_name", ""),
+                        "last_name": person_basic.get("last_name", ""),
+                        "same_as_driver": "1" if person_basic.get("is_same_as_driver", False) else "0",
+                        "address_block": {
+                            "address_line1": person_basic.get("address", ""),
+                            "address_city": person_basic.get("city", ""),
+                            "address_state": person_basic.get("state", ""),
+                            "address_zip": person_basic.get("zip", "")
+                        },
+                        "seating_position": str(person_info.get("seating_position", "")),
+                        "date_of_birth": person_info.get("date_of_birth", ""),
+                        "gender": person_info.get("gender", ""),
+                        "alcohol_or_drug_involved": "",
+                        "ethnicity": "",
+                        "occupant": "",
+                        "airbag_deployed": str(person_info.get("air_bag_deployed", "")),
+                        "airbag_status": str(person_info.get("air_bag_status", "")),
+                        "trapped": str(person_info.get("trapped", "")),
+                        "ejection": str(person_info.get("ejection", "")),
+                        "injury": str(person_info.get("injuries", "")),
+                        "ems_name": person_info.get("name_of_ems", ""),
+                        "injured_taken_by_ems": str(person_info.get("injured_taken_by_ems", "")),
+                        "age": str(person_info.get("age", "")),
+                        "injured_taken_to": person_info.get("injured_taken_to", ""),
+                        "driver_info_id": "",
+                        "alcohol_test_status": driver_info.get("alcohol_test_status", ""),
+                        "alcohol_test_type": driver_info.get("alcohol_test_type", ""),
+                        "alcohol_test_value": driver_info.get("alcohol_test_value", ""),
+                        "drug_test_status": driver_info.get("drug_test_status", ""),
+                        "drug_test_type": driver_info.get("drug_test_type", ""),
+                        "drug_test_value": driver_info.get("drug_test_value", ""),
+                        "offense_charged": driver_info.get("offense_charged", ""),
+                        "local_code": "",
+                        "offense_description": driver_info.get("offense_description", ""),
+                        "citation_number": driver_info.get("citation_number", ""),
+                        "contact_number": driver_info.get("contact_number", ""),
+                        "ol_class": driver_info.get("ol_class", ""),
+                        "endorsement": driver_info.get("endorsement", ""),
+                        "restriction": driver_info.get("restriction", ""),
+                        "driver_distracted_by": driver_info.get("driver_distracted_by", ""),
+                        "driving_license": driver_info.get("driving_licence", ""),
+                        "dl_state": driver_info.get("dl_state", ""),
+                        "alcohol_or_drug_suspected": driver_info.get("alcohol_drug_suspected", "")
+                    }
+                    
+                    vehicle["persons"].append(person_json)
+                    break
+        
+        return vehicles
+    
+    def _build_final_json(self, crash_info: dict, case_info: dict, vehicles: list) -> dict:
+        """Build final JSON structure matching expected output"""
+        # Parse date
+        date_of_crash = ""
+        if crash_info.get("date_of_crash"):
+            try:
+                dt = datetime.strptime(crash_info["date_of_crash"].split()[0], "%m/%d/%Y")
+                date_of_crash = dt.strftime("%Y-%m-%d")
+            except:
+                pass
+        
+        # Build vehicle JSON array
+        vehicles_json = []
+        for veh in vehicles:
+            veh_info = veh.get("vehicle_info", {})
+            
+            vehicle_json = {
+                "vehicle_unit": str(veh.get("vehicle_unit", "1")),
+                "is_commercial": "1" if veh.get("is_commercial", False) else "0",
+                "make": f" {veh.get('make', '')}",
+                "model": veh.get("model", ""),
+                "vehicle_year": str(veh.get("year", "")),
+                "plate_number": f" {veh.get('plate_no', '')}",
+                "plate_state": f" {veh.get('plate_state', '')}",
+                "plate_year": "",
+                "vin": veh.get("vin", ""),
+                "policy": veh.get("policy_no", ""),
+                "is_driven": "",
+                "is_left_at_scene": "",
+                "is_towed": "1" if veh.get("is_towed", False) else "0",
+                "is_impounded": "",
+                "is_disabled": "",
+                "is_parked": "1" if veh.get("is_parked", False) else "0",
+                "is_pedestrian": "",
+                "is_pedal_cyclist": "",
+                "is_hit_and_run": "1" if veh.get("is_hit_and_run", False) else "0",
+                "vehicle_used": "",
+                "vehicle_type": str(veh.get("vehicle_type", "1")),
+                "trailer_or_carrier_count": str(veh.get("no_of_trailer", "0")),
+                "color": veh.get("color", ""),
+                "vehicle_body_type": str(veh.get("veh_body_type", "")),
+                "vehicle_travel_direction": "",
+                "vehicle_details": {
+                    "crash_seq_1st_event": str(veh_info.get("crash_seq_1st_event", "")),
+                    "crash_seq_2nd_event": str(veh_info.get("crash_seq_2nd_event", "")),
+                    "crash_seq_3rd_event": str(veh_info.get("crash_seq_3rd_event", "")),
+                    "crash_seq_4th_event": str(veh_info.get("crash_seq_4th_event", "")),
+                    "harmful_event": str(veh_info.get("harmful_event", "")),
+                    "authorized_speed": "",
+                    "estimated_original_speed": "",
+                    "estimated_impact_speed": "",
+                    "tad": "",
+                    "estimated_damage": "",
+                    "most_harmful_event": str(veh_info.get("most_harmful_event", "")),
+                    "insurance_company": veh_info.get("insurance_company", ""),
+                    "insurance_verified": veh_info.get("insurance_verified", ""),
+                    "us_dot": veh_info.get("us_dot", ""),
                     "towed_by": veh_info.get("towed_by", ""),
                     "occupant_count": str(veh_info.get("no_of_occupants", "")),
                     "initial_impact": veh_info.get("initial_impact", ""),

@@ -262,10 +262,10 @@ class OhioPdfParser:
         while i < len(self.lines):
             line = self.lines[i]
             
-            # Look for vehicle header: "UNIT #" followed by "OWNER NAME"
-            if "UNIT" in line and "#" in line:
-                # Check if next line has OWNER NAME
-                if i + 1 < len(self.lines) and "OWNER NAME" in self.lines[i + 1]:
+            # Look for vehicle header: "OWNER NAME" (comes BEFORE "UNIT #")
+            if "OWNER NAME" in line and "SAME AS DRIVER" in line:
+                # This is the start of a vehicle section
+                if True:  # Always process when we find OWNER NAME
                     print(f"   🚗 Extracting vehicle starting at line {i}")
                     vehicle = self._extract_single_vehicle(i)
                     if vehicle:
@@ -337,12 +337,12 @@ class OhioPdfParser:
         # Search within next 200 lines for vehicle data
         end_idx = min(start_idx + 200, len(self.lines))
         
-        # Extract unit number
-        for i in range(start_idx, start_idx + 10):
-            if i < len(self.lines) and self.lines[i].isdigit() and len(self.lines[i]) <= 2:
-                vehicle["vehicle_unit"] = self.lines[i]
-                print(f"      Unit: {self.lines[i]}")
-                break
+        # Owner Name is on line after "OWNER NAME: LAST, FIRST, MIDDLE" (which is start_idx)
+        if start_idx + 1 < len(self.lines):
+            owner_name = self.lines[start_idx + 1].strip()
+            if owner_name and "UNIT #" not in owner_name:
+                vehicle["owner_name"] = owner_name
+                print(f"      Owner: {owner_name}")
         
         # Process each line looking for vehicle data
         for i in range(start_idx, end_idx):
@@ -351,8 +351,22 @@ class OhioPdfParser:
                 
             line = self.lines[i]
             
+            # Extract unit number - it's on line after "UNIT #"
+            if line == "UNIT #":
+                if i + 1 < len(self.lines) and self.lines[i + 1].isdigit():
+                    vehicle["vehicle_unit"] = self.lines[i + 1]
+                    print(f"      Unit: {self.lines[i + 1]}")
+            
+            # Owner Phone - extract from combined line with owner name
+            elif "DAMAGE SCALE" in line and re.search(r'\d{3}-\d{3}-\d{4}', line):
+                # This line has: "1  FLINDERS, LARRY    740-285-2912    DAMAGE SCALE"
+                match = re.search(r'(\d{3}-\d{3}-\d{4})', line)
+                if match:
+                    vehicle["owner_phone"] = match.group(1)
+            
             # LP STATE, LICENSE PLATE, VIN
-            if "LP STATE" in line and "LICENSE PLATE" in line:
+            elif "LP STATE" in line and "LICENSE PLATE" in line:
+                # Next line should have: "KY 2802GB 3C6UR5FL6MG630586 2021 RAM"
                 if i + 1 < len(self.lines):
                     next_line = self.lines[i + 1]
                     
@@ -367,26 +381,42 @@ class OhioPdfParser:
                         vehicle["plate_state"] = parts[0]
                     if len(parts) >= 2:
                         vehicle["plate_number"] = parts[1]
+                    
+                    # Year and Make might be on same line
+                    if len(parts) >= 4 and parts[3].isdigit() and len(parts[3]) == 4:
+                        vehicle["vehicle_year"] = parts[3]
+                        print(f"      Year: {parts[3]}")
+                    if len(parts) >= 5:
+                        vehicle["make"] = parts[4]
+                        print(f"      Make: {parts[4]}")
             
-            # Year (4-digit starting with 19 or 20)
-            elif line.isdigit() and len(line) == 4 and (line.startswith("19") or line.startswith("20")):
-                vehicle["vehicle_year"] = line
-                # Make is usually next
+            # VEHICLE YEAR label (if not already extracted)
+            elif line == "VEHICLE YEAR" and not vehicle["vehicle_year"]:
+                if i + 1 < len(self.lines) and self.lines[i + 1].isdigit():
+                    vehicle["vehicle_year"] = self.lines[i + 1]
+                    print(f"      Year: {self.lines[i + 1]}")
+            
+            # VEHICLE MAKE label (if not already extracted)
+            elif line == "VEHICLE MAKE" and not vehicle["make"]:
                 if i + 1 < len(self.lines):
                     make = self.lines[i + 1].strip()
-                    if make and not make.isdigit() and "INSURANCE" not in make:
+                    if make and not make.isdigit():
                         vehicle["make"] = make
+                        print(f"      Make: {make}")
             
             # Vehicle Model
-            elif "VEHICLE MODEL" in line:
+            elif line == "VEHICLE MODEL":
                 if i + 1 < len(self.lines):
-                    vehicle["model"] = self.lines[i + 1]
+                    model = self.lines[i + 1].strip()
+                    if model and not model.isdigit():
+                        vehicle["model"] = model
+                        print(f"      Model: {model}")
             
             # Color
             elif line == "COLOR":
                 if i + 1 < len(self.lines):
-                    color = self.lines[i + 1]
-                    if "TOWED" not in color:
+                    color = self.lines[i + 1].strip()
+                    if color and "TOWED" not in color and not color.isdigit():
                         vehicle["color"] = color
             
             # Insurance Company
@@ -394,7 +424,7 @@ class OhioPdfParser:
                 for offset in [1, -1, 2]:
                     if 0 <= i + offset < len(self.lines):
                         comp = self.lines[i + offset].strip()
-                        if comp and "INSURANCE" not in comp and "POLICY" not in comp and comp != "X":
+                        if comp and "INSURANCE" not in comp and "POLICY" not in comp and comp != "X" and len(comp) > 2:
                             vehicle["vehicle_details"]["insurance_company"] = comp
                             break
             
@@ -406,15 +436,15 @@ class OhioPdfParser:
             # Policy Number
             elif "POLICY" in line and "#" in line:
                 if i + 1 < len(self.lines):
-                    policy = self.lines[i + 1]
-                    if "COLOR" not in policy:
+                    policy = self.lines[i + 1].strip()
+                    if policy and "COLOR" not in policy and len(policy) > 3:
                         vehicle["policy"] = policy
             
             # Towed By
             elif "TOWED BY" in line:
                 if i + 1 < len(self.lines):
                     towed = self.lines[i + 1].strip()
-                    if towed and towed != "NA":
+                    if towed and towed != "NA" and len(towed) > 1:
                         vehicle["vehicle_details"]["towed_by"] = towed
                         vehicle["is_towed"] = "1"
             
@@ -424,7 +454,7 @@ class OhioPdfParser:
                     vehicle["is_hit_and_run"] = "1"
             
             # Occupants
-            elif "OCCUPANTS" in line:
+            elif "# OCCUPANTS" in line or line == "OCCUPANTS":
                 for offset in [-1, 1, -2, 2]:
                     if 0 <= i + offset < len(self.lines):
                         occ = self.lines[i + offset].strip()
@@ -472,8 +502,9 @@ class OhioPdfParser:
                         vehicle["vehicle_details"]["contributing_circumstance"] = m.group(1)
             
             # Stop when we hit the next vehicle or persons section
-            elif ("INJURIES" in line and i > start_idx + 30) or \
-                 ("UNIT #" in line and "OWNER NAME" in self.lines[i+1] if i+1<len(self.lines) else False):
+            elif "INJURIES" in line and i > start_idx + 30:
+                break
+            elif "OWNER NAME" in line and "SAME AS DRIVER" in line and i > start_idx + 10:
                 break
         
         # Extract persons for this vehicle
@@ -491,14 +522,11 @@ class OhioPdfParser:
         while i < len(self.lines) and i < vehicle_start_idx + 400:
             line = self.lines[i]
             
-            # Look for person header: "INJURIES" followed by "INJURED"
-            if "INJURIES" in line:
-                # Check if this is a person section
-                is_person = False
-                for offset in [1, 2, 3]:
-                    if i + offset < len(self.lines) and "INJURED" in self.lines[i + offset]:
-                        is_person = True
-                        break
+            # Look for person header: "INJURIES" followed by a NUMBER
+            if line == "INJURIES":
+                # Check if next line is a digit (injury code)
+                if i + 1 < len(self.lines) and self.lines[i + 1].strip().isdigit():
+                    is_person = True
                 
                 if is_person:
                     print(f"      👤 Extracting person at line {i}")
@@ -589,26 +617,21 @@ class OhioPdfParser:
                         person["same_as_driver"] = "1" if seat == "1" else "0"
                         break
             
-            # Name
-            elif "UNIT" in line and "#" in line:
-                # Check for NAME nearby
-                for offset in range(1, 5):
-                    if i + offset < len(self.lines) and "NAME" in self.lines[i + offset]:
-                        # Name is usually 1-2 lines after "NAME"
-                        for name_offset in range(offset + 1, offset + 4):
-                            if i + name_offset < len(self.lines):
-                                name_line = self.lines[i + name_offset].strip()
-                                if name_line and "CONTACT PHONE" not in name_line and not re.match(r'\d{2}/\d{2}/\d{4}', name_line):
-                                    # Parse name: LAST, FIRST, MIDDLE
-                                    parts = name_line.split(',')
-                                    if len(parts) >= 1:
-                                        person["last_name"] = parts[0].strip()
-                                    if len(parts) >= 2:
-                                        person["first_name"] = parts[1].strip()
-                                    if len(parts) >= 3:
-                                        person["middle_name"] = parts[2].strip()
-                                    break
-                        break
+            # Name - comes after "NAME: LAST, FIRST, MIDDLE"
+            elif line == "NAME: LAST, FIRST, MIDDLE":
+                # Name is on the NEXT line
+                if i + 1 < len(self.lines):
+                    name_line = self.lines[i + 1].strip()
+                    if name_line and "DATE OF BIRTH" not in name_line:
+                        # Parse: LAST, FIRST, MIDDLE
+                        parts = name_line.split(',')
+                        if len(parts) >= 1:
+                            person["last_name"] = parts[0].strip()
+                        if len(parts) >= 2:
+                            person["first_name"] = parts[1].strip()
+                        if len(parts) >= 3:
+                            person["middle_name"] = parts[2].strip()
+                        print(f"         Name: {name_line}")
             
             # Date of Birth
             elif "DATE OF BIRTH" in line:

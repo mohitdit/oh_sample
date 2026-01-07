@@ -34,5 +34,59 @@
       "crash_severity": ""
     }
   ],
-  "vehicles": []
+  "vehicles": [
+    {
+      "vehicle_unit": "1",
+      "is_commercial": "0",
+      "make": "RAM",
+      "model": "",
+      "vehicle_year": "",
+      "plate_number": "",
+      "plate_state": "",
+      "plate_year": "",
+      "vin": "",
+      "policy": "",
+      "is_driven": "",
+      "is_left_at_scene": "",
+      "is_towed": "0",
+      "is_impounded": "",
+      "is_disabled": "",
+      "is_parked": "0",
+      "is_pedestrian": "",
+      "is_pedal_cyclist": "",
+      "is_hit_and_run": "0",
+      "vehicle_used": "",
+      "vehicle_type": "1",
+      "trailer_or_carrier_count": "0",
+      "color": "BLK",
+      "vehicle_body_type": "",
+      "vehicle_travel_direction": "",
+      "vehicle_details": {
+        "crash_seq_1st_event": "",
+        "crash_seq_2nd_event": "",
+        "crash_seq_3rd_event": "",
+        "crash_seq_4th_event": "",
+        "harmful_event": "",
+        "authorized_speed": "",
+        "estimated_original_speed": "",
+        "estimated_impact_speed": "",
+        "tad": "",
+        "estimated_damage": "",
+        "most_harmful_event": "",
+        "insurance_company": "",
+        "insurance_verified": "",
+        "us_dot": "",
+        "towed_by": "",
+        "occupant_count": "1",
+        "initial_impact": "",
+        "contributing_circumstance": "",
+        "damage_severity": "",
+        "damaged_area": "",
+        "vehicle_defects": "",
+        "overweight_permit": ""
+      },
+      "persons": [],
+      "owner_name": "FLINDERS, LARRY"
+    }
+  ]
 }

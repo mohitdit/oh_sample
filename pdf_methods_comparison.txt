@@ -1,0 +1,3850 @@
+====================================================================================================
+🧪 COMPREHENSIVE PDF EXTRACTION METHOD COMPARISON - ALL METHODS
+====================================================================================================
+PDF: downloads\20235016815.pdf
+Size: 566,338 bytes
+
+
+====================================================================================================
+📘 METHOD 1: pdfplumber with layout=True - ALL PAGES
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 1 - 77 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     2:             T                                                                       
+     3:              RAFFIC                                                                 
+     4:                   C                                                                 
+     5:                    RASH                                                             
+     6:                         R                                                           
+     7:                          EPORT    *DENOTES MANDATORY FIELD FOR SUPPLEMENT REPORT LOCAL REPORT NUMBER *
+     8:    XPHOTOS TAKEN XOH -2 XOH -3 LOCAL INFORMATION P23013000000287 08-0079-01         
+     9:               OH-1P OTHER REPORTING AGENCY NAME * NCIC *  HIT/SKIP NUMBER OF UNITS UNIT IN ERROR
+    10:      SECONDARY CRASH PRIVATE PROPERTY Ohio State Highway Patrol OHP08 1 2 - - S U O N L S V O E L D VED 1 98 9 9 8 9 - - A U N N I K M N A O L WN
+    11:    COUNTY* LOCALITY* LOCATION: CITY, VILLAGE, TOWNSHIP*   CRASH DATE / TIME* CRASH SEVERITY
+    12:            1 - CITY                                                                 
+    13:                                                                         1 - FATAL   
+    14:      1   3 2 - VILLAGE Liberty (Township of)              01/30/2023 05:30 5        
+    15:            3 - TOWNSHIP                                                 2 - SERIOUS INJURY
+    16:                        LOCATION ROAD NAME                 LATITUDE DECIMAL DEGREES SUSPECTED
+    17:                                                                         3 - MINOR INJURY
+    18:                                                             38.801997    SUSPECTED  
+    19:                                                                         4 - INJURY POSSIBLE ROUTE TYPE REFERENCE ROAD NAME (ROAD, MILEPOST, HOUSE #) LONGITUDE DECIMAL DEGREES
+    20:                                                                         5 - PROPERTY DAMAGE
+    21:                         9                                  -83.603487    ONLY       
+    22:     REFERENCE POINT DIRECTION ROUTE TYPE   ROAD TYPE            INTERSECTION RELATED
+    23:               FROM REFERENCE                                                        
+    24:      1 - INTERSECTION 1 - NORTH IR - INTERSTATE ROUTE (TP) AL - ALLEY HW - HIGHWAY RD - ROAD WITHIN INTERSECTION OR ON APPROACH
+    25:    2 2 - MILE POST 2 2 - SOUTH     AV - AVENUE LA - LANE SQ - SQUARE                
+    26:      3 - HOUSE # 3 4 - - E W A E S S T T US - FEDERAL US ROUTE BL - BOULEVARD MP - MILEPOST ST - STREET WITHIN INTERCHANGE AREA NUMBER OF APPROACHES
+    27:                       SR - STATE ROUTE CR - CIRCLE OV - OVAL TE - TERRACE           
+    28:      FRO D M I S R T EF A E N RE C N E CE UN D IT I O S F T M AN EA C S E URE CR - NUMBERED COUNTY ROUTE CT - COURT PK - PARKWAY TL - TRAIL ROADWAY
+    29:                  1 - MILES         DR - DRIVE PI - PIKE WA - WAY                    
+    30:       0.40    1  2 - FEET TR - NUMBERED TOWNSHIP HE - HEIGHTS PL - PLACE ROADWAY DIVIDED
+    31:                  3 - YARDS ROUTE                                                    
+    32:          LOCATION OF FIRST HARMFUL EVENT MANNER OF CRASH COLLISION/IMPACT DIRECTION OF TRAVEL MEDIAN TYPE
+    33:        1 - ON ROADWAY 9 - CROSSOVER 1 - NOT COLLISION 4 - REAR-TO-REAR              
+    34:     1  2 - ON SHOULDER 10 - DRIVEWAY/ALLEY ACCESS 1 BETWEEN 5 - BACKING 1 2 - - N SO O U R T T H H 1 - ( D < IV 4 I D FE E E D T F ) LUSH MEDIAN
+    35:        3 - IN MEDIAN 11 - RAILWAY GRADE CROSSING TWO MOTOR 6 - ANGLE 3 - EAST 2 - DIVIDED FLUSH MEDIAN
+    36:        4 5 - - O O N N R G O O A R D E SIDE 1 2 - T S R H A A I R LS ED USE PATHS OR V TR E A H N IC S L P E O S R IN T 7 - SIDESWIPE, SAME DIRECTION 4 - WEST 3 - ( D ≥ IV 4 I D FE E E D T , D ) EPRESSED MEDIAN
+    37:        6 - OUTSIDE TRAFFIC WAY 13 - BIKE LANE 2 - REAR-END 8 - SIDESWIPE, OPPOSITE DIRECTION 4 - DIVIDED, RAISED MEDIAN
+    38:        7 - ON RAMP 14 - TOLL BOOTH 3 - HEAD-ON 9 - OTHER / UNKNOWN   (ANY TYPE)     
+    39:        8 - OFF RAMP 99 - OTHER / UNKNOWN                           9 - OTHER / UNKNOWN
+    40:     WORK ZONE RELATED   WORK ZONE TYPE LOCATION OF CRASH IN WORK ZONE CONTOUR CONDITIONS SURFACE
+    41:                       1 - LANE CLOSURE   1 - BEFORE THE 1ST WORK ZONE 2 2    2      
+    42:     WORKERS PRESENT   2 - LANE SHIFT/ CROSSOVER WARNING SIGN                        
+    43:                                          2 - ADVANCE WARNING AREA 1 - STRAIGHT 1 - DRY 1 - CONCRETE
+    44:     LAW ENFORCEMENT PRESENT 3 - WORK ON SHOULDER 3 - TRANSITION AREA LEVEL 2 - WET 2 - BLACKTOP,
+    45:                        OR MEDIAN         4 - ACTIVITY AREA 2 - STRAIGHT 3 - SNOW BITUMINOUS,
+    46:                       4 - INTERMITTENT OR MOVING WORK    GRADE  4 - ICE    ASPHALT  
+    47:      ACTIVE SCHOOL ZONE                  5 - TERMINATION AREA                       
+    48:                       5 - OTHER                         3 - CURVE LEVEL 5 - SAND, MUD, DIRT, 3 - BRICK/BLOCK
+    49:                                                         4 - CURVE GRADE OIL, GRAVEL 4 - SLAG , GRAVEL,
+    50:        1 - DAYL L IG IG H H T T CONDITION 1 - CLEAR W 6 - E S A N T O H W ER 9 - O /U T N H K ER N OWN 6 - W M A O T V E I R N G (S ) TANDING, 5 - D ST IR O T NE
+    51:     4  2 - DAWN/DUSK      2 2 - CLOUDY 7 - SEVERE CROSSWINDS    7 - SLUSH 9 - OTHER 
+    52:        3 - DARK - LIGHTED ROADWAY 3 - FOG, SMOG, SMOKE 8 - BLOWING SAND, SOIL, DIRT, SNOW 9 - OTHER / UNKNOWN / UNKNOWN
+    53:        4 - DARK - ROADWAY NOT LIGHTED 4 - RAIN 9 - FREEZING RAIN OR FREEZING DRIZZLE
+    54:        5 - DARK - UNKNOWN ROADWAY LIGHTING 5 - SLEET, HAIL 99 - OTHER / UNKNOWN     
+    55:        9 - OTHER / UNKNOWN                                                          
+    56:    NARRATIVE                                                                        
+    57:    Unit #1 was traveling northbound on State Route 136 and struck a deer attempting 
+    58:    to cross the roadway.                                                            
+    59:     CRASH REPORTED DATE / TIME DISPATCH DATE / TIME ARRIVAL DATE / TIME SCENE CLEARED DATE / TIME REPORT TAKEN BY
+    60:        01/30/2023 05:34 01/30/2023 05:34 01/30/2023 07:08 01/30/2023 07:29 XPOLICE AGENCY
+    61:                                                                          MOTORIST   
+    62:     TOTAL TIME OTHER TOTAL OFFICER'S NAME*      CHECKED BY OFFICER'S NAME*          
+    63:    ROADWAY CLOSEDINVESTIGATION TIME MINUTES Timberlake, Nathan Fox, Anthony         
+    64:                                                                          SUPPLEMENT 
+    65:                                OFFICER'S BADGE NUMBER* CHECKED BY OFFICER'S BADGE NUMBER* ( T C O O A R N R E E X C IS T TI I N O G N R O EP R O A R D T S D E I N T T IO TO N
+    66:                       115          0490                   1235          ODPS)       
+    67:    NOITACOL                                                                         
+    68:    ECNEREFER                                                                        
+    69:     ROUTE TYPE ROUTE NUMBER PREFIX1 - NORTH       ROAD TYPE                         
+    70:                    2 - SOUTH                                                        
+    71:      SR    136     3 - EAST                                                         
+    72:                    4 - WEST                                                         
+    73:          ROUTE NUMBER PREFIX1 - NORTH             ROAD TYPE                         
+    74:                    2 - SOUTH                                                        
+    75:                    3 - EAST                        MP                               
+    76:                    4 - WEST                                                         
+    77:                                                                           PAGE 1 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 2 - 111 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     3:            U                                                    LOCAL REPORT NUMBER 
+     4:              NIT                                                                    
+     5:                                                                  08-0079-01         
+     6:    UNIT # OWNER NAME: LAST, FIRST, MIDDLE ( SAME AS DRIVER) OWNER PHONE:INCLUDE AREA CODE ( SAME AS DRIVER) D A M A G E
+     7:     1  FLINDERS, LARRY                    740-285-2912           DAMAGE SCALE       
+     8:    OWNER ADDRESS: STREET, CITY, STATE, ZIP ( SAME AS DRIVER) 1 - NONE 3 - FUNCTIONAL DAMAGE 3
+     9:    814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056                2 - MINOR DAMAGE 4 - DISABLING DAMAGE
+    10:    COMMERCIAL CARRIER: NAME, ADDRESS, CITY, STATE, ZIP COMMERCIAL CARRIER PHONE: INCLUDE AREA CODE 9 - UNKNOWN
+    11:                                                                  DAMAGED AREA(S)    
+    12:                                                                 INDICATE ALL THAT APPLY
+    13:    LP STATE LICENSE PLATE # VEHICLE IDENTIFICATION # VEHICLE YEAR VEHICLE MAKE      
+    14:     KY 2802GB          3C6UR5FL6MG630586  2021    RAM                               
+    15:     INSURANCE INSURANCE COMPANY INSURANCE POLICY # COLOR VEHICLE MODEL              
+    16:    X VERIFIED KENTUCKY FARM BUREAU 0020617408 BLK 2500                              
+    17:           TYPE OF USE       US DOT # TOWED BY: COMPANY NAME                         
+    18:                   IN EMERGENCY                                                      
+    19:     COMMERCIAL GOVERNMENT RESPONSE                                                  
+    20:                         VEHICLE WEIGHT GVWR/GCWR HAZARDOUS MATERIAL                 
+    21:     INTERLOCK     # OCCUPANTS 1 - ≤10K LBS. MATERIAL CLASS # PLACARD ID #           
+    22:     DEVICE HIT/SKIP UNIT    2 - 10,001 - 26K LBS. RELEASED                          
+    23:     EQUIPPED        1       3 - > 26K LBS. PLACARD                                  
+    24:         1 - PASSENGER CAR 6 - VAN (9-15 SEATS) 12 - GOLF CART 18 - LIMO (LIVERY VEHICLE) 23 - PEDESTRIAN/SKATER
+    25:      4  2 - PASSENGER VAN 7 - MOTORCYCLE 2-WHEELED 13 - SNOWMOBILE 19 - BUS (16+ PASSENGERS) 24 - WHEELCHAIR (ANY TYPE)
+    26:          (MINIVAN) 8 - MOTORCYCLE 3-WHEELED 14 - SINGLE UNIT 20 - OTHER VEHICLE 25 - OTHER NON-MOTORIST
+    27:    UNIT TYPE3 - S V P E O H R IC T L U E TILITY 9 1 0 - - A M UT O O P C E Y D C O LE R MOTORIZED 1 5 - T S R E U M C I- K TRACTOR 21 - HEAVY EQUIPMENT 26 - BICYCLE
+    28:         4 - PICK UP BICYCLE 16 - FARM EQUIPMENT 22 - ANIMAL WITH RIDER OR 27 - TRAIN
+    29:                                     ANIMAL-DRAWN VEHICLE 99 - UNKNOWN OR HIT/SKIP   
+    30:         5 - CARGO VAN 11 - ALL TERRAIN VEHICLE 17 - MOTORHOME                       
+    31:                 (ATV/UTV)                                                           
+    32:         # OF TRAILING UNITS                                                         
+    33:        WAS VEHICLE OPERATING IN AUTONOMOUS 0 - NO AUTOMATION 3 - CONDITIONAL AUTOMATION 9 - OTHER/UNKNOWN
+    34:        MODE WHEN CRASH OCCURRED? 0                                                  
+    35:      2                     1 - DRIVER ASSISTANCE 4 - HIGH AUTOMATION                
+    36:        1 - YES 2 - NO 9 - OTHER / UNKNOWN AUTONOMOUS2 - PARTIAL AUTOMATION 5 - FULL AUTOMATION
+    37:                       MODE LEVEL                                                    
+    38:         1 - NONE  6 - BUS - CHARTER/TOUR 11 - FIRE 16 - FARM 21 - MAIL CARRIER      
+    39:      1  2 - TAXI  7 - BUS - INTERCITY 12 - MILITARY 17 - MOWING 99 - OTHER / UNKNOWN
+    40:         3 - ELECTRONIC RIDE 8 - BUS - SHUTTLE 13 - POLICE 18 - SNOW REMOVAL         
+    41:    SPECIAL SHARING 9 - BUS - OTHER 14 - PUBLIC UTILITY 19 - TOWING                  
+    42:    FUNCTION 4 - SCHOOL TRANSPORT 10 - AMBULANCE 15 - CONSTRUCTION EQUIP. 20 - SAFETY SERVICE
+    43:         5 - BUS - TRANSIT/COMMUTER    PATROL                                        
+    44:      1 1 - NO CARGO BODY TYPE 4 - LOGGING 7 - GRAIN/CHIPS/GRAVEL 11 - DUMP 99 - OTHER / UNKNOWN
+    45:          / NOT APPLICABLE 5 - INTERMODAL 8 - POLE 12 - CONCRETE MIXER               
+    46:     CARGO 2 - BUS  CONTAINER CHASSIS 9 - CARGO TANK 13 - AUTO TRANSPORTER           
+    47:     B T O YP D E Y 3 - A V N EH O I T C H LE E R T O M W O I T N O G R VEHICLE 6 - C /E A N R C G L O O V S A E N D BOX 10 - FLAT BED 14 - GARBAGE/REFUSE
+    48:         1 - TURN SIGNALS 4 - BRAKES 7 - WORN OR SLICK TIRES 9 - MOTOR TROUBLE 99 - OTHER / UNKNOWN
+    49:         2 - HEAD LAMPS 5 - STEERING 8 - TRAILER EQUIPMENT 10 - DISABLED FROM PRIOR  
+    50:    VEHICLE 3 - TAIL LAMPS 6 - TIRE BLOWOUT DEFECTIVE ACCIDENT                       
+    51:    DEFECTS                                                                          
+    52:                                                             - NO DAMAGE [ 0 ] - UNDERCARRIAGE [ 14 ]
+    53:         1 - INTERSECTION - 4 - MIDBLOCK - 7 - SHOULDER/ROADSIDE 10 - DRIVEWAY ACCESS 99 - OTHER / UNKNOWN
+    54:          MARKED CROSSWALK MARKED CROSSWALK 8 - SIDEWALK 11 - SHARED USE PATHS - TOP [ 13 ] - ALL AREAS [ 15 ]
+    55:     MO N T O O N R - IST 2 - I U N N TE M R A S R EC K T ED IO C N R - O SSWALK 5 - T O RA TH VE E L R L L A O N C E A T - ION 9 - MEDIAN/CROSSING 1 2 - O FI R R S T T R A R I E L S S PONDER - UNIT NOT AT SCENE [ 16 ]
+    56:    LOCATION 3 - INTERSECTION - OTHER 6 - BICYCLE LANE ISLAND AT INCIDENT SCENE      
+    57:    AT IMPACT                                                                        
+    58:         1 - NON-CONTACT 1 - STRAIGHT AHEAD 9 - LEAVING TRAFFIC 15 - WALKING, RUNNING, 21 - STANDING OUTSIDE INITIAL POINT OF CONTACT
+    59:                   2 - BACKING LANE     JOGGING, PLAYING DISABLED VEHICLE            
+    60:         2 - NON-COLLISION                                    0 - NO DAMAGE 14 - UNDERCARRIAGE
+    61:      3         1  3 - CHANGING LANES 10 - PARKED 16 - WORKING 99 - OTHER / UNKNOWN  
+    62:         3 - STRIKING 4 - OVERTAKING/PASSING 11 - SLOWING OR STOPPED 17 - PUSHING VEHICLE 12 1-12 - REFER TO UNIT 15 - VEHICLE NOT AT SCENE
+    63:    ACTION 4 - STRUCK P A R C E T -C IO RA N S S H 6 5 - - M M A A K K I I N N G G L R E IG FT H T T U T R U N RN 1 2 - I N D R T I R V A E F R F L I E C SS 1 8 - L A E P A P V R I O N A G C V H E I H N I G C L O E R DIAGRAM 99 - UNKNOWN
+    64:         5 - BOTH STRIKING 7 - MAKING U-TURN 13 - NEGOTIATING A CURVE 19 - STANDING 13 - TOP
+    65:         & STRUCK  8 - ENTERING TRAFFIC 14 - ENTERING OR CROSSING 20 - OTHER NON-MOTORIST
+    66:         9 - OTHER / UNKNOWN LANE SPECIFIED LOCATION               T R A F F I C     
+    67:         1 - NONE  8 - FOLLOWING TOO CLOSE 13 - IMPROPER START FROM 18 - OPERATING DEFECTIVE 23 - OPENING DOOR INTO TRAFFICWAY FLOW TRAFFIC CONTROL
+    68:         2 - FAILURE TO YIELD /ACDA A PARKED POSITION EQUIPMENT ROADWAY 1 - ONE-WAY 1 - ROUNDABOUT 4 - STOP SIGN
+    69:         3 - RAN RED LIGHT 9 - IMPROPER LANE 14 - STOPPED OR PARKED 19 - LOAD SHIFTING 99 - OTHER IMPROPER
+    70:      1  4 - RAN STOP SIGN CHANGE ILLEGALLY /FALLING/SPILLING ACTION 2 2 - TWO-WAY 6 2 - SIGNAL 5 - YIELD SIGN
+    71:         5 - UNSAFE SPEED 10 - IMPROPER PASSING 15 - SWERVING TO AVOID 20 - IMPROPER CROSSING 3 - FLASHER 6 - NO CONTROL
+    72:    CONTRIBUTING 6 - IMPROPER TURN 11 - DROVE OFF ROAD 16 - WRONG WAY 21 - LYING IN ROADWAY
+    73:    CIRCUMSTANCES7 - LEFT OF CENTER 12 - IMPROPER BACKING 17 - VISION OBSTRUCTION 22 - NOT DISCERNIBLE # OF THROUGH LANES RAIL GRADE CROSSING
+    74:                                                           ON ROAD    1 - NOT INVLOVED
+    75:    SEQUENCE OF EVENTS                                      2         2 - INVOLVED-ACTIVE CROSSING
+    76:                               EVENTS                                 3 - INVOLVED-PASSIVE CROSSING
+    77:      18 1 - OVERTURN/ROLLOVER 7 - SEPARATION OF UNITS 12 - DOWNHILL RUNAWAY 19 - ANIMAL -OTHER 23 - STRUCK BY FALLING,
+    78:    1    2 - FIRE/EXPLOSION 8 - RAN OFF ROAD RIGHT 13 - OTHER NON-COLLISION 20 - MOTOR VEHICLE IN SHIFTING CARGO OR
+    79:         3 - IMMERSION 9 - RAN OFF ROAD LEFT 14 - PEDESTRIAN TRANSPORT ANYTHING SET IN UNIT / NON-MOTORIST DIRECTION
+    80:         4 - JACKKNIFE 10 - CROSS MEDIAN 15 - PEDALCYCLE 21 - PARKED MOTOR MOTION BY A MOTOR 1 - NORTH 5 - NORTHEAST
+    81:    2    5 - CARGO / EQUIPMENT 11 - CROSS CENTERLINE - 16 - RAILWAY VEHICLE VEHICLE 2 4 - V O E T H H I E C R LE MOVABLE 2 - SOUTH 6 - NORTHWEST
+    82:         6 - L E O Q S U S I P O M R E S N H T I F F T AILURE O O P F P T O R S A I V T E E L DIRECTION 1 1 7 8 - - A A N N I I M M A A L L - - D F E A E R R M 2 2 - M W A O I R N K T E Z N O A N N E C E OBJECT 2 1 3 - EAST 7 - SOUTHEAST
+    83:    3                                  EQUIPMENT          FROM  TO   4 - WEST 8 - SOUTHWEST
+    84:                        COLLISION WITH FIXED OBJECT - STRUCK               9 - OTHER / UNKNOWN
+    85:         25 - IMPACT ATTENUATOR 31 - GUARDRAIL END 38 - OVERHEAD SIGN POST 45 - EMBANKMENT 52 - BUILDING
+    86:    4      / CRASH CUSHION 32 - PORTABLE BARRIER 39 - LIGHT / LUMINARIES 46 - FENCE 53 - TUNNEL UNIT SPEED DETECTED SPEED
+    87:         26 - BRIDGE OVERHEAD 33 - MEDIAN CABLE BARRIER SUPPORT 47 - MAILBOX 54 - OTHER FIXED
+    88:          STRUCTURE 34 - MEDIAN GUARDRAIL 40 - UTILITY POLE 48 - TREE OBJECT         
+    89:    5    27 - BRIDGE PIER OR BARRIER 41 - OTHER POST, POLE 49 - FIRE HYDRANT 99 - OTHER / UNKNOWN 55 1 - STATED / ESTIMATED SPEED
+    90:          ABUTMENT 35 - MEDIAN CONCRETE OR SUPPORT 50 - WORK ZONE                    
+    91:    6    2 2 8 9 - - B B R R I I D D G G E E R P A A I R L APET 3 6 - B M A E R D R I I A E N R OTHER BARRIER 4 4 3 2 - - C C U U R LV B ERT M EQ A U IN IP T M EN EN A T NCE POSTED SPEED 1 2 - CALCULATED / EDR
+    92:         30 - GUARDRAIL FACE 37 - TRAFFIC SIGN POST 44 - DITCH 51 - WALL             
+    93:                                                                        3 - UNDETERMINED
+    94:      1   FIRST HARMFUL EVENT 1 MOST HARMFUL EVENT           55                      
+    95:   R                                                                                 
+    96:   E N                                                                               
+    97:   W                                                                                 
+    98:   O                                                                                 
+    99:   E                                                                                 
+   100:   L                                                                                 
+   101:   C                                                                                 
+   102:   I                                                                                 
+   103:   H                                                                                 
+   104:   E                                                                                 
+   105:   V                                                                                 
+   106:   )s(                                                                               
+   107:   S                                                                                 
+   108:   T N                                                                               
+   109:   E V                                                                               
+   110:   E                                                                                 
+   111:                                                                           PAGE 2 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 3 - 76 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     2:            M           N     M                                  LOCAL REPORT NUMBER 
+     3:              OTORIST  /  ON-    OTORIST                                             
+     4:                                                                  08-0079-01         
+     5:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+     6:      1   FLINDERS, JENNIFER, A                               07/24/1972   50   F    
+     7:     ADDRESS: STREET, CITY, STATE, ZIP                   CONTACT PHONE - INCLUDE AREA CODE
+     8:     814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056           740-285-2912                
+     9:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    10:         TAKEN                                   USED     DOT-COMPLIANT POSITION     
+    11:      5  BY 1                                       4     MC HELMET 1   1   1    1   
+    12:    TSIROTOM-NON                                                                     
+    13:    /                                                                                
+    14:    TSIROTOM OL STATE OPERATOR LICENSE NUMBER OFFENSE CHARGED LOCAL OFFENSE DESCRIPTION CITATION NUMBER
+    15:                                              CODE                                   
+    16:      KY                                                                             
+    17:     OL CLASS ENDORSEMENT RESTRICTION SELECT UP TO 3 DRIVER ALCOHOL / DRUG SUSPECTED CONDITION ALCOHOL TEST DRUG TEST(S)
+    18:                             DISTRACTED ALCOHOL MARIJUANA STATUS TYPE VALUE STATUS TYPE RESULTS SELECT UP TO 4
+    19:      4                      BY 1   OTHER DRUG      1    1  1  .      1  1           
+    20:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+    21:     ADDRESS: STREET, CITY, STATE, ZIP                   CONTACT PHONE - INCLUDE AREA CODE
+    22:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    23:         TAKEN                                   USED     DOT-COMPLIANT POSITION     
+    24:         BY                                               MC HELMET                  
+    25:    TSIROTOM-NON                                                                     
+    26:    /                                                                                
+    27:    TSIROTOM OL STATE OPERATOR LICENSE NUMBER OFFENSE CHARGED LOCAL OFFENSE DESCRIPTION CITATION NUMBER
+    28:                                              CODE                                   
+    29:     OL CLASS ENDORSEMENT RESTRICTION SELECT UP TO 3 DRIVER ALCOHOL / DRUG SUSPECTED CONDITION ALCOHOL TEST DRUG TEST(S)
+    30:                             DISTRACTED ALCOHOL MARIJUANA STATUS TYPE VALUE STATUS TYPE RESULTS SELECT UP TO 4
+    31:                             BY                                                      
+    32:                                    OTHER DRUG                 .                     
+    33:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+    34:     ADDRESS: STREET, CITY, STATE, ZIP                   CONTACT PHONE - INCLUDE AREA CODE
+    35:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    36:         TAKEN                                   USED     DOT-COMPLIANT POSITION     
+    37:         BY                                               MC HELMET                  
+    38:    TSIROTOM-NON                                                                     
+    39:    /                                                                                
+    40:    TSIROTOM OL STATE OPERATOR LICENSE NUMBER OFFENSE CHARGED LOCAL OFFENSE DESCRIPTION CITATION NUMBER
+    41:                                              CODE                                   
+    42:     OL CLASS ENDORSEMENT RESTRICTION SELECT UP TO 3 DRIVER ALCOHOL / DRUG SUSPECTED CONDITION ALCOHOL TEST DRUG TEST(S)
+    43:                             DISTRACTED ALCOHOL MARIJUANA STATUS TYPE VALUE STATUS TYPE RESULTS SELECT UP TO 4
+    44:                             BY                                                      
+    45:                                    OTHER DRUG                 .                     
+    46:       INJURIES SEATING POSITION AIR BAG OL CLASS OL RESTRICTION(S) DRIVER DISTRACTION TEST STATUS
+    47:    1 - FATAL  1 - FRONT - LEFT SIDE 1 - NOT DEPLOYED 1 - CLASS A 1 - ALCOHOL INTERLOCK 1 - NOT DISTRACTED 1 - NONE GIVEN
+    48:    2 3 - - I S S N U U J S S U P P R E E Y C C T T E E D D S M E I R N IO O U R S 2 3 4 - - - ( F F S M R R EC O O O O T N N O N T T R D - - C M R - Y I L C G ID E L H F D E T T L D S E S R I I D D IV E E ER) 3 2 4 - - - F D D D R E E E O P P P N L L L O O O T Y Y Y /S E E E I D D D D E S F B R I O D O T E N H T 3 2 - - C C L L A A S S S S C B 3 2 4 - - - D C C FA E O D V R L R I M R C IN E E W C TR T A A I I V V S E E T R L A E T N E S O E N S LY 2 - E C ( M L T O E E A C X M N T T M R U IN O A U G N L N , L I I T Y C C Y A O P T P IN I E O G R N A , T D IN EV G IC A E N 3 2 - - C / T T O E E U S S N N T T U T G R A S E I M A V F B E U IN L N S E A E , D TED SAMPLE
+    49:     INJURY     (MOTORCYCLE PASSENGER) 5 - NOT APPLICABLE 4 - REGULAR CLASS 5 - EXCEPT CLASS A BUS DIALING) 4 - TEST GIVEN,
+    50:    4 - POSSIBLE INJURY 5 - SECOND - MIDDLE 9 - DEPLOYMENT UNKNOWN (OHIO = D) 6 - EXCEPT CLASS A 3 - TALKING ON HANDS-FREE RESULTS KNOWN
+    51:    5 2 1 - I - - N N / E N T O M J O R U A S E T A P R T P T R I A E E A R D S N E A N S T T T P A O I S N C K R J E U T E N E R N D E Y BY 8 7 9 1 6 0 - - - - - ( T T T S M O H H H S EC L O F I I I R R R E O T T E D D D O N R P U - - - R E D R C M L R C - E Y I K S G I F R C D E T C H I L C D G A E S T T L H B I I S E S D O T I I E D D N S E E ID C E AR) 1 2 3 4 - - - - N P T N O A O O R T T T A T E A I L E A J L P E L J Y P C L E L Y E T I C J C E E E D A T J C E B T I C L O E T E D E N D H 5 6 O - - - L M N H O A / E C Z N V M M A D A L O O I T D PE R O D S L O E N M L E Y NT 9 8 7 1 0 - - - - R L I E & R N O E E X L E A S I T C N C S M T E R E T L L R R I N P R A Y T I M T C I S E E C D R S T E T T D I ' R B S O I T O A I O A N P B N C T E U S T D S R E S O A M L R Y I I C - L T T E IG R N H A S I T E LER 4 5 6 7 - - - - C C E I T O P O N L O O A A T T E S L S M M H H C I K D S T E E M M I E E N R R R N U U O T G A D G H N N N C I O E S E I I I T R C C T C N I V A A R V D E H A T T IT H E I I C A O O Y V I T C N N N I W I C L O D E E D D I - N T H E E H V V E A L I I C C D N E E 1 2 3 5 A - - - - L N B U R T C L E E R O O S S O I N N U T O E H E L G D T I S O V E U L N N , T KN E O S W T N TYPE
+    52:    3 - POLICE 11 - PASSENGER IN TRAPPED M - MOTORCYCLE 11 - LIMITED TO EMPLOYMENT 8 - OTHER DISTRACTION 4 - BREATH
+    53:                 OTHER ENCLOSED CARGO P - PASSENGER 12 - LIMITED - OTHER OUTSIDE THE VEHICLE 5 - OTHER
+    54:    9 - OTHER / UNKNOWN AREA (NON-TRAILING UNIT, 1 - NOT TRAPPED 13 - MECHANICAL DEVICES 9 - OTHER / UNKNOWN
+    55:                BUS, PICK-UP WITH CAP) 2 - EXTRICATED BY N - TANKER (SPECIAL BRAKES, HAND CONDITION DRUG TEST TYPE
+    56:    SAFETY EQUIPMENT 12 - PASSENGER IN MECHANICAL MEANS Q - MOTOR SCOOTER CONTROLS, OR OTHER 1 - NONE
+    57:                 UNENCLOSED CARGO AREA 3 - FREED BY R - THREE-WHEEL ADAPTIVE DEVICES) 1 - APPARENTLY NORMAL 2 - BLOOD
+    58:    1 - NONE USED 13 - TRAILING UNIT NON-MECHANICAL MEANS 14 - MILITARY VEHICLES ONLY 2 - PHYSICAL IMPAIRMENT 3 - URINE
+    59:    2 - SHOULDER BELT ONLY 14 - RIDING ON VEHICLE MOTORCYCLE 15 - MOTOR VEHICLES 3 - EMOTIONAL (E.G., 4 - OTHER
+    60:     USED        EXTERIOR             S - SCHOOL BUS WITHOUT AIR BRAKES DEPRESSED, ANGRY,
+    61:    3 - LAP BELT ONLY USED (NON-TRAILING UNIT) T - DOUBLE & TRIPLE 16 - OUTSIDE MIRROR DISTURBED) DRUG TEST RESULT(S)
+    62:    4 - SHOULDER & LAP BELT 15 - NON-MOTORIST TRAILERS 17 - PROSTHETIC AID 4 - ILLNESS 1 - AMPHETAMINES
+    63:     USED      99 - OTHER / UNKNOWN   X - TANKER / HAZMAT 18 - OTHER 5 - FELL ASLEEP, FAINTED, 2 - BARBITURATES
+    64:    5 - CHILD RESTRAINT SYSTEM                               FATIGUED, ETC. 3 - BENZODIAZEPINES
+    65:     - FORWARD FACING                                       6 - UNDER THE INFLUENCE OF 4 - CANNABINOIDS
+    66:    6 - CHILD RESTRAINT SYSTEM           GENDER              MEDICATIONS / DRUGS / 5 - COCAINE
+    67:     - REAR FACING                    F - FEMALE             ALCOHOL    6 - OPIATES / OPIOIDS
+    68:    7 - BOOSTER SEAT                                        9 - OTHER / UNKNOWN 7 - OTHER
+    69:    8 - HELMET USED                   M - MALE                          8 - NEGATIVE RESULTS
+    70:    9 - PROTECTIVE PADS USED          U - OTHER / UNKNOWN                            
+    71:     (ELBOWS, KNEES, ETC)                                                            
+    72:    10 - REFLECTIVE CLOTHING                                                         
+    73:    11 - LIGHTING - PEDESTRIAN                                                       
+    74:     / BICYCLE ONLY                                                                  
+    75:    99 - OTHER / UNKNOWN                                                             
+    76:                                                                           PAGE 3 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 4 - 75 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     2:           O CCUPANT   / W ITNESS A DDENDUM                     LOCAL REPORT NUMBER  
+     3:                                                                  08-0079-01         
+     4:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+     6:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+     8:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+     9:         TAKEN                                           DOT-COMPLIANT POSITION      
+    10:         BY                                              MC HELMET                   
+    11:    TNAPUCCO                                                                         
+    12:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+    13:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+    15:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    16:         TAKEN                                           DOT-COMPLIANT POSITION      
+    17:         BY                                              MC HELMET                   
+    18:    TNAPUCCO                                                                         
+    19:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+    20:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+    21:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    22:         TAKEN                                           DOT-COMPLIANT POSITION      
+    23:         BY                                              MC HELMET                   
+    24:    TNAPUCCO                                                                         
+    25:     UNIT # NAME: LAST, FIRST, MIDDLE                         DATE OF BIRTH AGE GENDER
+    26:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+    27:     INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    28:         TAKEN                                           DOT-COMPLIANT POSITION      
+    29:         BY                                              MC HELMET                   
+    30:    TNAPUCCO                                                                         
+    31:            INJURIES       SAFETY EQUIPMENT USED SEATING POSITION    AIR BAG USAGE   
+    32:     1 - FATAL           1 - NONE USED -    1 - FRONT - LEFT SIDE 1 - NOT DEPLOYED   
+    33:                           VEHICLE OCCUPANT   (MOTORCYCLE DRIVER)                    
+    34:     2 - SUSPECTED SERIOUS INJURY                               2 - DEPLOYED FRONT   
+    35:                                            2 - FRONT - MIDDLE                       
+    36:                         2 - SHOULDER BELT ONLY USED                                 
+    37:     3 - SUSPECTED MINOR INJURY             3 - FRONT - RIGHT SIDE 3 - DEPLOYED SIDE 
+    38:                         3 - LAP BELT ONLY USED                                      
+    39:     4 - POSSIBLE INJURY                    4 - SECOND - LEFT SIDE 4 - DEPLOYED BOTH 
+    40:     5 - NO APPARENT INJURY 4 - SHOULDER & LAP BELT USED (MOTORCYCLE PASSENGER) FRONT/SIDE
+    41:                         5 - CHILD RESTRAINT SYSTEM - 5 - SECOND - MIDDLE 5 - NOT APPLICABLE
+    42:         INJURED TAKEN BY  FORWARD FACING   6 - SECOND - RIGHT SIDE                  
+    43:                                                                9 - DEPLOYMENT UNKNOWN
+    44:     1 - NOT TRANSPORTED / 6 - CHILD RESTRAINT SYSTEM - 7 - THIRD - LEFT SIDE        
+    45:       TREATED AT SCENE    REAR FACING        (MOTORCYCLE SIDE CAR)    EJECTION      
+    46:                                            8 - THIRD - MIDDLE                       
+    47:     2 - EMS             7 - BOOSTER SEAT                       1 - NOT EJECTED      
+    48:                                            9 - THIRD - RIGHT SIDE                   
+    49:     3 - POLICE          8 - HELMET USED    10 - SLEEPER SECTION OF TRUCK CAB 2 - PARTIALLY EJECTED
+    50:     9 - OTHER / UNKNOWN 9 - PROTECTIVE PADS USED 11 - PASSENGER IN OTHER ENCLOSED 3 - TOTALLY EJECTED
+    51:                           (ELBOWS, KNEES, ETC) CARGO AREA (NON-TRAILING UNIT 4 - NOT APPLICABLE
+    52:            GENDER                                                                   
+    53:                         10 - REFLECTIVE CLOTHING SUCH AS A BUS, PICK-UP WITH CAP)   
+    54:     F - FEMALE                             12 - PASSENGER IN UNENCLOSED TRAPPED     
+    55:                         11 - LIGHTING - PEDESTRIAN                                  
+    56:                                              CARGO AREA                             
+    57:     M - MALE              / BICYCLE ONLY   13 - TRAILING UNIT  1 - NOT TRAPPED      
+    58:     U - OTHER / UNKNOWN 99 - OTHER / UNKNOWN 14 - RIDING ON VEHICLE EXTERIOR 2 - EXTRICATED BY
+    59:                                                                  MECHANICAL MEANS   
+    60:                                              (NON-TRAILING UNIT)                    
+    61:                                            15 - NON-MOTORIST   3 - FREED BY         
+    62:                                            99 - OTHER / UNKNOWN  NON-MECHANICAL MEANS
+    63:     NAME: LAST, FIRST, MIDDLE                                                       
+    64:    SSENTIW                                                                          
+    65:                                                              DATE OF BIRTH AGE GENDER
+    66:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+    67:     NAME: LAST, FIRST, MIDDLE                                                       
+    68:    SSENTIW                                                                          
+    69:                                                              DATE OF BIRTH AGE GENDER
+    70:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+    71:     NAME: LAST, FIRST, MIDDLE                                                       
+    72:    SSENTIW                                                                          
+    73:                                                              DATE OF BIRTH AGE GENDER
+    74:     ADDRESS: STREET, CITY, STATE, ZIP                  CONTACT PHONE - INCLUDE AREA CODE
+    75:                                                                           PAGE 4 OF 4
+
+✅ TOTAL: 339 lines from 4 pages
+
+====================================================================================================
+📙 METHOD 2: pdfplumber with layout=False - ALL PAGES
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 1 - 76 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: T
+     2: RAFFIC
+     3: C
+     4: RASH
+     5: R
+     6: EPORT *DENOTES MANDATORY FIELD FOR SUPPLEMENT REPORT LOCAL REPORT NUMBER *
+     7: XPHOTOS TAKEN XOH -2 XOH -3 LOCAL INFORMATION P23013000000287 08-0079-01
+     8: OH-1P OTHER REPORTING AGENCY NAME * NCIC * HIT/SKIP NUMBER OF UNITS UNIT IN ERROR
+     9: SECONDARY CRASH PRIVATE PROPERTY Ohio State Highway Patrol OHP08 1 2 - - S U O N L S V O E L D VED 1 98 9 9 8 9 - - A U N N I K M N A O L WN
+    10: COUNTY* LOCALITY* LOCATION: CITY, VILLAGE, TOWNSHIP* CRASH DATE / TIME* CRASH SEVERITY
+    11: 1 - CITY
+    12: 1 - FATAL
+    13: 1 3 2 - VILLAGE Liberty (Township of) 01/30/2023 05:30 5
+    14: 3 - TOWNSHIP 2 - SERIOUS INJURY
+    15: LOCATION ROAD NAME LATITUDE DECIMAL DEGREES SUSPECTED
+    16: 3 - MINOR INJURY
+    17: 38.801997 SUSPECTED
+    18: 4 - INJURY POSSIBLE ROUTE TYPE REFERENCE ROAD NAME (ROAD, MILEPOST, HOUSE #) LONGITUDE DECIMAL DEGREES
+    19: 5 - PROPERTY DAMAGE
+    20: 9 -83.603487 ONLY
+    21: REFERENCE POINT DIRECTION ROUTE TYPE ROAD TYPE INTERSECTION RELATED
+    22: FROM REFERENCE
+    23: 1 - INTERSECTION 1 - NORTH IR - INTERSTATE ROUTE (TP) AL - ALLEY HW - HIGHWAY RD - ROAD WITHIN INTERSECTION OR ON APPROACH
+    24: 2 2 - MILE POST 2 2 - SOUTH AV - AVENUE LA - LANE SQ - SQUARE
+    25: 3 - HOUSE # 3 4 - - E W A E S S T T US - FEDERAL US ROUTE BL - BOULEVARD MP - MILEPOST ST - STREET WITHIN INTERCHANGE AREA NUMBER OF APPROACHES
+    26: SR - STATE ROUTE CR - CIRCLE OV - OVAL TE - TERRACE
+    27: FRO D M I S R T EF A E N RE C N E CE UN D IT I O S F T M AN EA C S E URE CR - NUMBERED COUNTY ROUTE CT - COURT PK - PARKWAY TL - TRAIL ROADWAY
+    28: 1 - MILES DR - DRIVE PI - PIKE WA - WAY
+    29: 0.40 1 2 - FEET TR - NUMBERED TOWNSHIP HE - HEIGHTS PL - PLACE ROADWAY DIVIDED
+    30: 3 - YARDS ROUTE
+    31: LOCATION OF FIRST HARMFUL EVENT MANNER OF CRASH COLLISION/IMPACT DIRECTION OF TRAVEL MEDIAN TYPE
+    32: 1 - ON ROADWAY 9 - CROSSOVER 1 - NOT COLLISION 4 - REAR-TO-REAR
+    33: 1 2 - ON SHOULDER 10 - DRIVEWAY/ALLEY ACCESS 1 BETWEEN 5 - BACKING 1 2 - - N SO O U R T T H H 1 - ( D < IV 4 I D FE E E D T F ) LUSH MEDIAN
+    34: 3 - IN MEDIAN 11 - RAILWAY GRADE CROSSING TWO MOTOR 6 - ANGLE 3 - EAST 2 - DIVIDED FLUSH MEDIAN
+    35: 4 5 - - O O N N R G O O A R D E SIDE 1 2 - T S R H A A I R LS ED USE PATHS OR V TR E A H N IC S L P E O S R IN T 7 - SIDESWIPE, SAME DIRECTION 4 - WEST 3 - ( D ≥ IV 4 I D FE E E D T , D ) EPRESSED MEDIAN
+    36: 6 - OUTSIDE TRAFFIC WAY 13 - BIKE LANE 2 - REAR-END 8 - SIDESWIPE, OPPOSITE DIRECTION 4 - DIVIDED, RAISED MEDIAN
+    37: 7 - ON RAMP 14 - TOLL BOOTH 3 - HEAD-ON 9 - OTHER / UNKNOWN (ANY TYPE)
+    38: 8 - OFF RAMP 99 - OTHER / UNKNOWN 9 - OTHER / UNKNOWN
+    39: WORK ZONE RELATED WORK ZONE TYPE LOCATION OF CRASH IN WORK ZONE CONTOUR CONDITIONS SURFACE
+    40: 1 - LANE CLOSURE 1 - BEFORE THE 1ST WORK ZONE 2 2 2
+    41: WORKERS PRESENT 2 - LANE SHIFT/ CROSSOVER WARNING SIGN
+    42: 2 - ADVANCE WARNING AREA 1 - STRAIGHT 1 - DRY 1 - CONCRETE
+    43: LAW ENFORCEMENT PRESENT 3 - WORK ON SHOULDER 3 - TRANSITION AREA LEVEL 2 - WET 2 - BLACKTOP,
+    44: OR MEDIAN 4 - ACTIVITY AREA 2 - STRAIGHT 3 - SNOW BITUMINOUS,
+    45: 4 - INTERMITTENT OR MOVING WORK GRADE 4 - ICE ASPHALT
+    46: ACTIVE SCHOOL ZONE 5 - TERMINATION AREA
+    47: 5 - OTHER 3 - CURVE LEVEL 5 - SAND, MUD, DIRT, 3 - BRICK/BLOCK
+    48: 4 - CURVE GRADE OIL, GRAVEL 4 - SLAG , GRAVEL,
+    49: 1 - DAYL L IG IG H H T T CONDITION 1 - CLEAR W 6 - E S A N T O H W ER 9 - O /U T N H K ER N OWN 6 - W M A O T V E I R N G (S ) TANDING, 5 - D ST IR O T NE
+    50: 4 2 - DAWN/DUSK 2 2 - CLOUDY 7 - SEVERE CROSSWINDS 7 - SLUSH 9 - OTHER
+    51: 3 - DARK - LIGHTED ROADWAY 3 - FOG, SMOG, SMOKE 8 - BLOWING SAND, SOIL, DIRT, SNOW 9 - OTHER / UNKNOWN / UNKNOWN
+    52: 4 - DARK - ROADWAY NOT LIGHTED 4 - RAIN 9 - FREEZING RAIN OR FREEZING DRIZZLE
+    53: 5 - DARK - UNKNOWN ROADWAY LIGHTING 5 - SLEET, HAIL 99 - OTHER / UNKNOWN
+    54: 9 - OTHER / UNKNOWN
+    55: NARRATIVE
+    56: Unit #1 was traveling northbound on State Route 136 and struck a deer attempting
+    57: to cross the roadway.
+    58: CRASH REPORTED DATE / TIME DISPATCH DATE / TIME ARRIVAL DATE / TIME SCENE CLEARED DATE / TIME REPORT TAKEN BY
+    59: 01/30/2023 05:34 01/30/2023 05:34 01/30/2023 07:08 01/30/2023 07:29 XPOLICE AGENCY
+    60: MOTORIST
+    61: TOTAL TIME OTHER TOTAL OFFICER'S NAME* CHECKED BY OFFICER'S NAME*
+    62: ROADWAY CLOSEDINVESTIGATION TIME MINUTES Timberlake, Nathan Fox, Anthony
+    63: SUPPLEMENT
+    64: OFFICER'S BADGE NUMBER* CHECKED BY OFFICER'S BADGE NUMBER* ( T C O O A R N R E E X C IS T TI I N O G N R O EP R O A R D T S D E I N T T IO TO N
+    65: 115 0490 1235 ODPS)
+    66: NOITACOL
+    67: ECNEREFER
+    68: ROUTE TYPE ROUTE NUMBER PREFIX1 - NORTH ROAD TYPE
+    69: 2 - SOUTH
+    70: SR 136 3 - EAST
+    71: 4 - WEST
+    72: ROUTE NUMBER PREFIX1 - NORTH ROAD TYPE
+    73: 2 - SOUTH
+    74: 3 - EAST MP
+    75: 4 - WEST
+    76: PAGE 1 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 2 - 109 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: U LOCAL REPORT NUMBER
+     2: NIT
+     3: 08-0079-01
+     4: UNIT # OWNER NAME: LAST, FIRST, MIDDLE ( SAME AS DRIVER) OWNER PHONE:INCLUDE AREA CODE ( SAME AS DRIVER) D A M A G E
+     5: 1 FLINDERS, LARRY 740-285-2912 DAMAGE SCALE
+     6: OWNER ADDRESS: STREET, CITY, STATE, ZIP ( SAME AS DRIVER) 1 - NONE 3 - FUNCTIONAL DAMAGE 3
+     7: 814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056 2 - MINOR DAMAGE 4 - DISABLING DAMAGE
+     8: COMMERCIAL CARRIER: NAME, ADDRESS, CITY, STATE, ZIP COMMERCIAL CARRIER PHONE: INCLUDE AREA CODE 9 - UNKNOWN
+     9: DAMAGED AREA(S)
+    10: INDICATE ALL THAT APPLY
+    11: LP STATE LICENSE PLATE # VEHICLE IDENTIFICATION # VEHICLE YEAR VEHICLE MAKE
+    12: KY 2802GB 3C6UR5FL6MG630586 2021 RAM
+    13: INSURANCE INSURANCE COMPANY INSURANCE POLICY # COLOR VEHICLE MODEL
+    14: X VERIFIED KENTUCKY FARM BUREAU 0020617408 BLK 2500
+    15: TYPE OF USE US DOT # TOWED BY: COMPANY NAME
+    16: IN EMERGENCY
+    17: COMMERCIAL GOVERNMENT RESPONSE
+    18: VEHICLE WEIGHT GVWR/GCWR HAZARDOUS MATERIAL
+    19: INTERLOCK # OCCUPANTS 1 - ≤10K LBS. MATERIAL CLASS # PLACARD ID #
+    20: DEVICE HIT/SKIP UNIT 2 - 10,001 - 26K LBS. RELEASED
+    21: EQUIPPED 1 3 - > 26K LBS. PLACARD
+    22: 1 - PASSENGER CAR 6 - VAN (9-15 SEATS) 12 - GOLF CART 18 - LIMO (LIVERY VEHICLE) 23 - PEDESTRIAN/SKATER
+    23: 4 2 - PASSENGER VAN 7 - MOTORCYCLE 2-WHEELED 13 - SNOWMOBILE 19 - BUS (16+ PASSENGERS) 24 - WHEELCHAIR (ANY TYPE)
+    24: (MINIVAN) 8 - MOTORCYCLE 3-WHEELED 14 - SINGLE UNIT 20 - OTHER VEHICLE 25 - OTHER NON-MOTORIST
+    25: UNIT TYPE3 - S V P E O H R IC T L U E TILITY 9 1 0 - - A M UT O O P C E Y D C O LE R MOTORIZED 1 5 - T S R E U M C I- K TRACTOR 21 - HEAVY EQUIPMENT 26 - BICYCLE
+    26: 4 - PICK UP BICYCLE 16 - FARM EQUIPMENT 22 - ANIMAL WITH RIDER OR 27 - TRAIN
+    27: ANIMAL-DRAWN VEHICLE 99 - UNKNOWN OR HIT/SKIP
+    28: 5 - CARGO VAN 11 - ALL TERRAIN VEHICLE 17 - MOTORHOME
+    29: (ATV/UTV)
+    30: # OF TRAILING UNITS
+    31: WAS VEHICLE OPERATING IN AUTONOMOUS 0 - NO AUTOMATION 3 - CONDITIONAL AUTOMATION 9 - OTHER/UNKNOWN
+    32: MODE WHEN CRASH OCCURRED? 0
+    33: 2 1 - DRIVER ASSISTANCE 4 - HIGH AUTOMATION
+    34: 1 - YES 2 - NO 9 - OTHER / UNKNOWN AUTONOMOUS2 - PARTIAL AUTOMATION 5 - FULL AUTOMATION
+    35: MODE LEVEL
+    36: 1 - NONE 6 - BUS - CHARTER/TOUR 11 - FIRE 16 - FARM 21 - MAIL CARRIER
+    37: 1 2 - TAXI 7 - BUS - INTERCITY 12 - MILITARY 17 - MOWING 99 - OTHER / UNKNOWN
+    38: 3 - ELECTRONIC RIDE 8 - BUS - SHUTTLE 13 - POLICE 18 - SNOW REMOVAL
+    39: SPECIAL SHARING 9 - BUS - OTHER 14 - PUBLIC UTILITY 19 - TOWING
+    40: FUNCTION 4 - SCHOOL TRANSPORT 10 - AMBULANCE 15 - CONSTRUCTION EQUIP. 20 - SAFETY SERVICE
+    41: 5 - BUS - TRANSIT/COMMUTER PATROL
+    42: 1 1 - NO CARGO BODY TYPE 4 - LOGGING 7 - GRAIN/CHIPS/GRAVEL 11 - DUMP 99 - OTHER / UNKNOWN
+    43: / NOT APPLICABLE 5 - INTERMODAL 8 - POLE 12 - CONCRETE MIXER
+    44: CARGO 2 - BUS CONTAINER CHASSIS 9 - CARGO TANK 13 - AUTO TRANSPORTER
+    45: B T O YP D E Y 3 - A V N EH O I T C H LE E R T O M W O I T N O G R VEHICLE 6 - C /E A N R C G L O O V S A E N D BOX 10 - FLAT BED 14 - GARBAGE/REFUSE
+    46: 1 - TURN SIGNALS 4 - BRAKES 7 - WORN OR SLICK TIRES 9 - MOTOR TROUBLE 99 - OTHER / UNKNOWN
+    47: 2 - HEAD LAMPS 5 - STEERING 8 - TRAILER EQUIPMENT 10 - DISABLED FROM PRIOR
+    48: VEHICLE 3 - TAIL LAMPS 6 - TIRE BLOWOUT DEFECTIVE ACCIDENT
+    49: DEFECTS
+    50: - NO DAMAGE [ 0 ] - UNDERCARRIAGE [ 14 ]
+    51: 1 - INTERSECTION - 4 - MIDBLOCK - 7 - SHOULDER/ROADSIDE 10 - DRIVEWAY ACCESS 99 - OTHER / UNKNOWN
+    52: MARKED CROSSWALK MARKED CROSSWALK 8 - SIDEWALK 11 - SHARED USE PATHS - TOP [ 13 ] - ALL AREAS [ 15 ]
+    53: MO N T O O N R - IST 2 - I U N N TE M R A S R EC K T ED IO C N R - O SSWALK 5 - T O RA TH VE E L R L L A O N C E A T - ION 9 - MEDIAN/CROSSING 1 2 - O FI R R S T T R A R I E L S S PONDER - UNIT NOT AT SCENE [ 16 ]
+    54: LOCATION 3 - INTERSECTION - OTHER 6 - BICYCLE LANE ISLAND AT INCIDENT SCENE
+    55: AT IMPACT
+    56: 1 - NON-CONTACT 1 - STRAIGHT AHEAD 9 - LEAVING TRAFFIC 15 - WALKING, RUNNING, 21 - STANDING OUTSIDE INITIAL POINT OF CONTACT
+    57: 2 - BACKING LANE JOGGING, PLAYING DISABLED VEHICLE
+    58: 2 - NON-COLLISION 0 - NO DAMAGE 14 - UNDERCARRIAGE
+    59: 3 1 3 - CHANGING LANES 10 - PARKED 16 - WORKING 99 - OTHER / UNKNOWN
+    60: 3 - STRIKING 4 - OVERTAKING/PASSING 11 - SLOWING OR STOPPED 17 - PUSHING VEHICLE 12 1-12 - REFER TO UNIT 15 - VEHICLE NOT AT SCENE
+    61: ACTION 4 - STRUCK P A R C E T -C IO RA N S S H 6 5 - - M M A A K K I I N N G G L R E IG FT H T T U T R U N RN 1 2 - I N D R T I R V A E F R F L I E C SS 1 8 - L A E P A P V R I O N A G C V H E I H N I G C L O E R DIAGRAM 99 - UNKNOWN
+    62: 5 - BOTH STRIKING 7 - MAKING U-TURN 13 - NEGOTIATING A CURVE 19 - STANDING 13 - TOP
+    63: & STRUCK 8 - ENTERING TRAFFIC 14 - ENTERING OR CROSSING 20 - OTHER NON-MOTORIST
+    64: 9 - OTHER / UNKNOWN LANE SPECIFIED LOCATION T R A F F I C
+    65: 1 - NONE 8 - FOLLOWING TOO CLOSE 13 - IMPROPER START FROM 18 - OPERATING DEFECTIVE 23 - OPENING DOOR INTO TRAFFICWAY FLOW TRAFFIC CONTROL
+    66: 2 - FAILURE TO YIELD /ACDA A PARKED POSITION EQUIPMENT ROADWAY 1 - ONE-WAY 1 - ROUNDABOUT 4 - STOP SIGN
+    67: 3 - RAN RED LIGHT 9 - IMPROPER LANE 14 - STOPPED OR PARKED 19 - LOAD SHIFTING 99 - OTHER IMPROPER
+    68: 1 4 - RAN STOP SIGN CHANGE ILLEGALLY /FALLING/SPILLING ACTION 2 2 - TWO-WAY 6 2 - SIGNAL 5 - YIELD SIGN
+    69: 5 - UNSAFE SPEED 10 - IMPROPER PASSING 15 - SWERVING TO AVOID 20 - IMPROPER CROSSING 3 - FLASHER 6 - NO CONTROL
+    70: CONTRIBUTING 6 - IMPROPER TURN 11 - DROVE OFF ROAD 16 - WRONG WAY 21 - LYING IN ROADWAY
+    71: CIRCUMSTANCES7 - LEFT OF CENTER 12 - IMPROPER BACKING 17 - VISION OBSTRUCTION 22 - NOT DISCERNIBLE # OF THROUGH LANES RAIL GRADE CROSSING
+    72: ON ROAD 1 - NOT INVLOVED
+    73: SEQUENCE OF EVENTS 2 2 - INVOLVED-ACTIVE CROSSING
+    74: EVENTS 3 - INVOLVED-PASSIVE CROSSING
+    75: 18 1 - OVERTURN/ROLLOVER 7 - SEPARATION OF UNITS 12 - DOWNHILL RUNAWAY 19 - ANIMAL -OTHER 23 - STRUCK BY FALLING,
+    76: 1 2 - FIRE/EXPLOSION 8 - RAN OFF ROAD RIGHT 13 - OTHER NON-COLLISION 20 - MOTOR VEHICLE IN SHIFTING CARGO OR
+    77: 3 - IMMERSION 9 - RAN OFF ROAD LEFT 14 - PEDESTRIAN TRANSPORT ANYTHING SET IN UNIT / NON-MOTORIST DIRECTION
+    78: 4 - JACKKNIFE 10 - CROSS MEDIAN 15 - PEDALCYCLE 21 - PARKED MOTOR MOTION BY A MOTOR 1 - NORTH 5 - NORTHEAST
+    79: 2 5 - CARGO / EQUIPMENT 11 - CROSS CENTERLINE - 16 - RAILWAY VEHICLE VEHICLE 2 4 - V O E T H H I E C R LE MOVABLE 2 - SOUTH 6 - NORTHWEST
+    80: 6 - L E O Q S U S I P O M R E S N H T I F F T AILURE O O P F P T O R S A I V T E E L DIRECTION 1 1 7 8 - - A A N N I I M M A A L L - - D F E A E R R M 2 2 - M W A O I R N K T E Z N O A N N E C E OBJECT 2 1 3 - EAST 7 - SOUTHEAST
+    81: 3 EQUIPMENT FROM TO 4 - WEST 8 - SOUTHWEST
+    82: COLLISION WITH FIXED OBJECT - STRUCK 9 - OTHER / UNKNOWN
+    83: 25 - IMPACT ATTENUATOR 31 - GUARDRAIL END 38 - OVERHEAD SIGN POST 45 - EMBANKMENT 52 - BUILDING
+    84: 4 / CRASH CUSHION 32 - PORTABLE BARRIER 39 - LIGHT / LUMINARIES 46 - FENCE 53 - TUNNEL UNIT SPEED DETECTED SPEED
+    85: 26 - BRIDGE OVERHEAD 33 - MEDIAN CABLE BARRIER SUPPORT 47 - MAILBOX 54 - OTHER FIXED
+    86: STRUCTURE 34 - MEDIAN GUARDRAIL 40 - UTILITY POLE 48 - TREE OBJECT
+    87: 5 27 - BRIDGE PIER OR BARRIER 41 - OTHER POST, POLE 49 - FIRE HYDRANT 99 - OTHER / UNKNOWN 55 1 - STATED / ESTIMATED SPEED
+    88: ABUTMENT 35 - MEDIAN CONCRETE OR SUPPORT 50 - WORK ZONE
+    89: 6 2 2 8 9 - - B B R R I I D D G G E E R P A A I R L APET 3 6 - B M A E R D R I I A E N R OTHER BARRIER 4 4 3 2 - - C C U U R LV B ERT M EQ A U IN IP T M EN EN A T NCE POSTED SPEED 1 2 - CALCULATED / EDR
+    90: 30 - GUARDRAIL FACE 37 - TRAFFIC SIGN POST 44 - DITCH 51 - WALL
+    91: 3 - UNDETERMINED
+    92: 1 FIRST HARMFUL EVENT 1 MOST HARMFUL EVENT 55
+    93: R
+    94: E N
+    95: W
+    96: O
+    97: E
+    98: L
+    99: C
+   100: I
+   101: H
+   102: E
+   103: V
+   104: )s(
+   105: S
+   106: T N
+   107: E V
+   108: E
+   109: PAGE 2 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 3 - 75 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: M N M LOCAL REPORT NUMBER
+     2: OTORIST / ON- OTORIST
+     3: 08-0079-01
+     4: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+     5: 1 FLINDERS, JENNIFER, A 07/24/1972 50 F
+     6: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+     7: 814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056 740-285-2912
+     8: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+     9: TAKEN USED DOT-COMPLIANT POSITION
+    10: 5 BY 1 4 MC HELMET 1 1 1 1
+    11: TSIROTOM-NON
+    12: /
+    13: TSIROTOM OL STATE OPERATOR LICENSE NUMBER OFFENSE CHARGED LOCAL OFFENSE DESCRIPTION CITATION NUMBER
+    14: CODE
+    15: KY
+    16: OL CLASS ENDORSEMENT RESTRICTION SELECT UP TO 3 DRIVER ALCOHOL / DRUG SUSPECTED CONDITION ALCOHOL TEST DRUG TEST(S)
+    17: DISTRACTED ALCOHOL MARIJUANA STATUS TYPE VALUE STATUS TYPE RESULTS SELECT UP TO 4
+    18: 4 BY 1 OTHER DRUG 1 1 1 . 1 1
+    19: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+    20: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    21: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    22: TAKEN USED DOT-COMPLIANT POSITION
+    23: BY MC HELMET
+    24: TSIROTOM-NON
+    25: /
+    26: TSIROTOM OL STATE OPERATOR LICENSE NUMBER OFFENSE CHARGED LOCAL OFFENSE DESCRIPTION CITATION NUMBER
+    27: CODE
+    28: OL CLASS ENDORSEMENT RESTRICTION SELECT UP TO 3 DRIVER ALCOHOL / DRUG SUSPECTED CONDITION ALCOHOL TEST DRUG TEST(S)
+    29: DISTRACTED ALCOHOL MARIJUANA STATUS TYPE VALUE STATUS TYPE RESULTS SELECT UP TO 4
+    30: BY
+    31: OTHER DRUG .
+    32: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+    33: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    34: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    35: TAKEN USED DOT-COMPLIANT POSITION
+    36: BY MC HELMET
+    37: TSIROTOM-NON
+    38: /
+    39: TSIROTOM OL STATE OPERATOR LICENSE NUMBER OFFENSE CHARGED LOCAL OFFENSE DESCRIPTION CITATION NUMBER
+    40: CODE
+    41: OL CLASS ENDORSEMENT RESTRICTION SELECT UP TO 3 DRIVER ALCOHOL / DRUG SUSPECTED CONDITION ALCOHOL TEST DRUG TEST(S)
+    42: DISTRACTED ALCOHOL MARIJUANA STATUS TYPE VALUE STATUS TYPE RESULTS SELECT UP TO 4
+    43: BY
+    44: OTHER DRUG .
+    45: INJURIES SEATING POSITION AIR BAG OL CLASS OL RESTRICTION(S) DRIVER DISTRACTION TEST STATUS
+    46: 1 - FATAL 1 - FRONT - LEFT SIDE 1 - NOT DEPLOYED 1 - CLASS A 1 - ALCOHOL INTERLOCK 1 - NOT DISTRACTED 1 - NONE GIVEN
+    47: 2 3 - - I S S N U U J S S U P P R E E Y C C T T E E D D S M E I R N IO O U R S 2 3 4 - - - ( F F S M R R EC O O O O T N N O N T T R D - - C M R - Y I L C G ID E L H F D E T T L D S E S R I I D D IV E E ER) 3 2 4 - - - F D D D R E E E O P P P N L L L O O O T Y Y Y /S E E E I D D D D E S F B R I O D O T E N H T 3 2 - - C C L L A A S S S S C B 3 2 4 - - - D C C FA E O D V R L R I M R C IN E E W C TR T A A I I V V S E E T R L A E T N E S O E N S LY 2 - E C ( M L T O E E A C X M N T T M R U IN O A U G N L N , L I I T Y C C Y A O P T P IN I E O G R N A , T D IN EV G IC A E N 3 2 - - C / T T O E E U S S N N T T U T G R A S E I M A V F B E U IN L N S E A E , D TED SAMPLE
+    48: INJURY (MOTORCYCLE PASSENGER) 5 - NOT APPLICABLE 4 - REGULAR CLASS 5 - EXCEPT CLASS A BUS DIALING) 4 - TEST GIVEN,
+    49: 4 - POSSIBLE INJURY 5 - SECOND - MIDDLE 9 - DEPLOYMENT UNKNOWN (OHIO = D) 6 - EXCEPT CLASS A 3 - TALKING ON HANDS-FREE RESULTS KNOWN
+    50: 5 2 1 - I - - N N / E N T O M J O R U A S E T A P R T P T R I A E E A R D S N E A N S T T T P A O I S N C K R J E U T E N E R N D E Y BY 8 7 9 1 6 0 - - - - - ( T T T S M O H H H S EC L O F I I I R R R E O T T E D D D O N R P U - - - R E D R C M L R C - E Y I K S G I F R C D E T C H I L C D G A E S T T L H B I I S E S D O T I I E D D N S E E ID C E AR) 1 2 3 4 - - - - N P T N O A O O R T T T A T E A I L E A J L P E L J Y P C L E L Y E T I C J C E E E D A T J C E B T I C L O E T E D E N D H 5 6 O - - - L M N H O A / E C Z N V M M A D A L O O I T D PE R O D S L O E N M L E Y NT 9 8 7 1 0 - - - - R L I E & R N O E E X L E A S I T C N C S M T E R E T L L R R I N P R A Y T I M T C I S E E C D R S T E T T D I ' R B S O I T O A I O A N P B N C T E U S T D S R E S O A M L R Y I I C - L T T E IG R N H A S I T E LER 4 5 6 7 - - - - C C E I T O P O N L O O A A T T E S L S M M H H C I K D S T E E M M I E E N R R R N U U O T G A D G H N N N C I O E S E I I I T R C C T C N I V A A R V D E H A T T IT H E I I C A O O Y V I T C N N N I W I C L O D E E D D I - N T H E E H V V E A L I I C C D N E E 1 2 3 5 A - - - - L N B U R T C L E E R O O S S O I N N U T O E H E L G D T I S O V E U L N N , T KN E O S W T N TYPE
+    51: 3 - POLICE 11 - PASSENGER IN TRAPPED M - MOTORCYCLE 11 - LIMITED TO EMPLOYMENT 8 - OTHER DISTRACTION 4 - BREATH
+    52: OTHER ENCLOSED CARGO P - PASSENGER 12 - LIMITED - OTHER OUTSIDE THE VEHICLE 5 - OTHER
+    53: 9 - OTHER / UNKNOWN AREA (NON-TRAILING UNIT, 1 - NOT TRAPPED 13 - MECHANICAL DEVICES 9 - OTHER / UNKNOWN
+    54: BUS, PICK-UP WITH CAP) 2 - EXTRICATED BY N - TANKER (SPECIAL BRAKES, HAND CONDITION DRUG TEST TYPE
+    55: SAFETY EQUIPMENT 12 - PASSENGER IN MECHANICAL MEANS Q - MOTOR SCOOTER CONTROLS, OR OTHER 1 - NONE
+    56: UNENCLOSED CARGO AREA 3 - FREED BY R - THREE-WHEEL ADAPTIVE DEVICES) 1 - APPARENTLY NORMAL 2 - BLOOD
+    57: 1 - NONE USED 13 - TRAILING UNIT NON-MECHANICAL MEANS 14 - MILITARY VEHICLES ONLY 2 - PHYSICAL IMPAIRMENT 3 - URINE
+    58: 2 - SHOULDER BELT ONLY 14 - RIDING ON VEHICLE MOTORCYCLE 15 - MOTOR VEHICLES 3 - EMOTIONAL (E.G., 4 - OTHER
+    59: USED EXTERIOR S - SCHOOL BUS WITHOUT AIR BRAKES DEPRESSED, ANGRY,
+    60: 3 - LAP BELT ONLY USED (NON-TRAILING UNIT) T - DOUBLE & TRIPLE 16 - OUTSIDE MIRROR DISTURBED) DRUG TEST RESULT(S)
+    61: 4 - SHOULDER & LAP BELT 15 - NON-MOTORIST TRAILERS 17 - PROSTHETIC AID 4 - ILLNESS 1 - AMPHETAMINES
+    62: USED 99 - OTHER / UNKNOWN X - TANKER / HAZMAT 18 - OTHER 5 - FELL ASLEEP, FAINTED, 2 - BARBITURATES
+    63: 5 - CHILD RESTRAINT SYSTEM FATIGUED, ETC. 3 - BENZODIAZEPINES
+    64: - FORWARD FACING 6 - UNDER THE INFLUENCE OF 4 - CANNABINOIDS
+    65: 6 - CHILD RESTRAINT SYSTEM GENDER MEDICATIONS / DRUGS / 5 - COCAINE
+    66: - REAR FACING F - FEMALE ALCOHOL 6 - OPIATES / OPIOIDS
+    67: 7 - BOOSTER SEAT 9 - OTHER / UNKNOWN 7 - OTHER
+    68: 8 - HELMET USED M - MALE 8 - NEGATIVE RESULTS
+    69: 9 - PROTECTIVE PADS USED U - OTHER / UNKNOWN
+    70: (ELBOWS, KNEES, ETC)
+    71: 10 - REFLECTIVE CLOTHING
+    72: 11 - LIGHTING - PEDESTRIAN
+    73: / BICYCLE ONLY
+    74: 99 - OTHER / UNKNOWN
+    75: PAGE 3 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 4 - 71 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: O CCUPANT / W ITNESS A DDENDUM LOCAL REPORT NUMBER
+     2: 08-0079-01
+     3: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+     4: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+     5: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+     6: TAKEN DOT-COMPLIANT POSITION
+     7: BY MC HELMET
+     8: TNAPUCCO
+     9: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+    10: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    11: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    12: TAKEN DOT-COMPLIANT POSITION
+    13: BY MC HELMET
+    14: TNAPUCCO
+    15: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+    16: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    17: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    18: TAKEN DOT-COMPLIANT POSITION
+    19: BY MC HELMET
+    20: TNAPUCCO
+    21: UNIT # NAME: LAST, FIRST, MIDDLE DATE OF BIRTH AGE GENDER
+    22: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    23: INJURIES INJURED EMS AGENCY (NAME) INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY) SAFETY EQUIPMENT SEATING AIR BAG USAGE EJECTION TRAPPED
+    24: TAKEN DOT-COMPLIANT POSITION
+    25: BY MC HELMET
+    26: TNAPUCCO
+    27: INJURIES SAFETY EQUIPMENT USED SEATING POSITION AIR BAG USAGE
+    28: 1 - FATAL 1 - NONE USED - 1 - FRONT - LEFT SIDE 1 - NOT DEPLOYED
+    29: VEHICLE OCCUPANT (MOTORCYCLE DRIVER)
+    30: 2 - SUSPECTED SERIOUS INJURY 2 - DEPLOYED FRONT
+    31: 2 - FRONT - MIDDLE
+    32: 2 - SHOULDER BELT ONLY USED
+    33: 3 - SUSPECTED MINOR INJURY 3 - FRONT - RIGHT SIDE 3 - DEPLOYED SIDE
+    34: 3 - LAP BELT ONLY USED
+    35: 4 - POSSIBLE INJURY 4 - SECOND - LEFT SIDE 4 - DEPLOYED BOTH
+    36: 5 - NO APPARENT INJURY 4 - SHOULDER & LAP BELT USED (MOTORCYCLE PASSENGER) FRONT/SIDE
+    37: 5 - CHILD RESTRAINT SYSTEM - 5 - SECOND - MIDDLE 5 - NOT APPLICABLE
+    38: INJURED TAKEN BY FORWARD FACING 6 - SECOND - RIGHT SIDE
+    39: 9 - DEPLOYMENT UNKNOWN
+    40: 1 - NOT TRANSPORTED / 6 - CHILD RESTRAINT SYSTEM - 7 - THIRD - LEFT SIDE
+    41: TREATED AT SCENE REAR FACING (MOTORCYCLE SIDE CAR) EJECTION
+    42: 8 - THIRD - MIDDLE
+    43: 2 - EMS 7 - BOOSTER SEAT 1 - NOT EJECTED
+    44: 9 - THIRD - RIGHT SIDE
+    45: 3 - POLICE 8 - HELMET USED 10 - SLEEPER SECTION OF TRUCK CAB 2 - PARTIALLY EJECTED
+    46: 9 - OTHER / UNKNOWN 9 - PROTECTIVE PADS USED 11 - PASSENGER IN OTHER ENCLOSED 3 - TOTALLY EJECTED
+    47: (ELBOWS, KNEES, ETC) CARGO AREA (NON-TRAILING UNIT 4 - NOT APPLICABLE
+    48: GENDER
+    49: 10 - REFLECTIVE CLOTHING SUCH AS A BUS, PICK-UP WITH CAP)
+    50: F - FEMALE 12 - PASSENGER IN UNENCLOSED TRAPPED
+    51: 11 - LIGHTING - PEDESTRIAN
+    52: CARGO AREA
+    53: M - MALE / BICYCLE ONLY 13 - TRAILING UNIT 1 - NOT TRAPPED
+    54: U - OTHER / UNKNOWN 99 - OTHER / UNKNOWN 14 - RIDING ON VEHICLE EXTERIOR 2 - EXTRICATED BY
+    55: MECHANICAL MEANS
+    56: (NON-TRAILING UNIT)
+    57: 15 - NON-MOTORIST 3 - FREED BY
+    58: 99 - OTHER / UNKNOWN NON-MECHANICAL MEANS
+    59: NAME: LAST, FIRST, MIDDLE
+    60: SSENTIW
+    61: DATE OF BIRTH AGE GENDER
+    62: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    63: NAME: LAST, FIRST, MIDDLE
+    64: SSENTIW
+    65: DATE OF BIRTH AGE GENDER
+    66: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    67: NAME: LAST, FIRST, MIDDLE
+    68: SSENTIW
+    69: DATE OF BIRTH AGE GENDER
+    70: ADDRESS: STREET, CITY, STATE, ZIP CONTACT PHONE - INCLUDE AREA CODE
+    71: PAGE 4 OF 4
+
+✅ TOTAL: 331 lines from 4 pages
+
+====================================================================================================
+📗 METHOD 3: pdfplumber COORDINATE-BASED (extract_words) - PAGE 1
+====================================================================================================
+✅ Extracted 1000 words with coordinates
+
+First 100 words with positions:
+    1: 'T' at x=83.4, y=13.3
+    2: 'RAFFIC' at x=92.2, y=16.4
+    3: 'C' at x=131.9, y=13.3
+    4: 'RASH' at x=141.3, y=16.4
+    5: 'R' at x=174.1, y=13.3
+    6: 'EPORT' at x=183.9, y=16.4
+    7: '*DENOTES' at x=245.1, y=18.6
+    8: 'MANDATORY' at x=272.3, y=18.6
+    9: 'FIELD' at x=307.2, y=18.6
+   10: 'FOR' at x=322.0, y=18.6
+   11: 'SUPPLEMENT' at x=333.7, y=18.6
+   12: 'REPORT' at x=368.1, y=18.6
+   13: 'LOCAL' at x=459.4, y=17.7
+   14: 'REPORT' at x=479.7, y=17.7
+   15: 'NUMBER' at x=504.1, y=17.7
+   16: '*' at x=531.5, y=17.7
+   17: 'XPHOTOS' at x=23.3, y=32.6
+   18: 'TAKEN' at x=57.5, y=34.4
+   19: 'XOH' at x=94.2, y=30.0
+   20: '-2' at x=114.3, y=31.3
+   21: 'XOH' at x=131.9, y=30.0
+   22: '-3' at x=152.0, y=31.3
+   23: 'LOCAL' at x=168.6, y=27.9
+   24: 'INFORMATION' at x=188.0, y=27.9
+   25: 'P23013000000287' at x=237.2, y=31.3
+   26: '08-0079-01' at x=470.7, y=26.5
+   27: 'OH-1P' at x=103.9, y=44.1
+   28: 'OTHER' at x=141.6, y=44.1
+   29: 'REPORTING' at x=167.4, y=42.5
+   30: 'AGENCY' at x=202.7, y=42.5
+   31: 'NAME' at x=228.1, y=42.5
+   32: '*' at x=247.7, y=42.5
+   33: 'NCIC' at x=355.9, y=42.5
+   34: '*' at x=371.7, y=42.5
+   35: 'HIT/SKIP' at x=417.2, y=42.5
+   36: 'NUMBER' at x=458.6, y=42.0
+   37: 'OF' at x=486.0, y=42.8
+   38: 'UNITS' at x=494.1, y=42.0
+   39: 'UNIT' at x=532.0, y=41.1
+   40: 'IN' at x=548.1, y=41.8
+   41: 'ERROR' at x=555.3, y=41.1
+   42: 'SECONDARY' at x=32.9, y=50.1
+   43: 'CRASH' at x=68.5, y=50.1
+   44: 'PRIVATE' at x=103.0, y=56.1
+   45: 'PROPERTY' at x=127.0, y=56.1
+   46: 'Ohio' at x=167.5, y=54.9
+   47: 'State' at x=182.1, y=54.9
+   48: 'Highway' at x=197.1, y=54.9
+   49: 'Patrol' at x=221.7, y=54.9
+   50: 'OHP08' at x=352.5, y=54.0
+   51: '1' at x=418.0, y=49.8
+   52: '2' at x=418.0, y=57.1
+   53: '-' at x=422.4, y=49.8
+   54: '-' at x=422.4, y=57.1
+   55: 'S' at x=426.1, y=49.8
+   56: 'U' at x=426.1, y=57.1
+   57: 'O' at x=429.0, y=49.8
+   58: 'N' at x=429.9, y=57.1
+   59: 'L' at x=433.2, y=49.8
+   60: 'S' at x=434.0, y=57.1
+   61: 'V' at x=435.8, y=49.8
+   62: 'O' at x=436.9, y=57.1
+   63: 'E' at x=439.2, y=49.8
+   64: 'L' at x=441.1, y=57.1
+   65: 'D' at x=442.0, y=49.8
+   66: 'VED' at x=443.7, y=57.1
+   67: '1' at x=482.1, y=52.6
+   68: '98' at x=523.0, y=52.4
+   69: '9' at x=540.1, y=50.3
+   70: '9' at x=540.1, y=57.6
+   71: '8' at x=543.0, y=50.3
+   72: '9' at x=543.0, y=57.6
+   73: '-' at x=547.5, y=50.3
+   74: '-' at x=547.5, y=57.6
+   75: 'A' at x=551.2, y=50.3
+   76: 'U' at x=551.2, y=57.6
+   77: 'N' at x=554.7, y=50.3
+   78: 'N' at x=555.0, y=57.6
+   79: 'I' at x=558.9, y=50.3
+   80: 'K' at x=559.1, y=57.6
+   81: 'M' at x=560.3, y=50.3
+   82: 'N' at x=562.3, y=57.6
+   83: 'A' at x=565.3, y=50.3
+   84: 'O' at x=566.4, y=57.6
+   85: 'L' at x=568.8, y=50.3
+   86: 'WN' at x=570.5, y=57.6
+   87: 'COUNTY*' at x=20.7, y=68.6
+   88: 'LOCALITY*' at x=55.7, y=68.6
+   89: 'LOCATION:' at x=127.1, y=69.2
+   90: 'CITY,' at x=160.6, y=70.0
+   91: 'VILLAGE,' at x=172.9, y=70.0
+   92: 'TOWNSHIP*' at x=193.6, y=69.2
+   93: 'CRASH' at x=418.7, y=69.6
+   94: 'DATE' at x=440.2, y=69.6
+   95: '/' at x=457.2, y=69.6
+   96: 'TIME*' at x=461.5, y=69.6
+   97: 'CRASH' at x=519.2, y=69.2
+   98: 'SEVERITY' at x=540.7, y=69.2
+   99: '1' at x=79.6, y=73.7
+  100: '-' at x=84.1, y=73.7
+
+🔍 Searching for key terms:
+  ✅ 'LOCAL': Found 3 times at [(459.36, 17.652000000000044), (168.624, 27.875999999999976), (55.656, 68.62800000000004)]
+  ✅ 'INFORMATION': Found 1 times at [(188.004, 27.875999999999976)]
+  ✅ 'REPORT': Found 5 times at [(368.09, 18.622999999999934), (479.652, 17.652000000000044), (167.4, 42.49199999999996), (53.663999999999994, 691.644), (527.184, 691.932)]
+  ✅ 'NUMBER': Found 9 times at [(504.06, 17.652000000000044), (458.568, 41.98799999999994), (515.016, 191.10000000000002), (170.148, 208.668), (169.5, 220.764)]
+  ❌ 'OWNER': NOT FOUND
+  ✅ 'NAME': Found 5 times at [(228.144, 42.49199999999996), (219.29399999999998, 98.14800000000002), (221.58, 128.31600000000003), (219.726, 723.108), (410.094, 722.46)]
+  ✅ 'UNIT': Found 3 times at [(494.058, 41.98799999999994), (532.008, 41.05200000000002), (22.464, 486.411)]
+  ❌ 'INJURIES': NOT FOUND
+
+====================================================================================================
+📕 METHOD 4: PyMuPDF (fitz) - ALL PAGES
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 1 - 284 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: LOCAL INFORMATION
+     2: P23013000000287
+     3:  TRAFFIC CRASH REPORT
+     4: *DENOTES MANDATORY FIELD FOR SUPPLEMENT REPORT
+     5: LOCAL REPORT NUMBER *
+     6: 08-0079-01
+     7: X
+     8: PHOTOS TAKEN
+     9: OH -2
+    10: OH-1P
+    11: X
+    12: OH -3
+    13: OTHER
+    14: X
+    15: PRIVATE PROPERTY
+    16: SECONDARY CRASH
+    17: REPORTING AGENCY NAME *
+    18: Ohio State Highway Patrol
+    19: NCIC *
+    20: OHP08
+    21: 1
+    22: NUMBER OF UNITS
+    23: 98 - ANIMAL
+    24: 99 - UNKNOWN
+    25: 98
+    26: UNIT IN ERROR
+    27: 5
+    28: 1 - FATAL
+    29: 2 - SERIOUS INJURY 
+    30:      SUSPECTED
+    31: 3 - MINOR INJURY 
+    32:      SUSPECTED
+    33: 4 - INJURY POSSIBLE
+    34: 5 - PROPERTY DAMAGE 
+    35:      ONLY
+    36: CRASH SEVERITY
+    37: HIT/SKIP
+    38: 1 - SOLVED
+    39: 2 - UNSOLVED
+    40: COUNTY*
+    41: 1
+    42: 1 - CITY
+    43: 2 - VILLAGE
+    44: 3 - TOWNSHIP
+    45: LOCALITY*
+    46: 3
+    47: LOCATION: CITY, VILLAGE, TOWNSHIP*
+    48: Liberty (Township of)
+    49: CRASH DATE / TIME*
+    50: 01/30/2023 05:30
+    51: LATITUDE DECIMAL DEGREES
+    52: 38.801997
+    53: -83.603487
+    54: LONGITUDE DECIMAL DEGREES
+    55: REFERENCE ROAD NAME (ROAD, MILEPOST, HOUSE #)
+    56: 9
+    57: ROUTE TYPE
+    58: LOCATION ROAD NAME
+    59: 0.40
+    60: DISTANCE
+    61: FROM REFERENCE
+    62: REFERENCE POINT
+    63: 2
+    64: 1 - INTERSECTION
+    65: 3 - HOUSE #
+    66: 2 - MILE POST
+    67: DIRECTION
+    68: 2
+    69: FROM REFERENCE
+    70: 1 - NORTH
+    71: 2 - SOUTH
+    72: 3 - EAST
+    73: 4 - WEST
+    74: ROUTE  TYPE
+    75: IR - INTERSTATE ROUTE (TP)
+    76: US - FEDERAL US ROUTE
+    77: SR - STATE ROUTE
+    78: CR - NUMBERED COUNTY ROUTE
+    79: TR - NUMBERED TOWNSHIP
+    80:         ROUTE
+    81: 1 - MILES
+    82: 2 - FEET
+    83: 3 - YARDS
+    84: DISTANCE
+    85: UNIT OF MEASURE
+    86: 1
+    87: ROAD  TYPE
+    88: AV - AVENUE
+    89: AL - ALLEY
+    90: BL - BOULEVARD
+    91: CT - COURT
+    92: CR - CIRCLE
+    93: DR - DRIVE
+    94: HW - HIGHWAY
+    95: HE - HEIGHTS
+    96: LA - LANE
+    97: PK - PARKWAY
+    98: MP - MILEPOST
+    99: PI - PIKE
+   100: RD - ROAD
+   101: PL - PLACE
+   102: SQ - SQUARE
+   103: TE - TERRACE
+   104: ST - STREET
+   105: TL - TRAIL
+   106: WA - WAY
+   107: OV  - OVAL
+   108: ROADWAY
+   109: INTERSECTION RELATED
+   110: WITHIN INTERSECTION OR ON APPROACH
+   111: WITHIN INTERCHANGE AREA
+   112: NUMBER OF APPROACHES
+   113: ROADWAY DIVIDED
+   114: 1
+   115: LOCATION OF FIRST HARMFUL EVENT
+   116: 1 - ON ROADWAY
+   117: 2 - ON  SHOULDER
+   118: 3 - IN MEDIAN
+   119: 4 - ON ROADSIDE
+   120: 5 - ON GORE
+   121: 6 - OUTSIDE TRAFFIC WAY
+   122: 7 - ON RAMP
+   123: 8 - OFF RAMP
+   124: 9 - CROSSOVER
+   125: 10 - DRIVEWAY/ALLEY ACCESS
+   126: 11 - RAILWAY GRADE CROSSING
+   127: 12 - SHARED USE PATHS OR 
+   128:       TRAILS
+   129: 13 - BIKE LANE
+   130: 14 - TOLL BOOTH
+   131: 99 - OTHER / UNKNOWN
+   132: DIRECTION OF TRAVEL
+   133: 1 - NORTH
+   134: 2 - SOUTH
+   135: 3 - EAST
+   136: 4 - WEST
+   137: MANNER OF CRASH COLLISION/IMPACT
+   138: 1
+   139: 1 - NOT COLLISION 
+   140:      BETWEEN
+   141:      TWO MOTOR 
+   142:      VEHICLES IN
+   143:      TRANSPORT
+   144: 2 - REAR-END
+   145: 3 - HEAD-ON
+   146: 4 - REAR-TO-REAR
+   147: 5 - BACKING
+   148: 6 - ANGLE
+   149: 7 - SIDESWIPE, SAME DIRECTION
+   150: 8 - SIDESWIPE, OPPOSITE DIRECTION
+   151: 9 - OTHER / UNKNOWN
+   152: CONTOUR
+   153: 2
+   154: 4 - CURVE GRADE
+   155: 3 - CURVE LEVEL
+   156: 2 - STRAIGHT
+   157: GRADE
+   158: 1 - STRAIGHT
+   159: LEVEL
+   160: 9 - OTHER 
+   161:       /UNKNOWN
+   162: WORKERS PRESENT
+   163: LAW ENFORCEMENT PRESENT
+   164: WORK ZONE RELATED
+   165: WORK ZONE TYPE
+   166: 3 - WORK ON SHOULDER
+   167: OR MEDIAN
+   168: 1 - LANE CLOSURE
+   169: 2 - LANE SHIFT/ CROSSOVER
+   170: 4 - INTERMITTENT OR MOVING WORK
+   171: 5 - OTHER
+   172: LOCATION OF CRASH IN WORK ZONE
+   173: 3 - TRANSITION  AREA
+   174: 1 - BEFORE THE 1ST WORK ZONE
+   175: WARNING SIGN
+   176: 2 - ADVANCE WARNING AREA
+   177: 4 - ACTIVITY AREA
+   178: 5 - TERMINATION AREA
+   179: ACTIVE SCHOOL ZONE 
+   180: LIGHT CONDITION
+   181: 4
+   182: 1 - DAYLIGHT
+   183: 2 - DAWN/DUSK
+   184: 3 - DARK - LIGHTED ROADWAY
+   185: 4 - DARK -  ROADWAY NOT LIGHTED
+   186: 5 - DARK - UNKNOWN  ROADWAY  LIGHTING
+   187: 9 - OTHER / UNKNOWN
+   188: WEATHER
+   189: 2
+   190: 1 - CLEAR
+   191: 2 - CLOUDY
+   192: 3 - FOG, SMOG, SMOKE
+   193: 4 - RAIN
+   194: 5 - SLEET, HAIL
+   195: 6 - SNOW
+   196: 7 - SEVERE CROSSWINDS
+   197: 8 - BLOWING SAND, SOIL, DIRT, SNOW
+   198: 99 - OTHER / UNKNOWN
+   199: 9 - FREEZING RAIN OR FREEZING DRIZZLE
+   200: MEDIAN TYPE
+   201: 1 - DIVIDED FLUSH MEDIAN
+   202: ( <4 FEET )
+   203: 2 - DIVIDED FLUSH MEDIAN
+   204: ( ≥4 FEET )
+   205: 3 - DIVIDED, DEPRESSED MEDIAN
+   206: 4 - DIVIDED, RAISED MEDIAN
+   207: (ANY TYPE)
+   208: 9 - OTHER / UNKNOWN
+   209: CONDITIONS
+   210: 2
+   211: 1 - DRY
+   212: 2 - WET
+   213: 3 - SNOW
+   214: 4 - ICE
+   215: 5 - SAND, MUD, DIRT,
+   216:       OIL, GRAVEL
+   217: 6 - WATER (STANDING,
+   218:       MOVING)
+   219: 7 - SLUSH
+   220: 9 - OTHER / UNKNOWN
+   221: SURFACE
+   222: 2
+   223: 1 - CONCRETE
+   224: 2 - BLACKTOP, 
+   225:      BITUMINOUS,
+   226:      ASPHALT
+   227: 3 - BRICK/BLOCK
+   228: 4 - SLAG , GRAVEL,
+   229:       STONE
+   230: 5 - DIRT
+   231: 9 - OTHER 
+   232:      / UNKNOWN
+   233:  NARRATIVE
+   234: Unit #1 was traveling northbound on State Route 136 and struck a deer attempting 
+   235: to cross the roadway.
+   236: REPORT TAKEN BY
+   237: X POLICE AGENCY
+   238: MOTORIST
+   239: SUPPLEMENT
+   240: (CORRECTION OR ADDITION
+   241: TO AN EXISTING REPORT SENT TO 
+   242: ODPS)
+   243: CRASH REPORTED DATE / TIME
+   244: 01/30/2023 05:34
+   245: DISPATCH DATE / TIME
+   246: 01/30/2023 05:34
+   247: SCENE CLEARED DATE / TIME
+   248: 01/30/2023 07:29
+   249: OTHER
+   250: INVESTIGATION TIME
+   251: TOTAL
+   252: MINUTES
+   253: 115
+   254: OFFICER'S NAME*
+   255: Timberlake, Nathan
+   256: OFFICER'S BADGE NUMBER*
+   257: 0490
+   258: ARRIVAL DATE / TIME
+   259: 01/30/2023 07:08
+   260: CHECKED BY OFFICER'S NAME*
+   261: Fox, Anthony
+   262: TOTAL TIME 
+   263: ROADWAY CLOSED
+   264: CHECKED BY OFFICER'S BADGE NUMBER*
+   265: 1235
+   266: LOCATION
+   267: REFERENCE
+   268: ROUTE NUMBER
+   269: PREFIX 1 - NORTH
+   270: 2 - SOUTH
+   271: 3 - EAST
+   272: 4 - WEST
+   273: MP
+   274: ROAD TYPE
+   275: SR
+   276: ROUTE TYPE ROUTE NUMBER
+   277: 136
+   278: PREFIX 1 - NORTH
+   279: 2 - SOUTH
+   280: 3 - EAST
+   281: 4 - WEST
+   282: ROAD TYPE
+   283: PAGE 1 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 2 - 437 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: VEHICLE
+     2: DEFECTS
+     3: 1 - TURN SIGNALS
+     4: 3 - TAIL LAMPS
+     5: 2 - HEAD LAMPS
+     6: 4 - BRAKES
+     7: 5 - STEERING
+     8: 6 - TIRE BLOWOUT
+     9: 8 - TRAILER EQUIPMENT
+    10:       DEFECTIVE
+    11: 7 - WORN OR SLICK  TIRES
+    12: 9 - MOTOR TROUBLE
+    13: 10 - DISABLED FROM PRIOR 
+    14:       ACCIDENT
+    15: 99 - OTHER / UNKNOWN
+    16: OWNER NAME: LAST, FIRST, MIDDLE (       SAME AS DRIVER)
+    17: FLINDERS, LARRY
+    18: UNIT #
+    19: 1
+    20: LP STATE
+    21: KY
+    22: LICENSE PLATE #
+    23: 2802GB
+    24: VEHICLE IDENTIFICATION #
+    25: 3C6UR5FL6MG630586
+    26: # OCCUPANTS
+    27: 1
+    28: VEHICLE MAKE
+    29: RAM
+    30: COLOR
+    31: BLK
+    32: DAMAGE SCALE
+    33: 1 - NONE
+    34: 3
+    35: 2 - MINOR DAMAGE
+    36: 3 - FUNCTIONAL DAMAGE
+    37: 4 - DISABLING DAMAGE
+    38: 9 - UNKNOWN
+    39: DAMAGED AREA(S)
+    40: INDICATE ALL THAT APPLY
+    41: - NO DAMAGE [ 0 ]
+    42: - TOP [ 13 ]
+    43: - UNIT NOT AT SCENE [ 16 ]
+    44: - UNDERCARRIAGE [ 14 ]
+    45: - ALL AREAS [ 15 ]
+    46: US DOT #
+    47: VEHICLE WEIGHT GVWR/GCWR
+    48: 1 - ≤10K LBS.
+    49: 3 - > 26K LBS.
+    50: 2 - 10,001 - 26K LBS.
+    51: HAZARDOUS MATERIAL
+    52: MATERIAL
+    53: RELEASED
+    54: PLACARD
+    55: CLASS #
+    56: PLACARD ID #
+    57: NON-
+    58: MOTORIST
+    59: LOCATION
+    60: 1 - INTERSECTION -  
+    61:       MARKED CROSSWALK
+    62: 3 - INTERSECTION - OTHER
+    63: 2 - INTERSECTION - 
+    64: UNMARKED CROSSWALK
+    65: 6 - BICYCLE LANE
+    66: 8 - SIDEWALK
+    67: 7 - SHOULDER/ROADSIDE
+    68: 9 - MEDIAN/CROSSING
+    69:      ISLAND
+    70: 10 - DRIVEWAY ACCESS
+    71: 11 - SHARED USE PATHS
+    72:       OR TRAILS
+    73: 99 - OTHER / UNKNOWN
+    74: 4 - MIDBLOCK - 
+    75:      MARKED  CROSSWALK
+    76: 5 - TRAVEL LANE - 
+    77: OTHER LOCATION
+    78: 12 - FIRST RESPONDER
+    79:       AT INCIDENT SCENE
+    80: TYPE OF USE
+    81: COMMERCIAL
+    82: GOVERNMENT
+    83: IN EMERGENCY
+    84: RESPONSE
+    85: UNIT TYPE
+    86: 4
+    87: 1 - PASSENGER CAR
+    88: 3 - SPORT UTILITY
+    89:       VEHICLE
+    90: 2 - PASSENGER VAN
+    91:       (MINIVAN)
+    92: 4 - PICK UP
+    93: 5 - CARGO VAN
+    94: 6 - VAN (9-15 SEATS)
+    95: 8 - MOTORCYCLE 3-WHEELED
+    96: 7 - MOTORCYCLE 2-WHEELED
+    97: 9 - AUTOCYCLE
+    98: 10 - MOPED OR MOTORIZED         
+    99:       BICYCLE
+   100: 11 - ALL TERRAIN VEHICLE              
+   101: (ATV/UTV)
+   102: # OF TRAILING UNITS
+   103: 12 - GOLF CART
+   104: 14 - SINGLE UNIT 
+   105:       TRUCK
+   106: 13 - SNOWMOBILE
+   107: 16 - FARM EQUIPMENT
+   108: 15 - SEMI-TRACTOR
+   109: 17 - MOTORHOME
+   110: 18 - LIMO (LIVERY VEHICLE)
+   111: 20 - OTHER VEHICLE
+   112: 19 - BUS (16+ PASSENGERS)
+   113: 22 - ANIMAL WITH RIDER OR
+   114:       ANIMAL-DRAWN VEHICLE
+   115: 21 - HEAVY EQUIPMENT
+   116: 23 - PEDESTRIAN/SKATER
+   117: 25 - OTHER NON-MOTORIST
+   118: 24 - WHEELCHAIR (ANY TYPE)
+   119: 27 - TRAIN
+   120: 26 - BICYCLE
+   121: 99 - UNKNOWN OR HIT/SKIP
+   122: SPECIAL 
+   123: FUNCTION
+   124: 1
+   125: 1 - NONE
+   126: 3 - ELECTRONIC RIDE
+   127: SHARING
+   128: 2 - TAXI
+   129: 4 - SCHOOL TRANSPORT
+   130: 5 - BUS - TRANSIT/COMMUTER
+   131: 6 - BUS -  CHARTER/TOUR
+   132: 9 - BUS -  OTHER
+   133: 8 - BUS - SHUTTLE
+   134: 10 - AMBULANCE
+   135: 11 - FIRE
+   136: 12 - MILITARY
+   137: 13 - POLICE
+   138: 14 - PUBLIC UTILITY
+   139: 15 - CONSTRUCTION EQUIP.
+   140: 17 - MOWING
+   141: 16 - FARM 
+   142: 18 - SNOW REMOVAL
+   143: 19 - TOWING
+   144: 20 - SAFETY SERVICE
+   145:       PATROL
+   146: 99 - OTHER / UNKNOWN
+   147: 7 - BUS - INTERCITY
+   148: 21 - MAIL CARRIER
+   149: 1
+   150: PRE-CRASH
+   151: ACTIONS
+   152: 14 - ENTERING OR CROSSING
+   153:        SPECIFIED LOCATION
+   154: 15 - WALKING, RUNNING,
+   155:        JOGGING, PLAYING
+   156: 17 - PUSHING VEHICLE
+   157: 16 - WORKING
+   158: 18 - APPROACHING OR 
+   159:        LEAVING VEHICLE
+   160: 19 - STANDING
+   161: 20 - OTHER NON-MOTORIST
+   162: 13 - NEGOTIATING A CURVE
+   163: 1 - STRAIGHT AHEAD
+   164: 6 - MAKING LEFT TURN
+   165: 5 - MAKING RIGHT TURN
+   166: 3 - CHANGING LANES
+   167: 2 - BACKING
+   168: ACTION
+   169: 3
+   170: 1 - NON-CONTACT
+   171: 3 - STRIKING
+   172: 2 - NON-COLLISION
+   173: 4 - STRUCK
+   174: 5 - BOTH STRIKING        
+   175:   & STRUCK
+   176: 9 - OTHER / UNKNOWN
+   177: 7 - MAKING U-TURN
+   178: 8 - ENTERING  TRAFFIC
+   179:      LANE
+   180: 9 - LEAVING TRAFFIC
+   181:      LANE
+   182: 10 - PARKED
+   183: 11 - SLOWING OR STOPPED     
+   184:       IN TRAFFIC
+   185: 12 - DRIVERLESS
+   186: 4 - OVERTAKING/PASSING
+   187: 21 - STANDING OUTSIDE
+   188:        DISABLED VEHICLE
+   189: 99 - OTHER / UNKNOWN
+   190: 1
+   191: CONTRIBUTING 
+   192: CIRCUMSTANCES
+   193: 1 - NONE
+   194: 3 - RAN RED LIGHT
+   195: 2 - FAILURE  TO YIELD
+   196: 4 - RAN  STOP SIGN
+   197: 5 - UNSAFE SPEED
+   198: 7 - LEFT OF CENTER
+   199: 6 - IMPROPER  TURN
+   200: 8 - FOLLOWING TOO CLOSE
+   201:       /ACDA
+   202: 9 - IMPROPER LANE
+   203:      CHANGE
+   204: 12 - IMPROPER BACKING
+   205: 13 - IMPROPER START FROM 
+   206:       A PARKED POSITION
+   207: 14 - STOPPED OR PARKED 
+   208:        ILLEGALLY
+   209: 15 - SWERVING TO  AVOID
+   210: 16 - WRONG WAY
+   211: 17 - VISION OBSTRUCTION
+   212: 18 - OPERATING DEFECTIVE 
+   213:        EQUIPMENT
+   214: 19 - LOAD SHIFTING
+   215:        /FALLING/SPILLING
+   216: 99 - OTHER IMPROPER
+   217:        ACTION
+   218: 20 - IMPROPER CROSSING
+   219: 21 - LYING IN ROADWAY
+   220: 10 - IMPROPER PASSING
+   221: 11 - DROVE OFF ROAD
+   222: 22 - NOT DISCERNIBLE
+   223: 23 - OPENING DOOR INTO
+   224:        ROADWAY
+   225: SEQUENCE OF EVENTS
+   226: 18
+   227: 1
+   228: 1
+   229: 1
+   230: FIRST HARMFUL EVENT
+   231: MOST HARMFUL EVENT
+   232: 1 - OVERTURN/ROLLOVER
+   233: 3 - IMMERSION
+   234: 2 - FIRE/EXPLOSION
+   235: 4 - JACKKNIFE
+   236: 5 - CARGO / EQUIPMENT
+   237:      LOSS OR SHIFT
+   238: 6 - EQUIPMENT FAILURE
+   239: 8 - RAN OFF ROAD RIGHT
+   240: 7 - SEPARATION OF UNITS
+   241: 9 - RAN OFF ROAD LEFT
+   242: 10 - CROSS MEDIAN
+   243: 11 - CROSS CENTERLINE -
+   244:       OPPOSITE DIRECTION
+   245:       OF TRAVEL
+   246: 12 - DOWNHILL RUNAWAY
+   247: 13 - OTHER NON-COLLISION
+   248: 14 - PEDESTRIAN
+   249: 16 - RAILWAY VEHICLE
+   250: 15 - PEDALCYCLE
+   251: 17 - ANIMAL -  FARM
+   252: 18 - ANIMAL - DEER
+   253: 19 - ANIMAL -OTHER
+   254: 20 - MOTOR VEHICLE IN
+   255:        TRANSPORT
+   256: 21 - PARKED MOTOR
+   257:        VEHICLE
+   258: 23 - STRUCK BY FALLING,
+   259:       SHIFTING CARGO OR 
+   260:       ANYTHING SET IN
+   261:       MOTION BY A MOTOR
+   262:       VEHICLE
+   263: 22 - WORK ZONE 
+   264:       MAINTENANCE
+   265:       EQUIPMENT
+   266: 24 - OTHER MOVABLE
+   267:       OBJECT
+   268: EVENTS
+   269: 25 - IMPACT ATTENUATOR
+   270:        / CRASH CUSHION
+   271: 27 - BRIDGE PIER OR 
+   272:        ABUTMENT
+   273: 26 - BRIDGE OVERHEAD
+   274:        STRUCTURE
+   275: 28 - BRIDGE  PARAPET
+   276: 29 - BRIDGE RAIL
+   277: 30 - GUARDRAIL FACE
+   278: 32 - PORTABLE BARRIER
+   279: 31 - GUARDRAIL END
+   280: 33 - MEDIAN CABLE BARRIER
+   281: 35 - MEDIAN CONCRETE 
+   282:       BARRIER
+   283: 34 - MEDIAN GUARDRAIL 
+   284:       BARRIER
+   285: 36 - MEDIAN OTHER BARRIER
+   286: 37 - TRAFFIC SIGN POST
+   287: 38 - OVERHEAD SIGN POST
+   288: 40 - UTILITY POLE
+   289: 39 - LIGHT / LUMINARIES
+   290:        SUPPORT
+   291: 41 - OTHER POST, POLE
+   292:        OR SUPPORT
+   293: 43 - CURB
+   294: 42 - CULVERT
+   295: 44 - DITCH
+   296: 45 - EMBANKMENT
+   297: 46 - FENCE
+   298: 47 - MAILBOX
+   299: 48 - TREE
+   300: 50 - WORK ZONE
+   301:       MAINTENANCE
+   302:       EQUIPMENT
+   303: 49 - FIRE HYDRANT
+   304: 54 - OTHER FIXED
+   305:       OBJECT
+   306: COLLISION WITH FIXED OBJECT - STRUCK
+   307: 2
+   308: 3
+   309: 4
+   310: 5
+   311: 6
+   312: 51 - WALL
+   313: 52 - BUILDING
+   314: 53 - TUNNEL
+   315: 99 - OTHER / UNKNOWN
+   316: DETECTED SPEED
+   317: 1
+   318: 1 - STATED / ESTIMATED SPEED
+   319: 2 - CALCULATED / EDR
+   320: 3 - UNDETERMINED
+   321: UNIT SPEED
+   322: 55
+   323: TRAFFIC CONTROL
+   324: 6
+   325: 1 - ROUNDABOUT
+   326: 3 - FLASHER
+   327: 2 - SIGNAL
+   328: 4 - STOP SIGN
+   329: 5 - YIELD SIGN
+   330: 6 - NO CONTROL
+   331: UNIT / NON-MOTORIST DIRECTION
+   332: 2
+   333: 1
+   334: FROM
+   335: TO
+   336: 1 - NORTH
+   337: 3 - EAST
+   338: 2 - SOUTH
+   339: 4 - WEST
+   340: 5 - NORTHEAST
+   341: 7 - SOUTHEAST
+   342: 6 - NORTHWEST
+   343: 8 - SOUTHWEST
+   344: 9 - OTHER / UNKNOWN
+   345: VEHICLE MODEL
+   346: 2500
+   347: INSURANCE
+   348: VERIFIED
+   349: X
+   350: INSURANCE COMPANY
+   351: KENTUCKY FARM BUREAU
+   352: INSURANCE POLICY #
+   353: 0020617408
+   354: TOWED BY: COMPANY NAME
+   355: 2021
+   356: VEHICLE YEAR
+   357: OWNER ADDRESS: STREET, CITY, STATE, ZIP (       SAME AS DRIVER)
+   358: 814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056
+   359: COMMERCIAL CARRIER: NAME, ADDRESS, CITY, STATE, ZIP
+   360: COMMERCIAL CARRIER PHONE: INCLUDE AREA CODE
+   361: D A M A G E
+   362: INTERLOCK 
+   363: DEVICE 
+   364: EQUIPPED
+   365: HIT/SKIP UNIT
+   366: 1
+   367: CARGO
+   368: BODY
+   369: TYPE
+   370: 1 - NO CARGO BODY TYPE
+   371: / NOT APPLICABLE
+   372: 2 - BUS
+   373: 3 - VEHICLE TOWING
+   374:     ANOTHER MOTOR VEHICLE
+   375: 4 - LOGGING
+   376: 5 - INTERMODAL 
+   377: CONTAINER CHASSIS
+   378: 7 - GRAIN/CHIPS/GRAVEL
+   379: 6 - CARGOVAN
+   380:      /ENCLOSED BOX
+   381: 8 - POLE
+   382: 9 - CARGO  TANK
+   383: 10 - FLAT BED
+   384: 11 - DUMP
+   385: 99 - OTHER / UNKNOWN
+   386: 12 - CONCRETE MIXER
+   387: 13 - AUTO TRANSPORTER
+   388: 14 - GARBAGE/REFUSE
+   389: T R A F F I C
+   390: RAIL GRADE CROSSING
+   391: 1 - NOT INVLOVED
+   392: 3 - INVOLVED-PASSIVE CROSSING
+   393: 2 - INVOLVED-ACTIVE CROSSING
+   394: POSTED SPEED
+   395: 55
+   396: TRAFFICWAY FLOW
+   397: 2
+   398: 2 - TWO-WAY
+   399: 1 - ONE-WAY
+   400: # OF THROUGH LANES
+   401: ON ROAD
+   402: 2
+   403: 2
+   404: WAS VEHICLE OPERATING IN AUTONOMOUS 
+   405: MODE WHEN CRASH OCCURRED?
+   406: 0 - NO AUTOMATION
+   407: 1 - YES
+   408: 2 - NO
+   409: 9 - OTHER / UNKNOWN
+   410: 0
+   411: AUTONOMOUS
+   412: MODE LEVEL
+   413: 1 - DRIVER ASSISTANCE
+   414: 2 - PARTIAL AUTOMATION
+   415: 3 - CONDITIONAL AUTOMATION
+   416: 4 - HIGH AUTOMATION
+   417: 5 - FULL AUTOMATION
+   418: 9 - OTHER/UNKNOWN
+   419: INITIAL POINT OF CONTACT
+   420: 0 - NO DAMAGE
+   421: 1-12 - REFER TO UNIT
+   422:           DIAGRAM
+   423: 13 - TOP
+   424: 14 - UNDERCARRIAGE
+   425: 15 - VEHICLE NOT AT SCENE
+   426: 99 - UNKNOWN
+   427: 12
+   428: OWNER PHONE:INCLUDE  AREA  CODE (       SAME AS DRIVER)
+   429: 740-285-2912
+   430: LOCAL REPORT NUMBER
+   431: 08-0079-01
+   432: UNIT
+   433: O W N E R
+   434: V E H I C L E
+   435: E V E N T S (s)
+   436: PAGE 2 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 3 - 367 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: LOCAL REPORT NUMBER
+     2: 08-0079-01
+     3: MOTORIST / NON-MOTORIST
+     4: INJURIES
+     5: 5
+     6: INJURED
+     7: TAKEN
+     8: BY
+     9: 1
+    10: EMS AGENCY (NAME)
+    11: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+    12: SAFETY EQUIPMENT
+    13: USED
+    14: 4
+    15: DOT-COMPLIANT
+    16: MC HELMET
+    17: SEATING
+    18: POSITION
+    19: 1
+    20: AIR BAG USAGE
+    21: 1
+    22: EJECTION
+    23: 1
+    24: TRAPPED
+    25: 1
+    26: ADDRESS: STREET, CITY, STATE, ZIP
+    27: 814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056
+    28: UNIT #
+    29: 1
+    30: NAME: LAST, FIRST, MIDDLE
+    31: FLINDERS, JENNIFER, A
+    32: DATE OF BIRTH
+    33: 07/24/1972
+    34: AGE
+    35: 50
+    36: GENDER
+    37: F
+    38: CONTACT PHONE - INCLUDE AREA CODE
+    39: 740-285-2912
+    40: MOTORIST / NON-MOTORIST
+    41: OL STATE
+    42: KY
+    43: OL CLASS
+    44: 4
+    45: OPERATOR LICENSE NUMBER
+    46: OFFENSE CHARGED
+    47: LOCAL
+    48: CODE
+    49: OFFENSE DESCRIPTION
+    50: CITATION NUMBER
+    51: ENDORSEMENT
+    52: RESTRICTION SELECT UP TO 3
+    53: DRIVER 
+    54: DISTRACTED 
+    55: BY 1
+    56: ALCOHOL / DRUG SUSPECTED
+    57: ALCOHOL
+    58: OTHER DRUG
+    59: MARIJUANA
+    60: CONDITION
+    61: 1
+    62: ALCOHOL TEST
+    63: DRUG TEST(S)
+    64: STATUS
+    65: 1
+    66: TYPE
+    67: 1
+    68: VALUE
+    69: .
+    70: STATUS
+    71: 1
+    72: 1
+    73: TYPE
+    74: RESULTS SELECT UP TO 4
+    75: INJURIES INJURED
+    76: TAKEN
+    77: BY
+    78: EMS AGENCY (NAME)
+    79: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+    80: SAFETY EQUIPMENT
+    81: USED
+    82: DOT-COMPLIANT
+    83: MC HELMET
+    84: SEATING
+    85: POSITION
+    86: AIR BAG USAGE
+    87: EJECTION
+    88: TRAPPED
+    89: ADDRESS: STREET, CITY, STATE, ZIP
+    90: UNIT #
+    91: NAME: LAST, FIRST, MIDDLE
+    92: DATE OF BIRTH
+    93: AGE
+    94: GENDER
+    95: CONTACT PHONE - INCLUDE AREA CODE
+    96: MOTORIST / NON-MOTORIST
+    97: OL STATE
+    98: OL CLASS
+    99: OPERATOR LICENSE NUMBER
+   100: OFFENSE CHARGED
+   101: LOCAL
+   102: CODE
+   103: OFFENSE DESCRIPTION
+   104: CITATION NUMBER
+   105: ENDORSEMENT
+   106: RESTRICTION SELECT UP TO 3
+   107: DRIVER 
+   108: DISTRACTED 
+   109: BY
+   110: ALCOHOL / DRUG SUSPECTED
+   111: ALCOHOL
+   112: OTHER DRUG
+   113: MARIJUANA
+   114: CONDITION
+   115: ALCOHOL TEST
+   116: DRUG TEST(S)
+   117: STATUS
+   118: TYPE
+   119: VALUE
+   120: .
+   121: STATUS
+   122: TYPE
+   123: RESULTS SELECT UP TO 4
+   124: INJURIES INJURED
+   125: TAKEN
+   126: BY
+   127: EMS AGENCY (NAME)
+   128: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+   129: SAFETY EQUIPMENT
+   130: USED
+   131: DOT-COMPLIANT
+   132: MC HELMET
+   133: SEATING
+   134: POSITION
+   135: AIR BAG USAGE
+   136: EJECTION
+   137: TRAPPED
+   138: ADDRESS: STREET, CITY, STATE, ZIP
+   139: UNIT #
+   140: NAME: LAST, FIRST, MIDDLE
+   141: DATE OF BIRTH
+   142: AGE
+   143: GENDER
+   144: CONTACT PHONE - INCLUDE AREA CODE
+   145: MOTORIST / NON-MOTORIST
+   146: OL STATE
+   147: OL CLASS
+   148: OPERATOR LICENSE NUMBER
+   149: OFFENSE CHARGED
+   150: LOCAL
+   151: CODE
+   152: OFFENSE DESCRIPTION
+   153: CITATION NUMBER
+   154: ENDORSEMENT
+   155: RESTRICTION SELECT UP TO 3
+   156: DRIVER 
+   157: DISTRACTED 
+   158: BY
+   159: ALCOHOL / DRUG SUSPECTED
+   160: ALCOHOL
+   161: OTHER DRUG
+   162: MARIJUANA
+   163: CONDITION
+   164: ALCOHOL TEST
+   165: DRUG TEST(S)
+   166: STATUS
+   167: TYPE
+   168: VALUE
+   169: .
+   170: STATUS
+   171: TYPE
+   172: RESULTS SELECT UP TO 4
+   173: 1 - FATAL
+   174: 2 - SUSPECTED SERIOUS
+   175:     INJURY
+   176: 3 - SUSPECTED MINOR 
+   177:     INJURY
+   178: 4 - POSSIBLE INJURY
+   179: 5 - NO APPARENT INJURY
+   180: 1 - CLASS A
+   181: 3 - CLASS C
+   182: 2 - CLASS B
+   183: 4 - REGULAR CLASS
+   184:       (OHIO = D)
+   185: 5 - M/C MOPED ONLY
+   186: 6 - NO VALID OL
+   187: 1 - FRONT - LEFT SIDE
+   188:      (MOTORCYCLE DRIVER)
+   189: 3 - FRONT - RIGHT SIDE
+   190: 2 - FRONT - MIDDLE
+   191: 4 - SECOND - LEFT SIDE
+   192:      (MOTORCYCLE PASSENGER)
+   193: 5 - SECOND - MIDDLE  
+   194: 6 - SECOND - RIGHT SIDE
+   195: 8 - THIRD - MIDDLE
+   196: 7 - THIRD - LEFT SIDE
+   197:      (MOTORCYCLE SIDE CAR)
+   198: 9 - THIRD - RIGHT SIDE
+   199: 10 - SLEEPER SECTION
+   200:        OF TRUCK CAB
+   201: 11 - PASSENGER IN 
+   202:        OTHER ENCLOSED CARGO 
+   203:        AREA (NON-TRAILING UNIT,
+   204:        BUS, PICK-UP WITH CAP)
+   205: 12 - PASSENGER IN
+   206:        UNENCLOSED CARGO AREA
+   207: 13 - TRAILING UNIT
+   208: 14 - RIDING ON VEHICLE
+   209:        EXTERIOR
+   210:        (NON-TRAILING UNIT)
+   211: 15 - NON-MOTORIST
+   212: 99 - OTHER / UNKNOWN
+   213: 1 - NOT DEPLOYED
+   214: 3 - DEPLOYED SIDE
+   215: 2 - DEPLOYED FRONT
+   216: 4 - DEPLOYED BOTH 
+   217:     FRONT/SIDE
+   218: 5 - NOT APPLICABLE
+   219: 9 - DEPLOYMENT UNKNOWN
+   220: 1 - NOT EJECTED
+   221: 2 - PARTIALLY EJECTED
+   222: 3 - TOTALLY EJECTED
+   223: 4 - NOT APPLICABLE
+   224: 1 - NOT TRAPPED
+   225: 3 - FREED BY
+   226:     NON-MECHANICAL MEANS
+   227: 2 - EXTRICATED BY 
+   228:     MECHANICAL MEANS
+   229: INJURIES
+   230: 1 - NONE  USED
+   231: 3 - LAP BELT ONLY USED
+   232: 2 - SHOULDER BELT ONLY
+   233:      USED
+   234: 4 - SHOULDER & LAP BELT
+   235:      USED
+   236: 5 - CHILD RESTRAINT SYSTEM
+   237:      - FORWARD FACING
+   238: 6 - CHILD RESTRAINT SYSTEM
+   239:      - REAR FACING
+   240: 8 - HELMET USED
+   241: 7 - BOOSTER SEAT
+   242: 9 - PROTECTIVE  PADS USED
+   243:       (ELBOWS, KNEES, ETC)
+   244: 10 - REFLECTIVE CLOTHING
+   245: 11 - LIGHTING - PEDESTRIAN
+   246:        / BICYCLE ONLY
+   247: 99 - OTHER / UNKNOWN
+   248: OL CLASS
+   249: SAFETY EQUIPMENT
+   250: SEATING POSITION
+   251: AIR BAG
+   252: TRAPPED
+   253: 1 - NOT TRANSPORTED
+   254:     /TREATED AT SCENE
+   255: 2 - EMS
+   256: 3 - POLICE
+   257: 9 - OTHER / UNKNOWN
+   258: INJURIES TAKEN BY
+   259: OL RESTRICTION(S)
+   260: 1 - ALCOHOL INTERLOCK
+   261:      DEVICE
+   262: 3 - CORRECTIVE LENSES
+   263: 2 - CDL INTRASTATE ONLY
+   264: 4 - FARM WAIVER
+   265: 5 - EXCEPT CLASS A BUS
+   266: 6 - EXCEPT CLASS A 
+   267:       & CLASS B BUS
+   268: 9 - LEARNER'S PERMIT
+   269:      RESTRICTIONS
+   270: 8 - INTERMEDIATE LICENSE
+   271:       RESTRICTIONS
+   272: 7 - EXCEPT TRACTOR-TRAILER
+   273: 10 - LIMITED TO DAYLIGHT
+   274:        ONLY
+   275: 11 - LIMITED TO EMPLOYMENT
+   276: 12 - LIMITED - OTHER
+   277: 13 - MECHANICAL DEVICES
+   278:        (SPECIAL BRAKES, HAND
+   279:        CONTROLS, OR OTHER
+   280:        ADAPTIVE DEVICES)
+   281: 14 - MILITARY VEHICLES ONLY
+   282: 15 - MOTOR VEHICLES 
+   283:        WITHOUT AIR BRAKES
+   284: 16 - OUTSIDE MIRROR
+   285: 17 - PROSTHETIC AID
+   286: 18 - OTHER
+   287: 1 - NOT DISTRACTED
+   288: 3 - TALKING ON HANDS-FREE
+   289:     COMMUNICATION DEVICE
+   290: 2 - MANUALLY OPERATING AN   
+   291:    ELECTRONIC 
+   292:     COMMUNICATION DEVICE
+   293:     (TEXTING, TYPING,
+   294: DIALING)
+   295: 4 - TALKING ON HAND-HELD
+   296:     COMMUNICATION DEVICE
+   297: 5 - OTHER ACTIVITY WITH AN
+   298:     ELECTRONIC DEVICE
+   299: 6 - PASSENGER
+   300: 8 - OTHER DISTRACTION
+   301:     OUTSIDE THE VEHICLE
+   302: 7 - OTHER DISTRACTION
+   303:     INSIDE THE VEHICLE
+   304: 9 - OTHER / UNKNOWN
+   305: DRIVER DISTRACTION
+   306: CONDITION
+   307: 1 - APPARENTLY NORMAL
+   308: 3 - EMOTIONAL (E.G.,
+   309:     DEPRESSED, ANGRY,
+   310:     DISTURBED)
+   311: 2 - PHYSICAL IMPAIRMENT
+   312: 4 - ILLNESS
+   313: 6 - UNDER THE INFLUENCE OF
+   314:     MEDICATIONS / DRUGS /
+   315:     ALCOHOL
+   316: 5 - FELL ASLEEP, FAINTED,
+   317:     FATIGUED, ETC.
+   318: 9 - OTHER / UNKNOWN
+   319: EJECTION
+   320: H - HAZMAT
+   321: P - PASSENGER
+   322: M - MOTORCYCLE
+   323: N - TANKER
+   324: Q - MOTOR SCOOTER
+   325: R - THREE-WHEEL
+   326:      MOTORCYCLE
+   327: S - SCHOOL BUS
+   328: T - DOUBLE & TRIPLE
+   329:     TRAILERS
+   330: X - TANKER / HAZMAT
+   331: OL ENDORSEMENT
+   332: TEST STATUS
+   333: 1 - NONE GIVEN
+   334: 3 - TEST GIVEN,
+   335:      CONTAMINATED SAMPLE
+   336:      / UNUSABLE
+   337: 2 - TEST REFUSED
+   338: 4 - TEST GIVEN,
+   339:      RESULTS KNOWN
+   340: 5 - TEST GIVEN,
+   341:      RESULTS UNKNOWN
+   342: 1 - NONE
+   343: 2 - BLOOD
+   344: 3 - URINE
+   345: 4 - BREATH
+   346: 5 - OTHER
+   347: 1 - NONE
+   348: 2 - BLOOD
+   349: 3 - URINE
+   350: 4 - OTHER
+   351: DRUG TEST TYPE
+   352: 1 - AMPHETAMINES
+   353: 2 - BARBITURATES
+   354: 3 - BENZODIAZEPINES
+   355: 4 - CANNABINOIDS
+   356: 5 - COCAINE
+   357: 6 - OPIATES / OPIOIDS
+   358: 7 - OTHER
+   359: 8 - NEGATIVE RESULTS
+   360: DRUG TEST RESULT(S)
+   361: ALCOHOL TEST TYPE
+   362: GENDER
+   363: F - FEMALE
+   364: M - MALE
+   365: U - OTHER / UNKNOWN
+   366: PAGE 3 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 4 - 187 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: LOCAL REPORT NUMBER
+     2: 08-0079-01
+     3: OCCUPANT / WITNESS ADDENDUM
+     4: INJURIES INJURED
+     5: TAKEN
+     6: BY
+     7: EMS AGENCY (NAME)
+     8: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+     9: SAFETY EQUIPMENT
+    10: DOT-COMPLIANT
+    11: MC HELMET
+    12: SEATING
+    13: POSITION
+    14: AIR BAG USAGE
+    15: EJECTION
+    16: TRAPPED
+    17: ADDRESS: STREET, CITY, STATE, ZIP
+    18: UNIT  #
+    19: NAME: LAST, FIRST, MIDDLE
+    20: DATE OF BIRTH
+    21: AGE
+    22: GENDER
+    23: CONTACT PHONE - INCLUDE AREA CODE
+    24: OCCUPANT
+    25: INJURIES INJURED
+    26: TAKEN
+    27: BY
+    28: EMS AGENCY (NAME)
+    29: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+    30: SAFETY EQUIPMENT
+    31: DOT-COMPLIANT
+    32: MC HELMET
+    33: SEATING
+    34: POSITION
+    35: AIR BAG USAGE
+    36: EJECTION
+    37: TRAPPED
+    38: ADDRESS: STREET, CITY, STATE, ZIP
+    39: UNIT  #
+    40: NAME: LAST, FIRST, MIDDLE
+    41: DATE OF BIRTH
+    42: AGE
+    43: GENDER
+    44: CONTACT PHONE - INCLUDE AREA CODE
+    45: OCCUPANT
+    46: INJURIES INJURED
+    47: TAKEN
+    48: BY
+    49: EMS AGENCY (NAME)
+    50: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+    51: SAFETY EQUIPMENT
+    52: DOT-COMPLIANT
+    53: MC HELMET
+    54: SEATING
+    55: POSITION
+    56: AIR BAG USAGE
+    57: EJECTION
+    58: TRAPPED
+    59: ADDRESS: STREET, CITY, STATE, ZIP
+    60: UNIT  #
+    61: NAME: LAST, FIRST, MIDDLE
+    62: DATE OF BIRTH
+    63: AGE
+    64: GENDER
+    65: CONTACT PHONE - INCLUDE AREA CODE
+    66: OCCUPANT
+    67: INJURIES INJURED
+    68: TAKEN
+    69: BY
+    70: EMS AGENCY (NAME)
+    71: INJURED TAKEN TO: MEDICAL FACILITY (NAME, CITY)
+    72: SAFETY EQUIPMENT
+    73: DOT-COMPLIANT
+    74: MC HELMET
+    75: SEATING
+    76: POSITION
+    77: AIR BAG USAGE
+    78: EJECTION
+    79: TRAPPED
+    80: ADDRESS: STREET, CITY, STATE, ZIP
+    81: UNIT  #
+    82: NAME: LAST, FIRST, MIDDLE
+    83: DATE OF BIRTH
+    84: AGE
+    85: GENDER
+    86: CONTACT PHONE - INCLUDE AREA CODE
+    87: OCCUPANT
+    88: 1 - FATAL
+    89: 2 - SUSPECTED SERIOUS INJURY
+    90: 3 - SUSPECTED MINOR INJURY
+    91: 4 - POSSIBLE INJURY
+    92: 5 - NO APPARENT INJURY
+    93: 1 - NOT TRANSPORTED  /
+    94:     TREATED AT SCENE
+    95: 3 - POLICE
+    96: 2 - EMS
+    97: 9 - OTHER / UNKNOWN
+    98: GENDER
+    99: F - FEMALE
+   100: M - MALE
+   101: U - OTHER / UNKNOWN
+   102: 1 - FRONT - LEFT SIDE
+   103:      (MOTORCYCLE DRIVER)
+   104: 3 - FRONT - RIGHT SIDE
+   105: 2 - FRONT - MIDDLE
+   106: 4 - SECOND - LEFT SIDE
+   107:      (MOTORCYCLE PASSENGER)
+   108: 5 - SECOND - MIDDLE  
+   109: 6 - SECOND - RIGHT SIDE
+   110: 8 - THIRD - MIDDLE
+   111: 7 - THIRD - LEFT SIDE
+   112:     (MOTORCYCLE SIDE CAR)
+   113: 9 - THIRD - RIGHT SIDE
+   114: 10 - SLEEPER SECTION OF TRUCK CAB
+   115: 11 - PASSENGER IN OTHER ENCLOSED
+   116:       CARGO AREA (NON-TRAILING UNIT
+   117:           SUCH AS A BUS, PICK-UP WITH CAP)
+   118: 12 - PASSENGER IN  UNENCLOSED
+   119:       CARGO AREA
+   120: 13 - TRAILING UNIT
+   121: 14 - RIDING ON VEHICLE EXTERIOR
+   122:       (NON-TRAILING UNIT)
+   123: 15 - NON-MOTORIST
+   124: 99 - OTHER / UNKNOWN
+   125: 1 - NOT DEPLOYED
+   126: 3 - DEPLOYED SIDE
+   127: 2 - DEPLOYED FRONT
+   128: 4 - DEPLOYED BOTH
+   129:      FRONT/SIDE
+   130: 5 - NOT APPLICABLE
+   131: 9 - DEPLOYMENT UNKNOWN
+   132: 1 - NOT EJECTED
+   133: 2 - PARTIALLY EJECTED
+   134: 3 - TOTALLY EJECTED
+   135: 4 - NOT APPLICABLE
+   136: 1 - NOT TRAPPED
+   137: 3 - FREED BY
+   138:     NON-MECHANICAL MEANS
+   139: 2 - EXTRICATED BY 
+   140:     MECHANICAL MEANS
+   141: INJURIES
+   142: 99 - OTHER / UNKNOWN
+   143: 1 - NONE  USED - 
+   144:       VEHICLE OCCUPANT
+   145: 3 - LAP BELT ONLY USED
+   146: 2 - SHOULDER BELT ONLY USED
+   147: 4 - SHOULDER & LAP BELT USED
+   148: 5 - CHILD RESTRAINT SYSTEM -
+   149:       FORWARD FACING
+   150: 6 - CHILD RESTRAINT SYSTEM -
+   151:       REAR FACING
+   152: 8 - HELMET USED
+   153: 7 - BOOSTER SEAT
+   154: 9 - PROTECTIVE  PADS USED
+   155:       (ELBOWS, KNEES, ETC)
+   156: 10 - REFLECTIVE CLOTHING
+   157: 11 - LIGHTING - PEDESTRIAN
+   158:        / BICYCLE ONLY
+   159: INJURED TAKEN BY
+   160: SAFETY EQUIPMENT USED
+   161: SEATING POSITION
+   162: AIR BAG USAGE
+   163: EJECTION
+   164: TRAPPED
+   165: NAME: LAST, FIRST, MIDDLE
+   166: WITNESS
+   167: ADDRESS: STREET, CITY, STATE, ZIP
+   168: DATE OF BIRTH
+   169: AGE
+   170: GENDER
+   171: CONTACT PHONE - INCLUDE AREA CODE
+   172: NAME: LAST, FIRST, MIDDLE
+   173: WITNESS
+   174: ADDRESS: STREET, CITY, STATE, ZIP
+   175: DATE OF BIRTH
+   176: AGE
+   177: GENDER
+   178: CONTACT PHONE - INCLUDE AREA CODE
+   179: NAME: LAST, FIRST, MIDDLE
+   180: WITNESS
+   181: ADDRESS: STREET, CITY, STATE, ZIP
+   182: DATE OF BIRTH
+   183: AGE
+   184: GENDER
+   185: CONTACT PHONE - INCLUDE AREA CODE
+   186: PAGE 4 OF 4
+
+✅ TOTAL: 1275 lines from 4 pages
+
+📦 PyMuPDF Blocks (structured extraction) - PAGE 1:
+Found 204 text blocks
+
+  Block 1: x=80.1, y=13.5, text='LOCAL INFORMATION
+P23013000000287
+ TRAFFIC CRASH REPORT
+*DENOTES MANDATORY FIELD'
+  Block 2: x=32.9, y=26.7, text='08-0079-01
+X
+PHOTOS TAKEN
+OH -2
+'
+  Block 3: x=94.2, y=27.2, text='OH-1P
+X
+OH -3
+'
+  Block 4: x=23.3, y=29.8, text='OTHER
+X
+'
+  Block 5: x=32.9, y=50.2, text='PRIVATE PROPERTY
+SECONDARY CRASH
+'
+  Block 6: x=167.4, y=42.6, text='REPORTING AGENCY NAME *
+'
+  Block 7: x=167.5, y=55.0, text='Ohio State Highway Patrol
+'
+  Block 8: x=355.9, y=42.6, text='NCIC *
+'
+  Block 9: x=352.5, y=52.7, text='OHP08
+1
+'
+  Block 10: x=458.6, y=42.1, text='NUMBER OF UNITS
+'
+  Block 11: x=523.0, y=50.4, text='98 - ANIMAL
+99 - UNKNOWN
+98
+'
+  Block 12: x=532.0, y=41.1, text='UNIT IN ERROR
+'
+  Block 13: x=506.3, y=81.1, text='5
+'
+  Block 14: x=522.3, y=77.4, text='1 - FATAL
+'
+  Block 15: x=522.3, y=88.1, text='2 - SERIOUS INJURY 
+'
+  Block 16: x=523.9, y=96.1, text='     SUSPECTED
+'
+  Block 17: x=522.3, y=106.7, text='3 - MINOR INJURY 
+'
+  Block 18: x=523.9, y=114.7, text='     SUSPECTED
+'
+  Block 19: x=522.3, y=125.4, text='4 - INJURY POSSIBLE
+'
+  Block 20: x=522.3, y=136.0, text='5 - PROPERTY DAMAGE 
+'
+
+====================================================================================================
+📔 METHOD 5: pypdf2 - ALL PAGES
+====================================================================================================
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 1 - 325 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: LOCAL INFORMATION
+     2: P23013000000287
+     4: T
+     5: RAFFIC 
+     6: C
+     7: RASH
+     9: R
+    10: EPORT
+    11: *DENOTES MANDATORY FIELD FOR SUPPLEMENT REPORT
+    12: LOCAL REPORT NUMBER *
+    13: 08-0079-01
+    14: X
+    15: PHOTOS TAKEN
+    16: OH -2
+    17: OH-1P
+    18: X
+    19: OH -3
+    20: OTHER
+    21: X
+    22: PRIVATE PROPERTY
+    23: SECONDARY CRASH
+    24: REPORTING AGENCY NAME *
+    25: Ohio State Highway Patrol
+    26: NCIC *
+    27: OHP08
+    28: 1
+    29: NUMBER 
+    30: OF
+    31:  UNITS
+    32: 98 - ANIMAL
+    33: 99 - UNKNOWN
+    34: 98
+    35: UNIT 
+    36: IN
+    37:  ERROR
+    38: 5
+    39: 1 - FATAL
+    40: 2 - SERIOUS INJURY 
+    41:       SUSPECTED
+    42: 3 - MINOR INJURY 
+    43:       SUSPECTED
+    44: 4 - INJURY POSSIBLE
+    45: 5 - PROPERTY DAMAGE 
+    46:       ONLY
+    47: CRASH SEVERITY
+    48: HIT/SKIP
+    49: 1 - SOLVED
+    50: 2 - UNSOLVED
+    51: COUNTY*
+    52: 1
+    53: 1 - CITY
+    54: 2 - VILLAGE
+    55: 3 - TOWNSHIP
+    56: LOCALITY*
+    57: 3
+    58: LOCATION: 
+    59: CITY, VILLAGE, TOWNSHIP
+    60: *
+    61: Liberty (Township of)
+    62: CRASH DATE / TIME*
+    63: 01/30/2023 05:30
+    64: LATITUDE 
+    65: DECIMAL DEGREES
+    66: 38.801997
+    67: -83.603487
+    68: LONGITUDE 
+    69: DECIMAL DEGREES
+    70: REFERENCE ROAD NAME (ROAD, MILEPOST, HOUSE #)
+    71: 9
+    72: ROUTE TYPE
+    73: LOCATION ROAD NAME
+    74: 0.40
+    75: DISTANCE
+    76: FROM
+    77:  REFERENCE
+    78: REFERENCE POINT
+    79: 2
+    80: 1 - INTERSECTION
+    81: 3 - HOUSE #
+    82: 2 - MILE POST
+    83: DIRECTION
+    84: 2
+    85: FROM
+    86:  REFERENCE
+    87: 1 - NORTH
+    88: 2 - SOUTH
+    89: 3 - EAST
+    90: 4 - WEST
+    91: ROUTE  TYPE
+    92: IR - INTERSTATE ROUTE (TP)
+    93: US - FEDERAL US ROUTE
+    94: SR - STATE ROUTE
+    95: CR - NUMBERED COUNTY ROUTE
+    96: TR - NUMBERED TOWNSHIP
+    97:         ROUTE
+    98: 1 - MILES
+    99: 2 - FEET
+   100: 3 - YARDS
+   101: DISTANCE
+   102: UNIT OF MEASURE
+   103: 1
+   104: ROAD  TYPE
+   105: AV - AVENUE
+   106: AL - ALLEY
+   107: BL - BOULEVARD
+   108: CT - COURT
+   109: CR - CIRCLE
+   110: DR - DRIVE
+   111: HW - HIGHWAY
+   112: HE - HEIGHTS
+   113: LA - LANE
+   114: PK - PARKWAY
+   115: MP - MILEPOST
+   116: PI - PIKE
+   117: RD - ROAD
+   118: PL - PLACE
+   119: SQ - SQUARE
+   120: TE - TERRACE
+   121: ST - STREET
+   122: TL - TRAIL
+   123: WA - WAY
+   124: OV  - OVAL
+   125: ROADWAY
+   126: INTERSECTION RELATED
+   127: WITHIN INTERSECTION 
+   128: OR
+   129:  ON APPROACH
+   130: WITHIN INTERCHANGE AREA
+   131: NUMBER 
+   132: OF
+   133:  APPROACHES
+   134: ROADWAY DIVIDED
+   135: 1
+   136:  LOCATION 
+   137: OF
+   138:  FIRST HARMFUL EVENT
+   139: 1 - ON ROADWAY
+   140: 2 - ON  SHOULDER
+   141: 3 - IN MEDIAN
+   142: 4 - ON ROADSIDE
+   143: 5 - ON GORE
+   144: 6 - OUTSIDE TRAFFIC WAY
+   145: 7 - ON RAMP
+   146: 8 - OFF RAMP
+   147: 9 - CROSSOVER
+   148: 10 - DRIVEWAY/ALLEY ACCESS
+   149: 11 - RAILWAY GRADE CROSSING
+   150: 12 - SHARED USE PATHS OR 
+   151:        TRAILS
+   152: 13 - BIKE LANE
+   153: 14 - TOLL BOOTH
+   154: 99 - OTHER / UNKNOWN
+   155: DIRECTION
+   156:  OF 
+   157: TRAVEL
+   158: 1 - NORTH
+   159: 2 - SOUTH
+   160: 3 - EAST
+   161: 4 - WEST
+   162: MANNER 
+   163: OF
+   164:   CRASH COLLISION/IMPACT
+   165: 1
+   166: 1 - NOT COLLISION 
+   167:      BETWEEN
+   168:      TWO MOTOR 
+   169:      VEHICLES IN
+   170:      TRANSPORT
+   171: 2 - REAR-END
+   172: 3 - HEAD-ON
+   173: 4 - REAR-TO-REAR
+   174: 5 - BACKING
+   175: 6 - ANGLE
+   176: 7 - SIDESWIPE, 
+   177: SAME DIRECTION
+   178: 8 - SIDESWIPE, 
+   179: OPPOSITE DIRECTION
+   180: 9 - OTHER / UNKNOWN
+   181: CONTOUR
+   182: 2
+   183: 4 - CURVE GRADE
+   184: 3 - CURVE LEVEL
+   185: 2 - STRAIGHT
+   186:       GRADE
+   187: 1 - STRAIGHT
+   188:       LEVEL
+   189: 9 - OTHER 
+   190:       /UNKNOWN
+   191: WORKERS PRESENT
+   192: LAW ENFORCEMENT PRESENT
+   193: WORK ZONE RELATED
+   194: WORK ZONE TYPE
+   195: 3 - WORK ON SHOULDER
+   196:      OR MEDIAN
+   197: 1 - LANE CLOSURE
+   198: 2 - LANE SHIFT/ CROSSOVER
+   199: 4 - INTERMITTENT OR MOVING WORK
+   200: 5 - OTHER
+   201: LOCATION OF CRASH IN WORK ZONE 
+   202: 3 - TRANSITION  AREA
+   203: 1 - BEFORE THE 1ST WORK ZONE
+   204:      WARNING SIGN
+   205: 2 - ADVANCE WARNING AREA
+   206: 4 - ACTIVITY AREA
+   207: 5 - TERMINATION AREA
+   208: ACTIVE SCHOOL ZONE 
+   209: LIGHT CONDITION
+   210: 4
+   211: 1 - DAYLIGHT
+   212: 2 - DAWN/DUSK
+   213: 3 - DARK - LIGHTED ROADWAY
+   214: 4 - DARK -  ROADWAY NOT LIGHTED
+   215: 5 - DARK - UNKNOWN  ROADWAY  LIGHTING
+   216: 9 - OTHER / UNKNOWN
+   217: WEATHER
+   218: 2
+   219: 1 - CLEAR
+   220: 2 - CLOUDY
+   221: 3 - FOG, SMOG, SMOKE
+   222: 4 - RAIN
+   223: 5 - SLEET, HAIL
+   224: 6 - SNOW
+   225: 7 - SEVERE CROSSWINDS
+   226: 8 - BLOWING SAND, SOIL, DIRT, SNOW
+   227: 99 - OTHER / UNKNOWN
+   228: 9 - FREEZING RAIN OR FREEZING DRIZZLE
+   229: MEDIAN TYPE
+   230: 1 - DIVIDED FLUSH MEDIAN
+   231:      ( <4 FEET )
+   232: 2 - DIVIDED FLUSH MEDIAN
+   233:      ( ≥4 
+   234: FEET )
+   235: 3 - DIVIDED, DEPRESSED MEDIAN
+   236: 4 - DIVIDED, RAISED MEDIAN
+   237:      (ANY TYPE)
+   238: 9 - OTHER / UNKNOWN
+   239: CONDITIONS
+   240: 2
+   241: 1 - DRY
+   242: 2 - WET
+   243: 3 - SNOW
+   244: 4 - ICE
+   245: 5 - SAND, MUD, DIRT,
+   246:       OIL, GRAVEL
+   247: 6 - WATER (STANDING,
+   248:       MOVING)
+   249: 7 - SLUSH
+   250: 9 - OTHER / UNKNOWN
+   251: SURFACE
+   252: 2
+   253: 1 - CONCRETE
+   254: 2 - BLACKTOP, 
+   255:      BITUMINOUS,
+   256:      ASPHALT
+   257: 3 - BRICK/BLOCK
+   258: 4 - SLAG , GRAVEL,
+   259:       STONE
+   260: 5 - DIRT
+   261: 9 - OTHER 
+   262:       / UNKNOWN
+   263:  NARRATIVE
+   264: Unit #1 was traveling northbound on State Route 136 and struck a deer attempting 
+   265: to cross the roadway.
+   266: REPORT TAKEN BY
+   267: X
+   268: POLICE AGENCY
+   269: MOTORIST
+   270: SUPPLEMENT
+   271: (CORRECTION
+   272:  OR 
+   273: ADDITION
+   274: TO AN EXISTING REPORT SENT TO 
+   275: ODPS
+   276: )
+   277: CRASH REPORTED DATE / TIME
+   278: 01/30/2023 05:34
+   279: DISPATCH DATE / TIME
+   280: 01/30/2023 05:34
+   281: SCENE CLEARED DATE / TIME
+   282: 01/30/2023 07:29
+   283: OTHER
+   284: INVESTIGATION TIME
+   285: TOTAL
+   286: MINUTES
+   287: 115
+   288: OFFICER'S NAME*
+   289: Timberlake, Nathan
+   290: OFFICER'S BADGE NUMBER*
+   291: 0490
+   292: ARRIVAL DATE / TIME
+   293: 01/30/2023 07:08
+   294: C
+   295: HECKED BY 
+   296: OFFICER'S NAME*
+   297: Fox, Anthony
+   298: TOTAL TIME 
+   299: ROADWAY CLOSED
+   300: C
+   301: HECKED BY 
+   302: OFFICER'S BADGE NUMBER*
+   303: 1235
+   304: LOCATION
+   305: REFERENCE
+   306: ROUTE NUMBER
+   307: PREFIX
+   308: 1 - NORTH
+   309: 2 - SOUTH
+   310: 3 - EAST
+   311: 4 - WEST
+   312: MP
+   313: ROAD TYPE
+   314: SR
+   315: ROUTE TYPE
+   316: ROUTE NUMBER
+   317: 136
+   318: PREFIX
+   319: 1 - NORTH
+   320: 2 - SOUTH
+   321: 3 - EAST
+   322: 4 - WEST
+   323: ROAD TYPE
+   324: PAGE 1 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 2 - 487 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: VEHICLE
+     2: DEFECTS
+     3: 1 - TURN SIGNALS
+     4: 3 - TAIL LAMPS
+     5: 2 - HEAD LAMPS
+     6: 4 - BRAKES
+     7: 5 - STEERING
+     8: 6 - TIRE BLOWOUT
+     9: 8 - TRAILER EQUIPMENT
+    10:       DEFECTIVE
+    11: 7 - WORN OR SLICK  TIRES
+    12: 9 - MOTOR TROUBLE
+    13: 10 - DISABLED FROM PRIOR 
+    14:        ACCIDENT
+    15: 99 - OTHER / UNKNOWN
+    16: OWNER NAME:
+    18: LAST, FIRST, MIDDLE
+    20: (       SAME AS DRIVER)
+    21: FLINDERS, LARRY
+    22: UNIT #
+    23: 1
+    24: LP STATE
+    25: KY
+    26: LICENSE PLATE #
+    27: 2802GB
+    28: VEHICLE IDENTIFICATION #
+    29: 3C6UR5FL6MG630586
+    30: # OCCUPANTS
+    31: 1
+    32: VEHICLE MAKE
+    33: RAM
+    34: COLOR
+    35: BLK
+    36: DAMAGE SCALE
+    37: 1 - NONE
+    38: 3
+    39: 2 - MINOR DAMAGE
+    40: 3 - FUNCTIONAL DAMAGE
+    41: 4 - DISABLING DAMAGE
+    42: 9 - UNKNOWN
+    43: DAMAGED AREA(S)
+    44: INDICATE ALL THAT APPLY
+    45: - NO DAMAGE
+    47: [ 0 ]
+    48: - 
+    49: TOP
+    51: [ 13 ]
+    52: - UNIT NOT AT SCENE
+    54: [ 16 ]
+    55: - UNDERCARRIAGE
+    57: [ 14 ]
+    58: - ALL AREAS
+    60: [ 15 ]
+    61: US DOT #
+    62: VEHICLE WEIGHT GVWR/GCWR
+    63:  1 - ≤10
+    64: K
+    66: LBS.
+    67:  3 - > 26K 
+    68: LBS.
+    69:  2 - 10,001 - 26K 
+    70: LBS.
+    71: HAZARDOUS MATERIAL
+    72: MATERIAL
+    73: RELEASED
+    74: PLACARD
+    75: CLASS #
+    76: PLACARD ID #
+    77: NON-
+    78: MOTORIST
+    79: LOCATION
+    80: AT IMPACT
+    81: 1 - INTERSECTION -  
+    82:       MARKED CROSSWALK
+    83: 3 - INTERSECTION - OTHER
+    84: 2 - INTERSECTION - 
+    85:       UNMARKED CROSSWALK
+    86: 6 - BICYCLE LANE
+    87: 8 - SIDEWALK
+    88: 7 - SHOULDER/ROADSIDE
+    89: 9 - MEDIAN/CROSSING
+    90:      ISLAND
+    91: 10 - DRIVEWAY ACCESS
+    92: 11 - SHARED USE PATHS
+    93:        OR TRAILS
+    94: 99 - OTHER / UNKNOWN
+    95: 4 - MIDBLOCK - 
+    96:       MARKED  CROSSWALK
+    97: 5 - TRAVEL LANE - 
+    98:        OTHER LOCATION
+    99: 12 - FIRST RESPONDER
+   100:        AT INCIDENT SCENE
+   101: TYPE 
+   102: OF
+   103:  USE
+   104: COMMERCIAL
+   105: GOVERNMENT
+   106: IN EMERGENCY
+   107: RESPONSE
+   108: UNIT TYPE
+   109: 4
+   110: 1 - PASSENGER CAR
+   111: 3 - SPORT UTILITY
+   112:       VEHICLE
+   113: 2 - PASSENGER VAN
+   114:       (MINIVAN)
+   115: 4 - PICK UP
+   116: 5 - CARGO VAN
+   117: 6 - VAN (9-15 SEATS)
+   118: 8 - MOTORCYCLE 3-WHEELED
+   119: 7 - MOTORCYCLE 2-WHEELED
+   120: 9 - AUTOCYCLE
+   121: 10 - MOPED OR MOTORIZED         
+   122:        BICYCLE
+   123: 11 - ALL TERRAIN VEHICLE              
+   124:  (ATV/UTV)
+   125: # 
+   126: OF
+   127:  TRAILING UNITS
+   128: 12 - GOLF CART
+   129: 14 - SINGLE UNIT 
+   130:        TRUCK
+   131: 13 - SNOWMOBILE
+   132: 16 - FARM EQUIPMENT
+   133: 15 - SEMI-TRACTOR
+   134: 17 - MOTORHOME
+   135: 18 - LIMO (LIVERY VEHICLE)
+   136: 20 - OTHER VEHICLE
+   137: 19 - BUS (16+ PASSENGERS)
+   138: 22 - ANIMAL WITH RIDER 
+   139: OR
+   140:        ANIMAL-DRAWN VEHICLE
+   141: 21 - HEAVY EQUIPMENT
+   142: 23 - PEDESTRIAN/SKATER
+   143: 25 - OTHER NON-MOTORIST
+   144: 24 - WHEELCHAIR (ANY TYPE)
+   145: 27 - TRAIN
+   146: 26 - BICYCLE
+   147: 99 - UNKNOWN OR HIT/SKIP
+   148: SPECIAL 
+   149: FUNCTION
+   150: 1
+   151: 1 - NONE
+   152: 3 - ELECTRONIC RIDE
+   153:      SHARING
+   154: 2 - TAXI
+   155: 4 - SCHOOL TRANSPORT
+   156: 5 - BUS - TRANSIT/COMMUTER
+   157: 6 - BUS -  CHARTER/TOUR
+   158: 9 - BUS -  OTHER
+   159: 8 - BUS - SHUTTLE
+   160: 10 - AMBULANCE
+   161: 11 - FIRE
+   162: 12 - MILITARY
+   163: 13 - POLICE
+   164: 14 - PUBLIC UTILITY
+   165: 15 - CONSTRUCTION EQUIP.
+   166: 17 - MOWING
+   167: 16 - FARM 
+   168: 18 - SNOW REMOVAL
+   169: 19 - TOWING
+   170: 20 - SAFETY SERVICE
+   171:        PATROL
+   172: 99 - OTHER / UNKNOWN
+   173: 7 - BUS - INTERCITY
+   174: 21 - MAIL CARRIER
+   175: 1
+   176: PRE-CRASH
+   177: ACTIONS
+   178: 14 - ENTERING OR CROSSING
+   179:        SPECIFIED LOCATION
+   180: 15 - WALKING, RUNNING,
+   181:        JOGGING, PLAYING
+   182: 17 - PUSHING VEHICLE
+   183: 16 - WORKING
+   184: 18 - APPROACHING OR 
+   185:        LEAVING VEHICLE
+   186: 19 - STANDING
+   187: 20 - OTHER NON-MOTORIST
+   188: 13 - NEGOTIATING A CURVE
+   189: 1 - STRAIGHT AHEAD
+   190: 6 - MAKING LEFT TURN
+   191: 5 - MAKING RIGHT TURN
+   192: 3 - CHANGING LANES
+   193: 2 - BACKING
+   194: ACTION
+   195: 3
+   196: 1 - NON-CONTACT
+   197: 3 - STRIKING
+   198: 2 - NON-COLLISION
+   199: 4 - STRUCK
+   200: 5 - BOTH STRIKING        
+   201:    & STRUCK
+   202: 9 - OTHER / UNKNOWN
+   203: 7 - MAKING U-TURN
+   204: 8 - ENTERING  TRAFFIC
+   205:      LANE
+   206: 9 - LEAVING TRAFFIC
+   207:      LANE
+   208: 10 - PARKED
+   209: 11 - SLOWING OR STOPPED     
+   210:       IN TRAFFIC
+   211: 12 - DRIVERLESS
+   212: 4 - OVERTAKING/PASSING
+   213: 21 - STANDING OUTSIDE
+   214:        DISABLED VEHICLE
+   215: 99 - OTHER / UNKNOWN
+   216: 1
+   217: CONTRIBUTING 
+   218: CIRCUMSTANCES
+   219: 1 - NONE
+   220: 3 - RAN RED LIGHT
+   221: 2 - FAILURE  TO YIELD
+   222: 4 - RAN  STOP SIGN
+   223: 5 - UNSAFE SPEED
+   224: 7 - LEFT OF CENTER
+   225: 6 - IMPROPER  TURN
+   226: 8 - FOLLOWING TOO CLOSE
+   227:       /ACDA
+   228: 9 - IMPROPER LANE
+   229:      CHANGE
+   230: 12 - IMPROPER BACKING
+   231: 13 - IMPROPER START FROM 
+   232:        A PARKED POSITION
+   233: 14 - STOPPED OR PARKED 
+   234:        ILLEGALLY
+   235: 15 - SWERVING TO  AVOID
+   236: 16 - WRONG WAY
+   237: 17 - VISION OBSTRUCTION
+   238: 18 - OPERATING DEFECTIVE 
+   239:        EQUIPMENT
+   240: 19 - LOAD SHIFTING
+   241:        /FALLING/SPILLING
+   242: 99 - OTHER IMPROPER
+   243:        ACTION
+   244: 20 - IMPROPER CROSSING
+   245: 21 - LYING IN ROADWAY
+   246: 10 - IMPROPER PASSING
+   247: 11 - DROVE OFF ROAD
+   248: 22 - NOT DISCERNIBLE
+   249: 23 - OPENING DOOR INTO
+   250:        ROADWAY
+   251: SEQUENCE 
+   252: OF
+   253:  EVENTS
+   254: 18
+   255: 1
+   256: 1
+   257: 1
+   258: FIRST HARMFUL EVENT
+   259: MOST HARMFUL EVENT
+   260: 1 - OVERTURN/ROLLOVER
+   261: 3 - IMMERSION
+   262: 2 - FIRE/EXPLOSION
+   263: 4 - JACKKNIFE
+   264: 5 - CARGO / EQUIPMENT
+   265:      LOSS OR SHIFT
+   266: 6 - EQUIPMENT FAILURE
+   267: 8 - RAN OFF ROAD RIGHT
+   268: 7 - SEPARATION OF UNITS
+   269: 9 - RAN OFF ROAD LEFT
+   270: 10 - CROSS MEDIAN
+   271: 11 - CROSS CENTERLINE -
+   272:        OPPOSITE DIRECTION
+   273:        OF TRAVEL
+   274: 12 - DOWNHILL RUNAWAY
+   275: 13 - OTHER NON-COLLISION
+   276: 14 - PEDESTRIAN
+   277: 16 - RAILWAY VEHICLE
+   278: 15 - PEDALCYCLE
+   279: 17 - ANIMAL -  FARM
+   280: 18 - ANIMAL - DEER
+   281: 19 - ANIMAL -OTHER
+   282: 20 - MOTOR VEHICLE IN
+   283:        TRANSPORT
+   284: 21 - PARKED MOTOR
+   285:        VEHICLE
+   286: 23 - STRUCK BY FALLING,
+   287:        SHIFTING CARGO OR 
+   288:        ANYTHING SET IN
+   289:        MOTION BY A MOTOR
+   290:        VEHICLE
+   291: 22 - WORK ZONE 
+   292:        MAINTENANCE
+   293:        EQUIPMENT
+   294: 24 - OTHER MOVABLE
+   295:        OBJECT
+   296: EVENTS
+   297: 25 - IMPACT ATTENUATOR
+   298:        / CRASH CUSHION
+   299: 27 - BRIDGE PIER OR 
+   300:        ABUTMENT
+   301: 26 - BRIDGE OVERHEAD
+   302:        STRUCTURE
+   303: 28 - BRIDGE  PARAPET
+   304: 29 - BRIDGE RAIL
+   305: 30 - GUARDRAIL FACE
+   306: 32 - PORTABLE BARRIER
+   307: 31 - GUARDRAIL END
+   308: 33 - MEDIAN CABLE BARRIER
+   309: 35 - MEDIAN CONCRETE 
+   310:        BARRIER
+   311: 34 - MEDIAN GUARDRAIL 
+   312:        BARRIER
+   313: 36 - MEDIAN OTHER BARRIER
+   314: 37 - TRAFFIC SIGN POST
+   315: 38 - OVERHEAD SIGN POST
+   316: 40 - UTILITY POLE
+   317: 39 - LIGHT / LUMINARIES
+   318:        SUPPORT
+   319: 41 - OTHER POST, POLE
+   320:        OR SUPPORT
+   321: 43 - CURB
+   322: 42 - CULVERT
+   323: 44 - DITCH
+   324: 45 - EMBANKMENT
+   325: 46 - FENCE
+   326: 47 - MAILBOX
+   327: 48 - TREE
+   328: 50 - WORK ZONE
+   329:        MAINTENANCE
+   330:        EQUIPMENT
+   331: 49 - FIRE HYDRANT
+   332: 54 - OTHER FIXED
+   333:        OBJECT
+   334: COLLISION 
+   335: WITH
+   336:  FIXED OBJECT - STRUCK
+   337: 2
+   338: 3
+   339: 4
+   340: 5
+   341: 6
+   342: 51 - WALL
+   343: 52 - BUILDING
+   344: 53 - TUNNEL
+   345: 99 - OTHER / UNKNOWN
+   346: DETECTED  SPEED
+   347: 1
+   348: 1 - STATED / ESTIMATED SPEED
+   349: 2 - CALCULATED / EDR
+   350: 3 - UNDETERMINED
+   351: UNIT SPEED
+   352: 55
+   353: TRAFFIC  CONTROL
+   354: 6
+   355: 1 - ROUNDABOUT
+   356: 3 - FLASHER
+   357: 2 - SIGNAL
+   358: 4 - STOP SIGN
+   359: 5 - YIELD SIGN
+   360: 6 - NO CONTROL
+   361: UNIT  / NON-MOTORIST DIRECTION
+   362: 2
+   363: 1
+   364: FROM
+   365: TO
+   366: 1 - NORTH
+   367: 3 - EAST
+   368: 2 - SOUTH
+   369: 4 - WEST
+   370: 5 - NORTHEAST
+   371: 7 - SOUTHEAST
+   372: 6 - NORTHWEST
+   373: 8 - SOUTHWEST
+   374: 9 - OTHER / UNKNOWN
+   375: VEHICLE MODEL
+   376: 2500
+   377: INSURANCE
+   378: VERIFIED
+   379: X
+   380: INSURANCE COMPANY
+   381: KENTUCKY FARM BUREAU
+   382: INSURANCE POLICY #
+   383: 0020617408
+   384: TOWED BY: 
+   385: COMPANY NAME
+   386: 2021
+   387: VEHICLE YEAR
+   388: OWNER ADDRESS: 
+   389: STREET, CITY, STATE, ZIP
+   391: (       SAME AS DRIVER)
+   392: 814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056
+   393: COMMERCIAL CARRIER:
+   394:  NAME, ADDRESS, CITY, STATE, ZIP
+   395: C
+   396: OMMERCIAL 
+   397: C
+   398: ARRIER
+   399:  PHONE:
+   400:  INCLUDE  AREA  CODE
+   401: D A M A G E
+   402: INTERLOCK 
+   403: DEVICE 
+   404: EQUIPPED
+   405: HIT/SKIP UNIT
+   406: 1
+   407: CARGO
+   408: BODY
+   409: TYPE
+   410: 1 - NO CARGO BODY TYPE
+   411:       / NOT APPLICABLE
+   412: 2 - BUS
+   413: 3 - VEHICLE TOWING
+   414:      ANOTHER MOTOR VEHICLE
+   415: 4 - LOGGING
+   416: 5 - INTERMODAL 
+   417:      CONTAINER CHASSIS
+   418: 7 - GRAIN/CHIPS/GRAVEL
+   419: 6 - CARGOVAN
+   420:       /ENCLOSED BOX
+   421: 8 - POLE
+   422: 9 - CARGO  TANK
+   423: 10 - FLAT BED
+   424: 11 - DUMP
+   425: 99 - OTHER / UNKNOWN
+   426: 12 - CONCRETE MIXER
+   427: 13 - AUTO TRANSPORTER
+   428: 14 - GARBAGE/REFUSE
+   429: T R A F F I C
+   430: RAIL GRADE CROSSING
+   431: 1 - NOT INVLOVED
+   432: 3 - INVOLVED-PASSIVE CROSSING
+   433: 2 - INVOLVED-ACTIVE CROSSING
+   434: POSTED SPEED
+   435: 55
+   436: TRAFFICWAY FLOW
+   437: 2
+   438: 2 - TWO-WAY
+   439: 1 - ONE-WAY
+   440: # 
+   441: OF
+   442:  THROUGH LANES
+   443: ON
+   444:  ROAD
+   445: 2
+   446: 2
+   447: WAS VEHICLE OPERATING IN
+   449: AUTONOMOUS 
+   450: MODE
+   451:  WHEN CRASH OCCURRED?
+   452: 0 - NO AUTOMATION
+   453: 1 - YES
+   454: 2 - NO
+   455: 9 - OTHER / UNKNOWN
+   456: 0
+   457: AUTONOMOUS
+   458: MODE LEVEL
+   459: 1 - DRIVER ASSISTANCE
+   460: 2 - PARTIAL AUTOMATION
+   461: 3 - CONDITIONAL AUTOMATION
+   462: 4 - HIGH AUTOMATION
+   463: 5 - FULL AUTOMATION
+   464: 9 - OTHER/UNKNOWN
+   465: INITIAL POINT 
+   466: OF
+   467:  CONTACT
+   468: 0 - NO DAMAGE
+   469: 1-12 - REFER TO UNIT
+   470:           DIAGRAM
+   471: 13 - TOP
+   472: 14 - UNDERCARRIAGE
+   473: 15 - VEHICLE NOT AT SCENE
+   474: 99 - UNKNOWN
+   475: 12
+   476: OWNER PHONE:
+   477: INCLUDE  AREA  CODE (       SAME AS DRIVER)
+   478: 740-285-2912
+   479: LOCAL REPORT NUMBER
+   480: 08-0079-01
+   481: U
+   482: NIT
+   483: O W N E R
+   484: V E H I C L E
+   485: E V E N T S (s)
+   486: PAGE 2 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 3 - 429 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: LOCAL REPORT NUMBER 
+     2: 08-0079-01
+     3: M
+     4: OTORIST / 
+     5: N
+     6: ON-
+     7: M
+     8: OTORIST
+     9: INJURIES
+    10: 5
+    11: INJURED
+    12: TAKEN
+    13: BY
+    14: 1
+    15: EMS A
+    16: GENCY 
+    17: (NAME)
+    18: INJURED TAKEN TO:
+    19:  M
+    20: EDICAL
+    21:  F
+    22: ACILITY 
+    23: (
+    24: NAME, CITY
+    25: )
+    26: SAFETY EQUIPMENT
+    27: USED
+    28: 4
+    29: DOT-C
+    30: OMPLIANT
+    31: MC HELMET
+    32: SEATING
+    33: POSITION
+    34: 1
+    35: AIR BAG USAGE
+    36: 1
+    37: EJECTION
+    38: 1
+    39: TRAPPED
+    40: 1
+    41: ADDRESS:
+    43: STREET, CITY, STATE, ZIP
+    44: 814 JERSEY RIDGE RD, MAYSVILLE, KY, 41056
+    45: UNIT  #
+    46: 1
+    47: NAME: 
+    48: LAST, FIRST, MIDDLE
+    49: FLINDERS, JENNIFER, A
+    50: DATE OF BIRTH
+    51: 07/24/1972
+    52: AGE
+    53: 50
+    54: GENDER
+    55: F
+    56: CONTACT PHONE  -
+    58: INCLUDE  AREA  CODE
+    59: 740-285-2912
+    60: MOTORIST / NON-MOTORIST
+    61: OL STATE
+    62: KY
+    63: OL CLASS
+    64: 4
+    65: OPERATOR LICENSE NUMBER
+    66: OFFENSE CHARGED
+    67: LOCAL
+    68: CODE
+    69: OFFENSE DESCRIPTION
+    70: CITATION NUMBER
+    71: ENDORSEMENT
+    72: RESTRICTION 
+    73: SELECT UP TO 3
+    74: DRIVER 
+    75: DISTRACTED 
+    76: BY
+    77: 1
+    78: ALCOHOL / DRUG SUSPECTED
+    79: ALCOHOL
+    80: OTHER DRUG
+    81: MARIJUANA
+    82: CONDITION
+    83: 1
+    84: ALCOHOL TEST
+    85: DRUG TEST(S)
+    86: STATUS
+    87: 1
+    88: TYPE
+    89: 1
+    90: VALUE
+    91: .
+    92: STATUS
+    93: 1
+    94: 1
+    95: TYPE
+    96: RESULTS 
+    97: SELECT UP TO 4
+    98: INJURIES
+    99: INJURED
+   100: TAKEN
+   101: BY
+   102: EMS A
+   103: GENCY 
+   104: (NAME)
+   105: INJURED TAKEN TO:
+   106:  M
+   107: EDICAL
+   108:  F
+   109: ACILITY 
+   110: (
+   111: NAME, CITY
+   112: )
+   113: SAFETY EQUIPMENT
+   114: USED
+   115: DOT-C
+   116: OMPLIANT
+   117: MC HELMET
+   118: SEATING
+   119: POSITION
+   120: AIR BAG USAGE
+   121: EJECTION
+   122: TRAPPED
+   123: ADDRESS:
+   125: STREET, CITY, STATE, ZIP
+   126: UNIT  #
+   127: NAME: 
+   128: LAST, FIRST, MIDDLE
+   129: DATE OF BIRTH
+   130: AGE
+   131: GENDER
+   132: CONTACT PHONE  -
+   134: INCLUDE  AREA  CODE
+   135: MOTORIST / NON-MOTORIST
+   136: OL STATE
+   137: OL CLASS
+   138: OPERATOR LICENSE NUMBER
+   139: OFFENSE CHARGED
+   140: LOCAL
+   141: CODE
+   142: OFFENSE DESCRIPTION
+   143: CITATION NUMBER
+   144: ENDORSEMENT
+   145: RESTRICTION 
+   146: SELECT UP TO 3
+   147: DRIVER 
+   148: DISTRACTED 
+   149: BY
+   150: ALCOHOL / DRUG SUSPECTED
+   151: ALCOHOL
+   152: OTHER DRUG
+   153: MARIJUANA
+   154: CONDITION
+   155: ALCOHOL TEST
+   156: DRUG TEST(S)
+   157: STATUS
+   158: TYPE
+   159: VALUE
+   160: .
+   161: STATUS
+   162: TYPE
+   163: RESULTS 
+   164: SELECT UP TO 4
+   165: INJURIES
+   166: INJURED
+   167: TAKEN
+   168: BY
+   169: EMS A
+   170: GENCY 
+   171: (NAME)
+   172: INJURED TAKEN TO:
+   173:  M
+   174: EDICAL
+   175:  F
+   176: ACILITY 
+   177: (
+   178: NAME, CITY
+   179: )
+   180: SAFETY EQUIPMENT
+   181: USED
+   182: DOT-C
+   183: OMPLIANT
+   184: MC HELMET
+   185: SEATING
+   186: POSITION
+   187: AIR BAG USAGE
+   188: EJECTION
+   189: TRAPPED
+   190: ADDRESS:
+   192: STREET, CITY, STATE, ZIP
+   193: UNIT  #
+   194: NAME: 
+   195: LAST, FIRST, MIDDLE
+   196: DATE OF BIRTH
+   197: AGE
+   198: GENDER
+   199: CONTACT PHONE  -
+   201: INCLUDE  AREA  CODE
+   202: MOTORIST / NON-MOTORIST
+   203: OL STATE
+   204: OL CLASS
+   205: OPERATOR LICENSE NUMBER
+   206: OFFENSE CHARGED
+   207: LOCAL
+   208: CODE
+   209: OFFENSE DESCRIPTION
+   210: CITATION NUMBER
+   211: ENDORSEMENT
+   212: RESTRICTION 
+   213: SELECT UP TO 3
+   214: DRIVER 
+   215: DISTRACTED 
+   216: BY
+   217: ALCOHOL / DRUG SUSPECTED
+   218: ALCOHOL
+   219: OTHER DRUG
+   220: MARIJUANA
+   221: CONDITION
+   222: ALCOHOL TEST
+   223: DRUG TEST(S)
+   224: STATUS
+   225: TYPE
+   226: VALUE
+   227: .
+   228: STATUS
+   229: TYPE
+   230: RESULTS 
+   231: SELECT UP TO 4
+   232: 1 - FATAL
+   233: 2 - SUSPECTED SERIOUS
+   234:      INJURY
+   235: 3 - SUSPECTED MINOR 
+   236:      INJURY
+   237: 4 - POSSIBLE INJURY
+   238: 5 - NO APPARENT INJURY
+   239: 1 - CLASS A
+   240: 3 - CLASS C
+   241: 2 - CLASS B
+   242: 4 - REGULAR CLASS
+   243:       (OHIO = D)
+   244: 5 - M/C MOPED ONLY
+   245: 6 - NO VALID OL
+   246: 1 - FRONT - LEFT SIDE
+   247:      (MOTORCYCLE DRIVER)
+   248: 3 - FRONT - RIGHT SIDE
+   249: 2 - FRONT - MIDDLE
+   250: 4 - SECOND - LEFT SIDE
+   251:      (MOTORCYCLE PASSENGER)
+   252: 5 - SECOND - MIDDLE  
+   253: 6 - SECOND - RIGHT SIDE
+   254: 8 - THIRD - MIDDLE
+   255: 7 - THIRD - LEFT SIDE
+   256:      (MOTORCYCLE SIDE CAR)
+   257: 9 - THIRD - RIGHT SIDE
+   258: 10 - SLEEPER SECTION
+   259:        OF TRUCK CAB
+   260: 11 - PASSENGER IN 
+   261:        OTHER ENCLOSED CARGO 
+   262:        AREA 
+   263: (NON-TRAILING UNIT,
+   264:        BUS, PICK-UP WITH CAP)
+   265: 12 - PASSENGER IN
+   266:        UNENCLOSED CARGO AREA
+   267: 13 - TRAILING UNIT
+   268: 14 - RIDING ON VEHICLE
+   269:        EXTERIOR
+   271: (NON-TRAILING UNIT)
+   272: 15 - NON-MOTORIST
+   273: 99 - OTHER / UNKNOWN
+   274: 1 - NOT DEPLOYED
+   275: 3 - DEPLOYED SIDE
+   276: 2 - DEPLOYED FRONT
+   277: 4 - DEPLOYED BOTH 
+   278:      FRONT/SIDE
+   279: 5 - NOT APPLICABLE
+   280: 9 - DEPLOYMENT UNKNOWN
+   281: 1 - NOT EJECTED
+   282: 2 - PARTIALLY EJECTED
+   283: 3 - TOTALLY EJECTED
+   284: 4 - NOT APPLICABLE
+   285: 1 - NOT TRAPPED
+   286: 3 - FREED BY
+   287:      NON-MECHANICAL MEANS
+   288: 2 - EXTRICATED BY 
+   289:      MECHANICAL MEANS
+   290: INJURIES
+   291: 1 - NONE  USED
+   292: 3 - LAP BELT ONLY USED
+   293: 2 - SHOULDER BELT ONLY
+   294:      USED
+   295: 4 - SHOULDER & LAP BELT
+   296:      USED
+   297: 5 - CHILD RESTRAINT SYSTEM
+   298:      - FORWARD FACING
+   299: 6 - CHILD RESTRAINT SYSTEM
+   300:      - REAR FACING
+   301: 8 - HELMET USED
+   302: 7 - BOOSTER SEAT
+   303: 9 - PROTECTIVE  PADS USED
+   304:       (ELBOWS, KNEES, ETC)
+   305: 10 - REFLECTIVE CLOTHING
+   306: 11 - LIGHTING - PEDESTRIAN
+   307:        / BICYCLE ONLY
+   308: 99 - OTHER / UNKNOWN
+   309: OL CLASS
+   310: SAFETY EQUIPMENT
+   311: SEATING POSITION
+   312: AIR BAG
+   313: TRAPPED
+   314: 1 - NOT TRANSPORTED
+   315:      /TREATED AT SCENE
+   316: 2 - EMS
+   317: 3 - POLICE
+   318: 9 - OTHER / UNKNOWN
+   319: INJURIES TAKEN BY
+   320: OL RESTRICTION(S)
+   321: 1 - ALCOHOL INTERLOCK
+   322:      DEVICE
+   323: 3 - CORRECTIVE LENSES
+   324: 2 - CDL INTRASTATE ONLY
+   325: 4 - FARM WAIVER
+   326: 5 - EXCEPT CLASS A BUS
+   327: 6 - EXCEPT CLASS A 
+   328:       & CLASS B BUS
+   329: 9 - LEARNER'S PERMIT
+   330:      RESTRICTIONS
+   331: 8 - INTERMEDIATE LICENSE
+   332:       RESTRICTIONS
+   333: 7 - EXCEPT TRACTOR-TRAILER
+   334: 10 - LIMITED TO DAYLIGHT
+   335:        ONLY
+   336: 11 - LIMITED TO EMPLOYMENT
+   337: 12 - LIMITED - OTHER
+   338: 13 - MECHANICAL DEVICES
+   339:        (SPECIAL BRAKES, HAND
+   340:        CONTROLS, OR OTHER
+   341:        ADAPTIVE DEVICES)
+   342: 14 - MILITARY VEHICLES ONLY
+   343: 15 - MOTOR VEHICLES 
+   344:        WITHOUT AIR BRAKES
+   345: 16 - OUTSIDE MIRROR
+   346: 17 - PROSTHETIC AID
+   347: 18 - OTHER
+   348: 1 - NOT DISTRACTED
+   349: 3 - TALKING ON HANDS-FREE
+   350:      COMMUNICATION DEVICE
+   351: 2 - MANUALLY OPERATING AN   
+   352:     ELECTRONIC 
+   353:      COMMUNICATION DEVICE
+   354:      (TEXTING, TYPING,
+   355:      DIALING)
+   356: 4 - TALKING ON HAND-HELD
+   357:      COMMUNICATION DEVICE
+   358: 5 - OTHER ACTIVITY WITH AN
+   359:      ELECTRONIC DEVICE
+   360: 6 - PASSENGER
+   361: 8 - OTHER DISTRACTION
+   362:      OUTSIDE THE VEHICLE
+   363: 7 - OTHER DISTRACTION
+   364:      INSIDE THE VEHICLE
+   365: 9 - OTHER / UNKNOWN
+   366: DRIVER DISTRACTION
+   367: CONDITION
+   368: 1 - APPARENTLY NORMAL
+   369: 3 - EMOTIONAL 
+   370: (E.G.,
+   371:      DEPRESSED, ANGRY,
+   372:      DISTURBED)
+   373: 2 - PHYSICAL IMPAIRMENT
+   374: 4 - ILLNESS
+   375: 6 - UNDER THE INFLUENCE OF
+   376:      MEDICATIONS / DRUGS /
+   377:      ALCOHOL
+   378: 5 - FELL ASLEEP, FAINTED,
+   379:      FATIGUED, ETC.
+   380: 9 - OTHER / UNKNOWN
+   381: EJECTION
+   382: H - HAZMAT
+   383: P - PASSENGER
+   384: M - MOTORCYCLE
+   385: N - TANKER
+   386: Q - MOTOR SCOOTER
+   387: R - THREE-WHEEL
+   388:       MOTORCYCLE
+   389: S - SCHOOL BUS
+   390: T - DOUBLE & TRIPLE
+   391:      TRAILERS
+   392: X - TANKER / HAZMAT
+   393: OL ENDORSEMENT
+   394: TEST STATUS
+   395: 1 - NONE GIVEN
+   396: 3 - TEST GIVEN,
+   397:      CONTAMINATED SAMPLE
+   398:      / UNUSABLE
+   399: 2 - TEST REFUSED
+   400: 4 - TEST GIVEN,
+   401:      RESULTS KNOWN
+   402: 5 - TEST GIVEN,
+   403:      RESULTS UNKNOWN
+   404: 1 - NONE
+   405: 2 - BLOOD
+   406: 3 - URINE
+   407: 4 - BREATH
+   408: 5 - OTHER
+   409: 1 - NONE
+   410: 2 - BLOOD
+   411: 3 - URINE
+   412: 4 - OTHER
+   413: DRUG TEST TYPE
+   414: 1 - AMPHETAMINES
+   415: 2 - BARBITURATES
+   416: 3 - BENZODIAZEPINES
+   417: 4 - CANNABINOIDS
+   418: 5 - COCAINE
+   419: 6 - OPIATES / OPIOIDS
+   420: 7 - OTHER
+   421: 8 - NEGATIVE RESULTS
+   422: DRUG TEST RESULT(S)
+   423: ALCOHOL TEST TYPE
+   424: GENDER
+   425: F - FEMALE
+   426: M - MALE
+   427: U - OTHER / UNKNOWN
+   428: PAGE 3 OF 4
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+PAGE 4 - 274 lines
+────────────────────────────────────────────────────────────────────────────────────────────────────
+     1: LOCAL REPORT NUMBER 
+     2: 08-0079-01
+     3: O
+     4: CCUPANT / 
+     5: W
+     6: ITNESS
+     8: A
+     9: DDENDUM
+    10: INJURIES
+    11: INJURED
+    12: TAKEN
+    13: BY
+    14: EMS A
+    15: GENCY 
+    16: (NAME)
+    17: INJURED TAKEN TO:
+    18:  M
+    19: EDICAL
+    20:  F
+    21: ACILITY 
+    22: (
+    23: NAME, CITY
+    24: )
+    25: SAFETY EQUIPMENT
+    26: DOT-C
+    27: OMPLIANT
+    28: MC HELMET
+    29: SEATING
+    30: POSITION
+    31: AIR BAG USAGE
+    32: EJECTION
+    33: TRAPPED
+    34: ADDRESS:
+    36: STREET, CITY, STATE, ZIP
+    37: UNIT  #
+    38: NAME: 
+    39: LAST, FIRST, MIDDLE
+    40: DATE OF BIRTH
+    41: AGE
+    42: GENDER
+    43: CONTACT PHONE  -
+    45: INCLUDE  AREA  CODE
+    46: OCCUPANT
+    47: INJURIES
+    48: INJURED
+    49: TAKEN
+    50: BY
+    51: EMS A
+    52: GENCY 
+    53: (NAME)
+    54: INJURED TAKEN TO:
+    55:  M
+    56: EDICAL
+    57:  F
+    58: ACILITY 
+    59: (
+    60: NAME, CITY
+    61: )
+    62: SAFETY EQUIPMENT
+    63: DOT-C
+    64: OMPLIANT
+    65: MC HELMET
+    66: SEATING
+    67: POSITION
+    68: AIR BAG USAGE
+    69: EJECTION
+    70: TRAPPED
+    71: ADDRESS:
+    73: STREET, CITY, STATE, ZIP
+    74: UNIT  #
+    75: NAME: 
+    76: LAST, FIRST, MIDDLE
+    77: DATE OF BIRTH
+    78: AGE
+    79: GENDER
+    80: CONTACT PHONE  -
+    82: INCLUDE  AREA  CODE
+    83: OCCUPANT
+    84: INJURIES
+    85: INJURED
+    86: TAKEN
+    87: BY
+    88: EMS A
+    89: GENCY 
+    90: (NAME)
+    91: INJURED TAKEN TO:
+    92:  M
+    93: EDICAL
+    94:  F
+    95: ACILITY 
+    96: (
+    97: NAME, CITY
+    98: )
+    99: SAFETY EQUIPMENT
+   100: DOT-C
+   101: OMPLIANT
+   102: MC HELMET
+   103: SEATING
+   104: POSITION
+   105: AIR BAG USAGE
+   106: EJECTION
+   107: TRAPPED
+   108: ADDRESS:
+   110: STREET, CITY, STATE, ZIP
+   111: UNIT  #
+   112: NAME: 
+   113: LAST, FIRST, MIDDLE
+   114: DATE OF BIRTH
+   115: AGE
+   116: GENDER
+   117: CONTACT PHONE  -
+   119: INCLUDE  AREA  CODE
+   120: OCCUPANT
+   121: INJURIES
+   122: INJURED
+   123: TAKEN
+   124: BY
+   125: EMS A
+   126: GENCY 
+   127: (NAME)
+   128: INJURED TAKEN TO:
+   129:  M
+   130: EDICAL
+   131:  F
+   132: ACILITY 
+   133: (
+   134: NAME, CITY
+   135: )
+   136: SAFETY EQUIPMENT
+   137: DOT-C
+   138: OMPLIANT
+   139: MC HELMET
+   140: SEATING
+   141: POSITION
+   142: AIR BAG USAGE
+   143: EJECTION
+   144: TRAPPED
+   145: ADDRESS:
+   147: STREET, CITY, STATE, ZIP
+   148: UNIT  #
+   149: NAME: 
+   150: LAST, FIRST, MIDDLE
+   151: DATE OF BIRTH
+   152: AGE
+   153: GENDER
+   154: CONTACT PHONE  -
+   156: INCLUDE  AREA  CODE
+   157: OCCUPANT
+   158: 1 - FATAL
+   159: 2 - SUSPECTED SERIOUS INJURY
+   160: 3 - SUSPECTED MINOR INJURY
+   161: 4 - POSSIBLE INJURY
+   162: 5 - NO APPARENT INJURY
+   163: 1 - NOT TRANSPORTED  /
+   164:      TREATED AT SCENE
+   165: 3 - POLICE
+   166: 2 - EMS
+   167: 9 - OTHER / UNKNOWN
+   168: GENDER
+   169: F - FEMALE
+   170: M - MALE
+   171: U - OTHER / UNKNOWN
+   172: 1 - FRONT - LEFT SIDE
+   173:       (MOTORCYCLE DRIVER)
+   174: 3 - FRONT - RIGHT SIDE
+   175: 2 - FRONT - MIDDLE
+   176: 4 - SECOND - LEFT SIDE
+   177:      (MOTORCYCLE PASSENGER)
+   178: 5 - SECOND - MIDDLE  
+   179: 6 - SECOND - RIGHT SIDE
+   180: 8 - THIRD - MIDDLE
+   181: 7 - THIRD - LEFT SIDE
+   182:      (MOTORCYCLE SIDE CAR)
+   183: 9 - THIRD - RIGHT SIDE
+   184: 10 - SLEEPER SECTION OF TRUCK CAB
+   185: 11 - PASSENGER IN OTHER ENCLOSED
+   186:        CARGO AREA 
+   187: (NON-TRAILING UNIT
+   188:            SUCH AS A BUS, PICK-UP WITH CAP)
+   189: 12 - PASSENGER IN  UNENCLOSED
+   190:        CARGO AREA
+   191: 13 - TRAILING UNIT
+   192: 14 - RIDING ON VEHICLE EXTERIOR
+   194: (NON-TRAILING UNIT)
+   195: 15 - NON-MOTORIST
+   196: 99 - OTHER / UNKNOWN
+   197: 1 - NOT DEPLOYED
+   198: 3 - DEPLOYED SIDE
+   199: 2 - DEPLOYED FRONT
+   200: 4 - DEPLOYED BOTH
+   201:      FRONT/SIDE
+   202: 5 - NOT APPLICABLE
+   203: 9 - DEPLOYMENT UNKNOWN
+   204: 1 - NOT EJECTED
+   205: 2 - PARTIALLY EJECTED
+   206: 3 - TOTALLY EJECTED
+   207: 4 - NOT APPLICABLE
+   208: 1 - NOT TRAPPED
+   209: 3 - FREED BY
+   210:      NON-MECHANICAL MEANS
+   211: 2 - EXTRICATED BY 
+   212:      MECHANICAL MEANS
+   213: INJURIES
+   214: 99 - OTHER / UNKNOWN
+   215: 1 - NONE  USED - 
+   216:       VEHICLE OCCUPANT
+   217: 3 - LAP BELT ONLY USED
+   218: 2 - SHOULDER BELT ONLY USED
+   219: 4 - SHOULDER & LAP BELT USED
+   220: 5 - CHILD RESTRAINT SYSTEM -
+   221:       FORWARD FACING
+   222: 6 - CHILD RESTRAINT SYSTEM -
+   223:       REAR FACING
+   224: 8 - HELMET USED
+   225: 7 - BOOSTER SEAT
+   226: 9 - PROTECTIVE  PADS USED
+   227:       (ELBOWS, KNEES, ETC)
+   228: 10 - REFLECTIVE CLOTHING
+   229: 11 - LIGHTING - PEDESTRIAN
+   230:        / BICYCLE ONLY
+   231: INJURED TAKEN BY
+   232: SAFETY EQUIPMENT USED
+   233: SEATING POSITION
+   234: AIR BAG USAGE
+   235: EJECTION
+   236: TRAPPED
+   237: NAME: 
+   238: LAST, FIRST, MIDDLE
+   239: WITNESS
+   240: ADDRESS:
+   242: STREET, CITY, STATE, ZIP
+   243: DATE OF BIRTH
+   244: AGE
+   245: GENDER
+   246: CONTACT PHONE  -
+   248: INCLUDE  AREA  CODE
+   249: NAME: 
+   250: LAST, FIRST, MIDDLE
+   251: WITNESS
+   252: ADDRESS:
+   254: STREET, CITY, STATE, ZIP
+   255: DATE OF BIRTH
+   256: AGE
+   257: GENDER
+   258: CONTACT PHONE  -
+   260: INCLUDE  AREA  CODE
+   261: NAME: 
+   262: LAST, FIRST, MIDDLE
+   263: WITNESS
+   264: ADDRESS:
+   266: STREET, CITY, STATE, ZIP
+   267: DATE OF BIRTH
+   268: AGE
+   269: GENDER
+   270: CONTACT PHONE  -
+   272: INCLUDE  AREA  CODE
+   273: PAGE 4 OF 4
+
+✅ TOTAL: 1515 lines from 4 pages
+
+====================================================================================================
+📓 METHOD 6: REGEX EXTRACTION (on pdfplumber layout=True)
+====================================================================================================
+🎯 Testing regex patterns:
+
+  ✅ Case Number: ['P23013000000287']
+  ✅ Report Number: ['08-0079-01']
+  ❌ Agency: NOT FOUND
+  ✅ NCIC: ['SECONDARY']
+  ✅ Owner Name: ['OWNER PHONE']
+  ❌ VIN: NOT FOUND
+  ✅ Person Name: ['DATE OF BIRTH AGE GENDER\n     ', 'DATE OF BIRTH AGE GENDER\n    ADDRESS', 'DATE OF BIRTH AGE GENDER\n    ADDRESS']
+
+====================================================================================================
+📐 METHOD 7: pdfminer.six - ALL PAGES
+====================================================================================================
+✅ Extracted 2213 lines
+
+First 100 lines:
+    1: X
+    3: PHOTOS TAKEN
+    5: SECONDARY CRASH
+    7:  TRAFFIC CRASH REPORT
+    9: LOCAL INFORMATION
+   11: X
+   13: OH -2
+   15: X
+   17: OH -3
+   19: *DENOTES MANDATORY FIELD FOR SUPPLEMENT REPORT
+   21: P23013000000287
+   23: LOCAL REPORT NUMBER *
+   24: 08-0079-01
+   26: OH-1P
+   28: OTHER
+   30: REPORTING AGENCY NAME *
+   32: PRIVATE PROPERTY
+   34: Ohio State Highway Patrol
+   36: NCIC *
+   38: OHP08
+   40: HIT/SKIP
+   41: 1 - SOLVED
+   42: 2 - UNSOLVED
+   44: NUMBER OF UNITS
+   45: 1
+   47: UNIT IN ERROR
+   49: 98
+   51: 98 - ANIMAL
+   52: 99 - UNKNOWN
+   54: COUNTY*
+   56: LOCALITY*
+   58: 1
+   60: 3
+   62: 1 - CITY
+   63: 2 - VILLAGE
+   64: 3 - TOWNSHIP
+   66: LOCATION: CITY, VILLAGE, TOWNSHIP*
+   68: Liberty (Township of)
+   70: CRASH DATE / TIME*
+   72: 01/30/2023 05:30
+   74: 5
+   76: N
+   77: O
+   78: I
+   79: T
+   80: A
+   81: C
+   82: O
+   83: L
+   85: E
+   86: C
+   87: N
+   88: E
+   89: R
+   90: E
+   91: F
+   92: E
+   93: R
+   95: ROUTE TYPE ROUTE NUMBER
+   97: SR
+   99: 136
+
+📐 With LAParams (layout-aware):
+Extracted 2213 lines with layout
+
+First 100 lines:
+    1: X
+    3: PHOTOS TAKEN
+    5: SECONDARY CRASH
+    7:  TRAFFIC CRASH REPORT
+    9: LOCAL INFORMATION
+   11: X
+   13: OH -2
+   15: X
+   17: OH -3
+   19: *DENOTES MANDATORY FIELD FOR SUPPLEMENT REPORT
+   21: P23013000000287
+   23: LOCAL REPORT NUMBER *
+   24: 08-0079-01
+   26: OH-1P
+   28: OTHER
+   30: REPORTING AGENCY NAME *
+   32: PRIVATE PROPERTY
+   34: Ohio State Highway Patrol
+   36: NCIC *
+   38: OHP08
+   40: HIT/SKIP
+   41: 1 - SOLVED
+   42: 2 - UNSOLVED
+   44: NUMBER OF UNITS
+   45: 1
+   47: UNIT IN ERROR
+   49: 98
+   51: 98 - ANIMAL
+   52: 99 - UNKNOWN
+   54: COUNTY*
+   56: LOCALITY*
+   58: 1
+   60: 3
+   62: 1 - CITY
+   63: 2 - VILLAGE
+   64: 3 - TOWNSHIP
+   66: LOCATION: CITY, VILLAGE, TOWNSHIP*
+   68: Liberty (Township of)
+   70: CRASH DATE / TIME*
+   72: 01/30/2023 05:30
+   74: 5
+   76: N
+   77: O
+   78: I
+   79: T
+   80: A
+   81: C
+   82: O
+   83: L
+   85: E
+   86: C
+   87: N
+   88: E
+   89: R
+   90: E
+   91: F
+   92: E
+   93: R
+   95: ROUTE TYPE ROUTE NUMBER
+   97: SR
+   99: 136
+
+====================================================================================================
+📊 COMPARISON SUMMARY
+====================================================================================================
+
+REVIEW ABOVE OUTPUTS AND DETERMINE:
+
+1. Which method gave cleanest line-by-line extraction?
+2. Which method correctly separated field labels from values?
+3. Which method extracted:
+   - Owner name: "FLINDERS, LARRY"
+   - VIN: "3C6UR5FL6MG630586"
+   - Plate: "2802GB"
+   - Person name: "FLINDERS, JENNIFER, A"
+   - Date of birth: "07/24/1972"
+4. Which method handled multi-line fields best?
+5. Which method preserved proper spacing/structure?
+
+RECOMMENDATION:
+- Choose the method that extracts all fields correctly
+- Use that method's line structure in the parser
+- Update _extract_single_vehicle() and _extract_single_person() accordingly
+
+
+====================================================================================================
+COMPARISON COMPLETE - Review pdf_methods_comparison.txt
+====================================================================================================
